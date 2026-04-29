@@ -6,26 +6,27 @@
     <!-- 数式表示用 (MathJax) -->
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <style>
-        /* 背景色をさらに薄く調整、テキストは全て太字に設定 */
+        /* 背景色調整 (#d8eaff) / 本文含め全テキストを極太(900)に設定 */
         body {
             background-color: #d8eaff; 
             color: #000000; 
             font-family: "MS PMincho", "Hiragino Mincho ProN", serif;
-            font-weight: bold; /* 全体を太字に */
+            font-weight: 900; 
             line-height: 1.6;
             margin: 0 auto;
-            max-width: 900px;
+            max-width: 950px;
             padding: 5px 20px;
+            text-rendering: optimizeLegibility;
         }
 
-        /* ゴシック体・太字設定 */
+        /* ゴシック体・極太設定（タイトル・リンク等） */
         h1, h2, h3, .gothic-bold, .links-header a {
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            font-weight: 900; /* より厚みのある太字 */
+            font-weight: 900;
             color: #000000;
         }
 
-        /* タイトルエリア（センター・上詰め） */
+        /* タイトルエリア（センター） */
         .header-area {
             text-align: center;
             margin-top: 0;
@@ -35,57 +36,75 @@
         .sub-title { font-size: 1.4em; margin-top: 0; margin-bottom: 2px; }
         .tagline { font-size: 0.95em; margin-top: 0; }
 
-        /* セクションタイトル（右揃え・二段構成・ゴシック太字） */
-        .section-title {
-            text-align: right;
-            margin-top: 50px;
-            margin-bottom: 15px;
-            line-height: 1.2;
+        /* リンク集とアリスGIFのコンテナ（重ならないように配置） */
+        .header-nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin: 15px 0;
         }
-        .section-title small {
-            font-size: 0.7em;
-            display: block;
-            text-transform: uppercase;
-        }
-
-        /* 区切り線（非常に濃い紺・4px） */
-        hr {
-            border: 0;
-            border-top: 4px solid #000055; 
-            margin: 25px 0;
-        }
-
-        /* ヘッダーリンク欄（縦詰め・隙間最小） */
         .links-header {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 15px 0;
-            font-size: 1.0em;
-            line-height: 1.15;
+            font-size: 1.05em;
+            line-height: 1.2;
         }
         .links-header a {
             text-decoration: none;
             color: #0000ee;
             padding: 1px 0;
         }
-        .links-header a:hover { text-decoration: underline; }
+        .alice-gif {
+            width: 120px; /* サイズ調整 */
+            height: auto;
+        }
 
-        /* 箇条書き：色付きの◽（小さい四角） */
+        /* セクションタイトル（右揃え・二段） */
+        .section-title {
+            text-align: right;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        .section-title small {
+            font-size: 0.75em;
+            display: block;
+        }
+
+        /* 区切り線（濃紺・3px・下の空白を圧縮） */
+        hr {
+            border: 0;
+            border-top: 3px solid #000055; 
+            margin: 25px 0 5px 0; /* 下マージンを5pxに縮小 */
+        }
+
+        /* 自己紹介：右詰めブロック */
+        .profile-details-right {
+            text-align: right;
+            margin-top: 15px;
+        }
+
+        /* 箇条書き：Scrapbox/TeX風の濃紺ドット（●） */
         ul {
             list-style: none;
             padding-left: 20px;
         }
+        ul li {
+            position: relative;
+            margin-bottom: 5px;
+        }
         ul li::before {
-            content: "◽"; 
-            color: #00008b; 
-            font-weight: bold;
-            display: inline-block;
-            width: 1.5em;
-            margin-left: -1.5em;
+            content: "●"; 
+            color: #224488; 
+            font-size: 0.9em;
+            position: absolute;
+            left: -1.2em;
+            top: 0.05em;
         }
 
-        /* 自画像（右側に配置） */
+        /* 自画像（右側） */
         .portrait {
             float: right;
             margin-left: 25px;
@@ -95,9 +114,19 @@
             background-color: white;
         }
 
-        /* フッター */
-        .footer { text-align: center; margin-top: 80px; padding-bottom: 40px; }
-        #last-updated { font-size: 1.0em; font-weight: 900; font-family: sans-serif; }
+        /* フッター：左詰め最終更新日 */
+        .footer-left {
+            text-align: left;
+            font-size: 1.0em;
+            font-weight: 900;
+            margin-top: 5px;
+            font-family: sans-serif;
+        }
+        .footer-center {
+            text-align: center;
+            margin-top: 40px;
+            padding-bottom: 40px;
+        }
     </style>
 </head>
 <body>
@@ -109,44 +138,51 @@
         <p class="tagline">That's what "your which meets this" is.</p>
     </div>
 
-    <!-- ヘッダーリンク欄 -->
-    <div class="links-header">
-        <a href="#updates">更新記録／etc.</a>
-        <a href="#links">リンク集</a>
-        <a href="./en/">English Version</a>
-        <a href="https://note.com/jikokennobun">Note／Zenn／Mathlog</a>
-        <a href="https://on.soundcloud.com/xmMBSUpdLnknl4GoIO">Soundcloud</a>
-        <a href="#misc">圏論は笑わない。</a>
-        <a href="#misc">抽象的証明可能体系動物園 (Zoo of APS)</a>
-        <a href="#misc">読みたい本 (Wish-readings)</a>
-        <a href="#interests">業績リスト</a>
-        <a href="#misc">安定領域理論 (Stable Domain Theory) の勉強記事</a>
-        <a href="#misc">Jesoslow-Type Sentence を可算個含むAPSモデルの構造論について</a>
-        <a href="https://researchmap.jp/your-id">Reserch map 上のページ</a>
+    <!-- リンク集とアリスGIF -->
+    <div class="header-nav-container">
+        <div class="links-header">
+            <a href="#updates">更新記録／etc.</a>
+            <a href="#links">リンク集</a>
+            <a href="./en/">English Version</a>
+            <a href="https://note.com/jikokennobun">Note／Zenn／Mathlog</a>
+            <a href="https://on.soundcloud.com/xmMBSUpdLnknl4GoIO">Soundcloud</a>
+            <a href="#misc">圏論は笑わない。</a>
+            <a href="#aps-zoo">抽象的証明可能体系動物園 (Zoo of APS)</a>
+            <a href="#wishlist">読みたい本 (Wish-readings)</a>
+            <a href="#interests">業績リスト</a>
+            <a href="#stable-domain">安定領域理論 (Stable Domain Theory) の勉強記事</a>
+            <a href="#jesoslow">Jesoslow-Type Sentence を可算個含むAPSモデルの構造論について</a>
+            <a href="https://researchmap.jp/your-id">Reserch map 上のページ</a>
+        </div>
+        <!-- 落下するアリスのGIF -->
+        <img src="alice_falling.gif" alt="Falling Alice" class="alice-gif">
     </div>
 
     <hr>
 
-    <!-- 自己紹介セクション -->
+    <!-- プロフィールセクション -->
     <img src="jikokennobunn.png" alt="自画像" class="portrait">
     <p>
         私: 自己嫌悪文 (Jikokenno-bun)．閉鎖的自意識の並行世界 (Parallel World) に安置する人ノ邨の住人．<br>
         自己紹介: 初めまして．自己嫌悪文という名前で X (旧Twitter) をやっている者です．<br><br>
         2026年度前期 B2DForum @大岡山キャンパスTakiplaza に参加します．B2D学生の皆さん宜しくお願い致します．<br><br>
-        数学基礎論若手の会 2026@エスポワールみやぎで不完全性現象の代数的側面に関する研究の口頭発表を行う予定です。<br><br>
+        数学基礎論若手の会 2026@エスポワールみやぎで不完全性現象の代数的側面に関する研究の口頭発表を行う予定です。
+    </p>
+
+    <!-- 右詰め詳細ブロック -->
+    <div class="profile-details-right">
         Rmk. (anything): <a href="#fn1" class="footnote">[1]</a><br><br>
         エルデシュ数; n＝? <br>
         身分: 学生 (Students)<br><br>
         好みのPiano 音源: Pianoteq 9<br>
         好みのDrums 音源: BF22<br><br>
         好きな童話: 鏡の国のアリス，注文の多い料理店 etc …
-    </p>
+    </div>
 
     <div style="clear: both;"></div>
 
     <hr>
 
-    <!-- 各セクション（右揃え二段構成） -->
     <h3 class="section-title">研究上の興味<br><small>Reserch Interests</small></h3>
     <p>
         数理論理学，その中でも特に <span style="color:blue;">Gödel の不完全性定理の代数的・圏論的側面</span>を研究している．
@@ -174,20 +210,23 @@
 
     <h3 class="section-title">最近の更新<br><small>Recent UPDATES</small></h3>
     <p id="updates">
-        [2026.04.29] webpage のデザインを修正。視認性向上のため全フォントを太字化。<br>
-        [2026.03.15] B2DForum への参加を決定。
+        [2026.04.29] webpage の明晰化・レイアウトの大規模修正を実施。<br>
+        [2026.03.15] 邨の境界線を再定義。
     </p>
 
     <hr>
 
-    <div class="footer">
+    <!-- フッター -->
+    <div class="footer-left">
         <div id="last-updated"></div>
+    </div>
+
+    <div class="footer-center">
         <script>
             const date = new Date(document.lastModified);
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('last-updated').innerHTML = "Last updated: " + date.toLocaleDateString('en-US', options);
         </script>
-        <br>
         <img src="https://hits.dwyl.com/yourusername/jikokennobun.svg" alt="Hits">
         <br><br>
         <img src="anim_log_disj.gif" alt="anim" width="40">
