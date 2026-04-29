@@ -14,7 +14,7 @@
             font-weight: 600; 
             line-height: 1.6;
             margin: 0 auto;
-            max-width: 1000px; /* PCでの広がりすぎを防止 */
+            max-width: 1000px; 
             width: 94%;
             padding: 20px 0;
             text-rendering: optimizeLegibility;
@@ -44,7 +44,7 @@
             justify-content: center;
             align-items: center;
             gap: 15px;
-            flex-wrap: wrap; /* スマホで折り返す用 */
+            flex-wrap: wrap; 
         }
         .title-village-img {
             width: 80px;
@@ -64,7 +64,6 @@
             border: 4px groove #000080;
             background-color: rgba(255, 255, 255, 0.7);
         }
-        .sub-title { font-size: 1.4em; margin-top: 5px; margin-bottom: 5px; color: #000080; }
         .tagline { font-size: 0.95em; margin-top: 0; font-weight: 900; }
 
         /* 懐かしのMarquee（流れる文字） */
@@ -95,9 +94,25 @@
             border: 2px dashed #0000FF;
             padding: 20px 40px;
             background-color: #e6f0ff;
+            width: 80%; /* 幅を広げてOthersを右寄せしやすくする */
         }
         .links-header a { padding: 3px 0; }
         
+        /* 1列に並べるリンク用 */
+        .inline-links-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 3px 0;
+        }
+        
+        /* Othersの右寄せ用 */
+        .others-link {
+            align-self: flex-end; /* フレックスコンテナの中で右端に寄せる */
+            margin-top: 10px;
+            font-style: italic;
+        }
+
         /* 落下するアリス（右側配置） */
         .alice-gif {
             position: absolute;
@@ -127,7 +142,7 @@
             color: #ccccff;
         }
 
-        /* 区切り線（細い青線、上下に十分な余裕） */
+        /* 区切り線 */
         hr {
             border: 0;
             border-top: 1px solid #000080; 
@@ -153,7 +168,7 @@
         }
         ul ul li::before { content: "-"; font-size: 1em; left: -1.2em; top: 0; }
 
-        /* プロフィールエリア（Flexbox） */
+        /* プロフィールエリア */
         .profile-container {
             display: flex;
             justify-content: space-between;
@@ -172,7 +187,7 @@
         }
         legend { font-weight: 900; color: #000080; padding: 0 10px; }
 
-        /* 自画像 */
+        /* 自画像（アップロードされたファイル名を指定） */
         .portrait {
             float: right;
             margin-left: 25px;
@@ -209,6 +224,8 @@
             }
             .portrait { width: 120px; }
             .header-nav-container { flex-direction: column; min-height: auto; }
+            .links-header { width: 90%; padding: 15px; }
+            .inline-links-row { flex-direction: column; gap: 5px; }
             .alice-gif { position: static; transform: none; margin-top: 20px; }
         }
     </style>
@@ -228,22 +245,33 @@
     <div class="header-nav-container">
         <div class="links-header">
             <a href="#updates">更新記録／etc.</a>
-            <a href="#links">リンク集</a>
+            <a href="links.html">リンク集</a>
             <a href="./en/">English Version</a>
             <a href="https://note.com/jikokennobun">Note／Zenn／Mathlog</a>
             <a href="https://on.soundcloud.com/xmMBSUpdLnknl4GoIO">Soundcloud</a>
-            <a href="#misc">圏論は笑わない。</a>
-            <a href="#aps-zoo">抽象的証明可能体系動物園 (Zoo of APS)</a>
-            <a href="#wishlist">読みたい本 (Wish-readings)</a>
-            <a href="#publications">業績リスト</a>
-            <a href="#stable-domain">安定領域理論 (Stable Domain Theory) の勉強記事</a>
-            <a href="#jesoslow">Jesoslow-Type Sentence を可算個含むAPSモデルの構造論について</a>
+            <a href="category.html">圏論は笑わない。</a>
+            <a href="aps-zoo.html">抽象的証明可能体系動物園 (Zoo of APS)</a>
+            <a href="wishlist.html">読みたい本 (Wish-readings)</a>
+            <a href="achievements.html">業績リスト</a>
+            <a href="stable-domain.html">安定領域理論 (Stable Domain Theory) の勉強記事</a>
+            <a href="jesoslow.html">Jesoslow-Type Sentence を可算個含むAPSモデルの構造論について</a>
+            
+            <div class="inline-links-row">
+                <a href="materials.html">Research materials and Papers</a>
+                <a href="hobbies.html">仕事／私的趣味</a>
+            </div>
+            
             <a href="https://researchmap.jp/your-id">Reserch map 上のページ</a>
+            
+            <div class="others-link">
+                <a href="others.html">Others</a>
+            </div>
         </div>
+        
         <img src="30i1cif3v4gf1.gif" alt="Falling Alice" class="alice-gif">
     </div>
 
-    <img src="jikokennobunn.png" alt="自画像" class="portrait">
+    <img src="1000013341.png" alt="自画像" class="portrait">
 
     <div class="profile-container">
         <div class="profile-left">
@@ -264,7 +292,7 @@
 
             <fieldset class="contacts-block">
                 <legend>--Contacts--</legend>
-                Twitter: <a href="#">@jikokennobun</a> (更新控えめ)<br>
+                Twitter: <a href="https://twitter.com/jikokennobun">@jikokennobun</a> (更新控えめ)<br>
                 E-mail (Public): shibuya.i.9f75@m.isct.ac.jp<br>
                 E-mail (Private): yizhi6331@gmail.com
             </fieldset>
@@ -340,122 +368,6 @@
     <p>
         (Here goes recent updates)
     </p>
-
-    <h3 class="section-title">研究集会・セミナー<br><small>(Conference and Seminar)</small></h3>
-    <p><span class="strong-text">参加した主な研究集会</span></p>
-    <ul>
-        <li>名古屋 証明論 (2024-12-14 Fri.? - )</li>
-        <li>東北大 数学基礎論若手の会 (2026-10-14?)
-            <ul><li>Title: 不完全性現象の代数的逆数学; 抽象的証明可能構造の観点から</li></ul>
-        </li>
-    </ul>
-    <p><span class="strong-text">B2D Forum</span></p>
-    <ul><li>2026年度前期</li></ul>
-    <p><span class="strong-text">主催・オーガナイズした研究集会や非公式セミナー</span></p>
-    <ul><li>都内数学科学生集合 (通称，都数) と呼ばれるインターカレッジサークルに IR. というアカウント名で所属していました．</li></ul>
-
-    <h3 class="section-title" id="publications">研究業績<br><small>(Reserch material and Papers)</small></h3>
-    <p><span class="strong-text">査読付き学術論文</span></p>
-    <ul><li> </li></ul>
-    <p><span class="strong-text">学術論文 (査読無し)</span></p>
-    <ul><li> </li></ul>
-    <p><span class="strong-text">Preprint (arXive)</span></p>
-    <ul><li> </li></ul>
-
-    <h3 class="section-title">作成資料・学術ノート・発表スライド<br><small>(MISC & Notes)</small></h3>
-    <p><span class="strong-text">MISC</span></p>
-    <ul>
-        <li>アリスは笑わない。 <img src="30i1cif3v4gf1.gif" alt="satire" width="20"></li>
-        <li>アリスはまだ笑わない。</li>
-        <li id="jesoslow">Jesoslow-Type Sentence を可算個含むAPSモデルの構造論について</li>
-        <li>圏論的抽象代数論理入門Ⅰ / (圏論的抽象代数論理入門Ⅱ)</li>
-        <li id="aps-zoo">代数的第二不完全性定理動物園 (Algebraic G2-Zoo)</li>
-        <li>トイモデルから始める第二不完全性定理 (G2) の代数的逆数学</li>
-        <li>使用と言及の代数系; 非古典化された不動点コンビネータを添えて</li>
-        <li>資源としての自己言及 (Self-Reference as resources)</li>
-    </ul>
-    <p><span class="strong-text">学術記事 (Academic Notes)</span></p>
-    <ul>
-        <li>第二不完全性定理 (G2) の内包性問題 (Intensionality Problems) に関する一詳察</li>
-        <li id="stable-domain">安定領域理論 (Stable Domain Theory)の勉強ブログ</li>
-    </ul>
-    <p><span class="strong-text">Slides (主に研究集会やB2DForum で使用したモノ)</span></p>
-    <ul>
-        <li> </li>
-        <li> </li>
-        <li> </li>
-    </ul>
-
-    <h3 class="section-title">仕事・趣味 (Hobbies) 等<br><small>(Jobs & Hobbies)</small></h3>
-    <p><span class="strong-text">趣味</span></p>
-    <ul>
-        <li>DTM, Sound Claud, ココナラ
-            <ul><li>あいあーるP (I®)</li></ul>
-        </li>
-        <li>二次創作 ()</li>
-        <li>Scrapbox (あまり更新していない)</li>
-        <li>Note, Mathlog
-            <ul>
-                <li>形式化された Löb の定理と証明</li>
-                <li>Löb の定理を3つの視点から捉える</li>
-                <li>外延的天才と内包的天才</li>
-                <li>公的資産に成り果てたツイッター絵師の自意識に関する考察</li>
-            </ul>
-        </li>
-        <li>ボーカロイド批評 (辛口), アニメ(特になろう系アニメ)評論, MCbattle 観測記録
-            <ul><li>オーバーロード4期の私的所見</li></ul>
-        </li>
-        <li>[小説] 童話，ディストピア系
-            <ul>
-                <li>華氏451℃ 読後の感想</li>
-                <li>ハーモニー考察</li>
-            </ul>
-        </li>
-        <li>ゆずソフト, 金色ラブリッチェ</li>
-        <li>そろばん</li>
-        <li>東海オンエア</li>
-        <li>興味ある分野(Math & Logic); 集合論 (特に基数不変量, 強制法, 巨大基数), 計算可能性理論, 証明論(特に循環型証明体系), 作用素環論, 代数的位相幾何学(4-Dim), 幾何解析, 確率微分方程式論</li>
-        <li>興味ある分野(Others); 擬態の科学, 生命物理学, 進化心理学</li>
-        <li id="wishlist">読みたい本 (wish-readings)</li>
-    </ul>
-    <p><span class="strong-text">仕事 (jobs)</span></p>
-    <ul>
-        <li>バイト経験
-            <ul><li>個別指導塾Exsia での指導 (約3年)</li></ul>
-        </li>
-        <li>参加したインターンシップ
-            <ul>
-                <li>小学館</li>
-                <li>KADOKAWA など</li>
-            </ul>
-        </li>
-    </ul>
-
-    <h3 class="section-title" id="links">リンク集<br><small>(Links)</small></h3>
-    <div style="text-align: center; margin-bottom: 25px;">
-        <a href="#" style="margin: 0 15px;">My scrapbox</a>
-        <a href="#" style="margin: 0 15px;">Note／Zenn／Mathlog</a>
-        <a href="#" style="margin: 0 15px;">My Research map</a>
-    </div>
-    
-    <p><span class="strong-text">[記事を解説 or 考察する記事]</span></p>
-    <ul>
-        <li>矢田部俊介</li>
-        <li>矛盾は矛盾か (岡田)</li>
-    </ul>
-    
-    <p><span class="strong-text">[関連する研究者 (Researcher) の webpage.]</span></p>
-    <ul>
-        <li><a href="#">L. D. Beklemishev</a></li>
-        <li><a href="#">Shamkanov</a></li>
-        <li><a href="#">F. Pakhomov</a></li>
-        <li><a href="#">G. Voutsadakis</a></li>
-        <li><a href="#">倉橋太志 (Kurahashi Taishi)</a></li>
-        <li><a href="#">木原貴行 (Kihara Takayuki)</a></li>
-    </ul>
-
-    <p><span class="strong-text">[抽象的証明可能体系動物園 (Zoo of APS)]</span></p>
-    <p><span class="strong-text">[日報 (不定期)]</span></p>
 
     <hr>
     <div class="footer-left">
