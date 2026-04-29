@@ -6,241 +6,112 @@
     <title>自己嫌悪文 (Jikokenno-bun) の webpage.</title>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <style>
-        /* 背景色 (#d8eaff) / レスポンシブ対応の余白設定 */
+        /* 背景色 (#d8eaff) / 極太テキスト */
         body {
             background-color: #d8eaff; 
             color: #000000; 
             font-family: "MS PMincho", "Hiragino Mincho ProN", serif;
-            font-weight: 600; 
+            font-weight: 900; 
             line-height: 1.6;
             margin: 0 auto;
-            max-width: 1000px; 
-            width: 94%;
-            padding: 20px 0;
-            text-rendering: optimizeLegibility;
+            max-width: 1050px; 
+            width: 96%;
+            padding: 10px 0;
         }
 
-        /* ゴシック体・極太設定 */
-        h1, h2, h3, .strong-text, a {
+        /* ゴシック体・立体タイトルの設定 */
+        h1, h2, h3, .gothic-bold, a {
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             font-weight: 900;
         }
 
-        /* リンク（青・下線・ホバーで赤+黄色背景のレトロ仕様） */
-        a { color: #0000FF; text-decoration: underline; }
-        a:hover { color: #FF0000; background-color: #ffff99; } 
-
-        /* タイトルエリア */
-        .header-area {
-            text-align: center;
-            margin-top: 0;
-            padding-top: 10px;
-            margin-bottom: 20px;
-        }
-        
-        /* 派手な多色グラデーションタイトル + 村の画像配置 */
-        .title-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap; 
-        }
-        .title-village-img {
-            width: 80px;
-            height: auto;
-            border: 3px ridge #000080;
-            border-radius: 8px;
-        }
+        /* 3D立体的タイトル */
         .header-area h1 {
             font-size: 2.2em;
             margin: 10px 0;
             padding: 15px;
-            background-image: linear-gradient(to right, #0000cc, #0066cc, #33cccc, #cc33cc, #33cc33, #cccc00);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            background-color: #ffffff;
             border: 4px groove #000080;
-            background-color: rgba(255, 255, 255, 0.7);
-        }
-        .tagline { font-size: 0.95em; margin-top: 0; font-weight: 900; }
-
-        /* 懐かしのMarquee（流れる文字） */
-        .marquee-box {
-            font-size: 1.0em;
+            display: inline-block;
+            /* 3Dテクスチャ・シャドウ */
             color: #000080;
-            margin-bottom: 25px;
-            font-weight: 900;
+            text-shadow: 1px 1px 0 #ddd, 2px 2px 0 #bbb, 3px 3px 0 #999, 4px 4px 0 #777;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
         }
 
-        /* ヘッダーリンクコンテナ */
-        .header-nav-container {
-            position: relative;
-            margin: 20px 0;
-            min-height: 200px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        /* リンク（青・下線） */
+        a { color: #0000FF; text-decoration: underline; }
+        a:hover { background-color: #ffff99; }
+
+        /* ヘッダーリンク欄（縦詰め・一部横並び） */
         .links-header {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            font-size: 1.05em;
-            line-height: 1.35;
-            z-index: 2;
+            line-height: 1.3;
             border: 2px dashed #0000FF;
-            padding: 20px 40px;
+            padding: 15px;
             background-color: #e6f0ff;
-            width: 80%; /* 幅を広げてOthersを右寄せしやすくする */
+            margin: 20px 0;
         }
-        .links-header a { padding: 3px 0; }
-        
-        /* 1列に並べるリンク用 */
-        .inline-links-row {
+        .link-row { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .others-link { align-self: flex-end; margin-top: 5px; font-style: italic; }
+
+        /* スマホ・PC共存レイアウト */
+        .header-nav-container {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin: 3px 0;
+            align-items: center;
+            position: relative;
+            min-height: 220px;
         }
-        
-        /* Othersの右寄せ用 */
-        .others-link {
-            align-self: flex-end; /* フレックスコンテナの中で右端に寄せる */
-            margin-top: 10px;
-            font-style: italic;
-        }
+        .alice-gif { width: 130px; height: auto; position: absolute; right: 0; }
 
-        /* 落下するアリス（右側配置） */
-        .alice-gif {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 140px; 
-            height: auto;
-            z-index: 1;
-        }
-
-        /* セクションタイトル（紺色背景・白抜き・立体枠） */
         .section-title {
             text-align: center;
             background-color: #000080;
             color: #ffffff;
-            padding: 10px;
-            margin-top: 40px; 
-            margin-bottom: 25px;
-            line-height: 1.2;
+            padding: 8px;
+            margin: 40px 0 20px;
             border: 3px ridge #aaaaff;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-        }
-        .section-title small {
-            font-size: 0.75em;
-            display: block;
-            color: #ccccff;
         }
 
-        /* 区切り線 */
-        hr {
-            border: 0;
-            border-top: 1px solid #000080; 
-            margin: 40px 0 35px 0; 
-        }
+        /* 箇条書き：□ */
+        ul { list-style: none; padding-left: 20px; }
+        ul li { position: relative; margin-bottom: 6px; }
+        ul li::before { content: "□"; color: #0000FF; position: absolute; left: -1.3em; }
 
-        /* 箇条書き：ご指定の「□」マーカー */
-        ul {
-            list-style: none;
-            padding-left: 20px;
-        }
-        ul li {
-            position: relative;
-            margin-bottom: 6px;
-        }
-        ul li::before {
-            content: "□"; 
-            color: #0000FF; 
-            font-size: 1.1em; 
-            position: absolute;
-            left: -1.3em;
-            top: 0.05em;
-        }
-        ul ul li::before { content: "-"; font-size: 1em; left: -1.2em; top: 0; }
+        /* プロフィール（レスポンシブ対応） */
+        .profile-container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; }
+        .profile-left { flex: 1; min-width: 300px; }
+        .profile-right { width: 380px; text-align: right; }
+        .portrait { width: 160px; border: 4px ridge #000080; background: white; float: right; margin: 0 0 10px 10px; }
 
-        /* プロフィールエリア */
-        .profile-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-top: 20px;
-        }
-        .profile-left { flex: 1; padding-right: 25px; }
-        .profile-right { width: 380px; text-align: right; font-size: 0.95em; }
+        /* 報告・予定（サイズ大） */
+        .reports-box { font-size: 1.2em; border: 2px solid #000080; padding: 15px; background: #fff; margin: 20px 0; }
 
-        /* fieldset Contacts */
-        fieldset.contacts-block {
-            margin-top: 30px;
-            border: 2px groove #000080;
-            padding: 15px;
-            background-color: #eef5ff;
-        }
-        legend { font-weight: 900; color: #000080; padding: 0 10px; }
+        /* 区切り線（3px） */
+        hr { border: 0; border-top: 3px solid #000080; margin: 30px 0; }
 
-        /* 自画像（アップロードされたファイル名を指定） */
-        .portrait {
-            float: right;
-            margin-left: 25px;
-            margin-bottom: 10px;
-            width: 160px;
-            border: 4px ridge #000080;
-            background-color: white;
-        }
-
-        /* フッター */
-        .footer-left {
-            text-align: left;
-            font-size: 1.0em;
-            font-weight: 900;
-            font-family: sans-serif;
-            margin-top: 5px;
-        }
-        .footer-bottom {
-            text-align: center;
-            margin-top: 50px;
-            padding-bottom: 40px;
-        }
-
-        /* === スマホ用レスポンシブデザイン === */
         @media screen and (max-width: 768px) {
-            .profile-container { flex-direction: column; }
-            .profile-left { padding-right: 0; }
-            .profile-right {
-                width: 100%;
-                text-align: left; 
-                margin-top: 20px;
-                padding-top: 15px;
-                border-top: 1px dashed #000080;
-            }
-            .portrait { width: 120px; }
             .header-nav-container { flex-direction: column; min-height: auto; }
-            .links-header { width: 90%; padding: 15px; }
-            .inline-links-row { flex-direction: column; gap: 5px; }
-            .alice-gif { position: static; transform: none; margin-top: 20px; }
+            .alice-gif { position: static; margin-top: 10px; width: 100px; }
+            .profile-right { width: 100%; text-align: left; }
+            .portrait { float: none; display: block; margin: 10px auto; width: 140px; }
+            .header-area h1 { font-size: 1.5em; width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <div class="header-area">
-        <div class="title-wrapper">
-            <img src="Village-5-7.jpg" alt="Village" class="title-village-img">
+    <div class="header-area" style="text-align:center;">
+        <div style="display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap;">
+            <img src="Village-5-7.jpg" style="width:80px; height:auto; border:2px solid #000;">
             <h1>自己嫌悪文 (Jikokenno-bun) の webpage.<br>内包的な人ノ邨 (Intensional Hito-no-Mura)</h1>
         </div>
-        <p class="tagline">That's what "your which meets this" is.</p>
+        <p>That's what "your which meets this" is.</p>
     </div>
-
-    <marquee class="marquee-box" scrollamount="6">Welcome to Intensional Hito-no-Mura... You are lost in the Parallel World of Jikokenno-bun...</marquee>
 
     <div class="header-nav-container">
         <div class="links-header">
@@ -249,53 +120,38 @@
             <a href="./en/">English Version</a>
             <a href="https://note.com/jikokennobun">Note／Zenn／Mathlog</a>
             <a href="https://on.soundcloud.com/xmMBSUpdLnknl4GoIO">Soundcloud</a>
-            <a href="category.html">圏論は笑わない。</a>
-            <a href="aps-zoo.html">抽象的証明可能体系動物園 (Zoo of APS)</a>
-            <a href="wishlist.html">読みたい本 (Wish-readings)</a>
-            <a href="achievements.html">業績リスト</a>
-            <a href="stable-domain.html">安定領域理論 (Stable Domain Theory) の勉強記事</a>
-            <a href="jesoslow.html">Jesoslow-Type Sentence を可算個含むAPSモデルの構造論について</a>
+            <a href="misc.html">圏論は笑わない。</a>
+            <a href="misc.html">抽象的証明可能体系動物園 (Zoo of APS)</a>
+            <a href="misc.html">読みたい本 (Wish-readings)</a>
             
-            <div class="inline-links-row">
-                <a href="materials.html">Research materials and Papers</a>
-                <a href="hobbies.html">仕事／私的趣味</a>
+            <div class="link-row">
+                <a href="materials.html">業績リスト</a> / <a href="misc.html">MISC</a>
+            </div>
+            
+            <a href="misc.html">安定領域理論 (Stable Domain Theory) の勉強記事</a>
+            <a href="misc.html">Jesoslow-Type Sentence を可算個含むAPSモデルの構造論について</a>
+            
+            <div class="link-row">
+                <a href="materials.html">Research materials and Papers</a> / <a href="hobbies.html">私的趣味・仕事</a>
             </div>
             
             <a href="https://researchmap.jp/your-id">Reserch map 上のページ</a>
-            
-            <div class="others-link">
-                <a href="others.html">Others</a>
-            </div>
+            <div class="others-link"><a href="others.html">Others</a></div>
         </div>
-        
         <img src="30i1cif3v4gf1.gif" alt="Falling Alice" class="alice-gif">
     </div>
 
-    <img src="1000013341.png" alt="自画像" class="portrait">
-
     <div class="profile-container">
         <div class="profile-left">
-            <p>
-                <span class="strong-text" style="font-size:1.35em;">WHAT AM I ?</span><br>
-                自己嫌悪文 (Jikokenno-bun)．閉鎖的自意識の並行世界 (Parallel World) に安置する人ノ邨 (Hito-no-Mura) の住人．
-            </p>
-            <p>
-                <span class="strong-text">自己紹介 (Self−Introduction)</span>:<br>
-                初めまして．自己嫌悪文という名前で X (旧Twitter) をやっている者です．
-            </p>
+            <img src="1000013341.png" alt="自画像" class="portrait">
+            <p><strong>WHAT AM I ?</strong><br>自己嫌悪文 (Jikokenno-bun)．閉鎖的自意識の並行世界 (Parallel World) に安置する人ノ邨 (Hito-no-Mura) の住人．</p>
+            <p><strong>自己紹介 (Self−Introduction)</strong><br>初めまして．自己嫌悪文という名前で X (旧Twitter) をやっている者です．</p>
             
-            <div style="margin-top: 30px;">
-                <span class="strong-text" style="font-size:1.25em;">報告・予定 等</span><br>
-                2026年度前期 B2DForum @大岡山キャンパスTakiplaza に参加します．B2D学生の皆さん宜しくお願い致します．<br><br>
-                数学基礎論若手の会 2026@エスポワールみやぎで不完全性現象の代数的側面に関する研究の口頭発表を行う予定です．
+            <div class="reports-box">
+                <strong>報告・予定 等</strong><br>
+                🔷 2026年度前期 B2DForum @大岡山キャンパスTakiplaza に参加します．B2D学生の皆さん宜しくお願い致します．(2026-4-20 Thu.)<br>
+                🔷 数学基礎論若手の会 2026@エスポワールみやぎで不完全性現象の代数的側面に関する研究の口頭発表を行う予定です．
             </div>
-
-            <fieldset class="contacts-block">
-                <legend>--Contacts--</legend>
-                Twitter: <a href="https://twitter.com/jikokennobun">@jikokennobun</a> (更新控えめ)<br>
-                E-mail (Public): shibuya.i.9f75@m.isct.ac.jp<br>
-                E-mail (Private): yizhi6331@gmail.com
-            </fieldset>
         </div>
 
         <div class="profile-right">
@@ -304,88 +160,38 @@
             私の身分 (My social status): 学生 (Students)<br><br>
             好みのPiano 音源: <a href="https://www.minet.jp/brand/modartt/pianoteq-9/">Pianoteq 9</a><br>
             好みのDrums 音源: <a href="https://www.minet.jp/brand/bfd/bfd3/">BFD2</a><br><br>
-            お気に入りの童話:<br>鏡の国のアリス (Lewis Carroll, 1871)，<br>注文の多い料理店 (宮沢賢治, 1921.11.10)<br><br>
-            愛読書 (精神安定本):<br>ゲーデル、エッシャー、バッハ<br>―あるいは不思議の環 (Douglas Richard Hofstadter, 1979)
+            お気に入りの童話: 鏡の国のアリス，注文の多い料理店<br>
+            愛読書: ゲーデル、エッシャー、バッハ
         </div>
     </div>
 
     <div style="clear: both;"></div>
 
-    <p style="margin-top: 25px;">
-        <span class="strong-text">指導教官</span>: 鹿島亮 先生 (専門: 非古典論理，特に様相論理, 直感主義論理)<br>
-        <span class="strong-text">卒業論文 (2026)</span> : Title: 未定<br>
-        <span class="strong-text">修士論文 (2028)</span> : Title: 未定
-    </p>
-
-    <p>
-        <span class="strong-text">[経歴]</span><br>
-        横浜市立横浜サイエンスフロンティア高等学校 2020-4 〜 2023-3<br>
-        東京科学大学 情報理工学院 数理・計算科学系 2023-4 〜 2027-3
-    </p>
-
-    <p>
-        <span class="strong-text">[奨学金 (Fellowship)]</span>
-        <ul>
-            <li>日本学生支援機構（JASSO）</li>
-            <li>日本学術振興会</li>
-        </ul>
-    </p>
-
-    <p><span class="strong-text">[履歴書pdf]</span> URL: </p>
-
+    <hr>
     <h3 class="section-title">私についての注記<br><small>(Remarks about ME)</small></h3>
-    <p><span class="strong-text" style="color:red;">Remark about me 1;</span><br> よく勘違いされることがあるが，私は所謂ところの証明可能性論理やMagari 代数の研究家ではない．</p>
-    <p><span class="strong-text" style="color:#0000FF;">Remark about me 2;</span><br> 当たり前のことだが，私は数理論理学 (特に不完全性定理周辺) の専門家であり，圏論やコンピュータサイエンス (CS) の専門家ではない．</p>
-    <p><span class="strong-text">Remark about me 3;</span></p>
+    <p>Remark about me 1; よく勘違いされることがあるが，私は所謂ところの<a href="https://ja.wikipedia.org/wiki/証明可能性論理">証明可能性論理</a>や<a href="https://en.wikipedia.org/wiki/Magari_algebra">Magari 代数</a>の研究家ではない．</p>
+    <p>Remark about me 2; 私は数理論理学の専門家であり，圏論やCSの専門家ではない．</p>
 
     <h3 class="section-title">研究上の興味<br><small>(Reserch Interests)</small></h3>
-    <p>
-        数理論理学，その中でも特に <span class="strong-text" style="color:#0000FF;">Gödel の不完全性定理の代数的・圏論的側面</span>を研究している．<br>
-        これに付随して以下のような分野・研究トピックスにも興味を抱いている．
-    </p>
+    <p>数理論理学，その中でも特に <span style="color:blue;">Gödel の不完全性定理の代数的・圏論的側面</span>を研究している．</p>
     <ul>
-        <li>抽象代数，普遍代数，抽象代数論理 (AAL)</li>
-        <li>(圏論的)領域理論, 計算論的意味論, 表示的意味論</li>
-        <li>部分構造論理，線形論理，アフィン論理</li>
-        <li>余代数，オートマトン，非整楚集合論，循環性，非可述性</li>
-        <li>圏論的論理学 (ハイパードクトリン, \(\pi\)-インスティチューション)，圏論的双対性, <span class="strong-text" style="color:red;">K4- Locale 理論</span></li>
-        <li>解釈可能性次数, 可述的包括関手 (特に，Pakhomov and Visser [2022])</li>
+        <li><a href="https://ja.wikipedia.org/wiki/抽象代数学">抽象代数</a>，<a href="https://ja.wikipedia.org/wiki/普遍代数学">普遍代数</a>，抽象代数論理 (AAL)</li>
+        <li>(圏論的)領域理論, 表示的意味論</li>
+        <li>部分構造論理，<a href="https://ja.wikipedia.org/wiki/線形論理">線形論理</a>，アフィン論理</li>
+        <li><a href="https://ja.wikipedia.org/wiki/余代数">余代数</a>，<a href="https://ja.wikipedia.org/wiki/オートマトン">オートマトン</a>，非整楚集合論</li>
     </ul>
-
-    <h3 class="section-title">研究紹介<br><small>(Topics Level)</small></h3>
-    <ul>
-        <li>論理の創発性を創造する．
-            <ul>
-                <li>[生命的体系としての論理] 含意 (Implication) は如何にして誕生するか？</li>
-            </ul>
-        </li>
-        <li>計算と論理の相互作用; 代数, 位相, 圏の視点から</li>
-        <li>不完全性現象の代数逆数学</li>
-        <li>圏論的第二不完全性定理 (Categorical G2)</li>
-    </ul>
-
-    <h3 class="section-title" id="updates">最近の更新<br><small>(Recent UPDATES)</small></h3>
-    <p>
-        (Here goes recent updates)
-    </p>
 
     <hr>
-    <div class="footer-left">
-        <div id="last-updated"></div>
-    </div>
-
-    <div class="footer-bottom">
+    <div class="footer-bottom" style="text-align:center; padding-bottom:40px;">
+        <div id="last-updated" style="text-align:left; font-size:0.9em; font-weight:bold;"></div>
         <script>
-            const date = new Date(document.lastModified);
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('last-updated').innerHTML = "Last updated: " + date.toLocaleDateString('en-US', options);
+            document.getElementById('last-updated').innerHTML = "Last updated: " + new Date(document.lastModified).toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
         </script>
-        
-        <div style="display: flex; justify-content: center; align-items: center; gap: 30px; margin-top: 30px;">
+        <div style="display:flex; justify-content:center; align-items:center; gap:20px; margin-top:20px;">
             <img src="images (1).png" alt="アクセスカウンター">
-            <img src="2580.gif" alt="二重トーラスGIF" width="100">
+            <img src="2580.gif" alt="GIF" width="100">
         </div>
+        <p>Shibuya Iori / Intensional Hito-no-Mura</p>
     </div>
-
 </body>
 </html>
