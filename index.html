@@ -6,27 +6,27 @@
     <!-- 数式表示用 (MathJax) -->
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <style>
-        /* 背景色調整 (#d8eaff) / 本文含め全テキストを極太(900)に設定 */
+        /* 背景色 (#d8eaff) / テキストは極太(900) */
         body {
             background-color: #d8eaff; 
             color: #000000; 
             font-family: "MS PMincho", "Hiragino Mincho ProN", serif;
             font-weight: 900; 
-            line-height: 1.6;
+            line-height: 1.5;
             margin: 0 auto;
             max-width: 950px;
-            padding: 5px 20px;
+            padding: 0 20px;
             text-rendering: optimizeLegibility;
         }
 
-        /* ゴシック体・極太設定（タイトル・リンク等） */
+        /* ゴシック体・極太設定 */
         h1, h2, h3, .gothic-bold, .links-header a {
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             font-weight: 900;
             color: #000000;
         }
 
-        /* タイトルエリア（センター） */
+        /* タイトルエリア */
         .header-area {
             text-align: center;
             margin-top: 0;
@@ -36,96 +36,107 @@
         .sub-title { font-size: 1.4em; margin-top: 0; margin-bottom: 2px; }
         .tagline { font-size: 0.95em; margin-top: 0; }
 
-        /* リンク集とアリスGIFのコンテナ（重ならないように配置） */
+        /* ヘッダーコンテナ（アリスを右端に固定） */
         .header-nav-container {
+            position: relative;
+            margin: 10px 0;
+            min-height: 180px; /* リンクの高さに合わせて調整 */
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 40px;
-            margin: 15px 0;
         }
         .links-header {
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
             font-size: 1.05em;
-            line-height: 1.2;
+            line-height: 1.15;
+            z-index: 2; /* アリスより前面に */
         }
         .links-header a {
             text-decoration: none;
-            color: #0000ee;
+            color: #0000FF; /* ぱきっとした青 */
             padding: 1px 0;
         }
+        .links-header a:hover { text-decoration: underline; }
+
         .alice-gif {
-            width: 120px; /* サイズ調整 */
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 130px; 
             height: auto;
+            z-index: 1;
+            opacity: 0.9;
         }
 
-        /* セクションタイトル（右揃え・二段） */
+        /* セクションタイトル（右揃え・二段・余白ゼロ） */
         .section-title {
             text-align: right;
-            margin-top: 40px;
-            margin-bottom: 15px;
-            line-height: 1.2;
+            margin-top: 0; /* 線との隙間を排除 */
+            margin-bottom: 10px;
+            line-height: 1.1;
         }
         .section-title small {
             font-size: 0.75em;
             display: block;
         }
 
-        /* 区切り線（濃紺・3px・下の空白を圧縮） */
+        /* 区切り線（濃紺・細め2px・隙間排除） */
         hr {
             border: 0;
-            border-top: 3px solid #000055; 
-            margin: 25px 0 5px 0; /* 下マージンを5pxに縮小 */
+            border-top: 2px solid #000080; /* 濃い紺色 */
+            margin: 0; /* タイトルとの隙間を埋める */
         }
 
-        /* 自己紹介：右詰めブロック */
-        .profile-details-right {
-            text-align: right;
-            margin-top: 15px;
-        }
-
-        /* 箇条書き：Scrapbox/TeX風の濃紺ドット（●） */
+        /* 箇条書き：ぱきっとした青のドット（●を小さく鋭く） */
         ul {
             list-style: none;
             padding-left: 20px;
         }
         ul li {
             position: relative;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
         ul li::before {
             content: "●"; 
-            color: #224488; 
-            font-size: 0.9em;
+            color: #0000FF; /* ぱきっとした青 */
+            font-size: 0.75em; /* 太すぎないようにサイズダウン */
             position: absolute;
             left: -1.2em;
-            top: 0.05em;
+            top: 0.1em;
         }
 
         /* 自画像（右側） */
         .portrait {
             float: right;
-            margin-left: 25px;
-            margin-bottom: 10px;
-            width: 160px;
-            border: 2px solid #000055;
+            margin-left: 20px;
+            margin-bottom: 5px;
+            width: 150px;
+            border: 2px solid #000080;
             background-color: white;
         }
 
-        /* フッター：左詰め最終更新日 */
+        /* プロフィール詳細（右詰め） */
+        .profile-details-right {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        /* フッター */
         .footer-left {
             text-align: left;
             font-size: 1.0em;
             font-weight: 900;
-            margin-top: 5px;
             font-family: sans-serif;
+            margin-top: 2px;
         }
-        .footer-center {
+        .footer-bottom {
             text-align: center;
             margin-top: 40px;
-            padding-bottom: 40px;
+            padding-bottom: 30px;
         }
     </style>
 </head>
@@ -138,7 +149,7 @@
         <p class="tagline">That's what "your which meets this" is.</p>
     </div>
 
-    <!-- リンク集とアリスGIF -->
+    <!-- ヘッダーリンク欄（中央揃え・アリスは右） -->
     <div class="header-nav-container">
         <div class="links-header">
             <a href="#updates">更新記録／etc.</a>
@@ -147,20 +158,19 @@
             <a href="https://note.com/jikokennobun">Note／Zenn／Mathlog</a>
             <a href="https://on.soundcloud.com/xmMBSUpdLnknl4GoIO">Soundcloud</a>
             <a href="#misc">圏論は笑わない。</a>
-            <a href="#aps-zoo">抽象的証明可能体系動物園 (Zoo of APS)</a>
-            <a href="#wishlist">読みたい本 (Wish-readings)</a>
+            <a href="#misc">抽象的証明可能体系動物園 (Zoo of APS)</a>
+            <a href="#misc">読みたい本 (Wish-readings)</a>
             <a href="#interests">業績リスト</a>
-            <a href="#stable-domain">安定領域理論 (Stable Domain Theory) の勉強記事</a>
-            <a href="#jesoslow">Jesoslow-Type Sentence を可算個含むAPSモデルの構造論について</a>
+            <a href="#misc">安定領域理論 (Stable Domain Theory) の勉強記事</a>
+            <a href="#misc">Jesoslow-Type Sentence を可算個含むAPSモデルの構造論について</a>
             <a href="https://researchmap.jp/your-id">Reserch map 上のページ</a>
         </div>
-        <!-- 落下するアリスのGIF -->
         <img src="alice_falling.gif" alt="Falling Alice" class="alice-gif">
     </div>
 
-    <hr>
+    <!-- 自己紹介の上の線は削除 -->
 
-    <!-- プロフィールセクション -->
+    <!-- プロフィール -->
     <img src="jikokennobunn.png" alt="自画像" class="portrait">
     <p>
         私: 自己嫌悪文 (Jikokenno-bun)．閉鎖的自意識の並行世界 (Parallel World) に安置する人ノ邨の住人．<br>
@@ -169,23 +179,20 @@
         数学基礎論若手の会 2026@エスポワールみやぎで不完全性現象の代数的側面に関する研究の口頭発表を行う予定です。
     </p>
 
-    <!-- 右詰め詳細ブロック -->
     <div class="profile-details-right">
         Rmk. (anything): <a href="#fn1" class="footnote">[1]</a><br><br>
         エルデシュ数; n＝? <br>
         身分: 学生 (Students)<br><br>
-        好みのPiano 音源: Pianoteq 9<br>
-        好みのDrums 音源: BF22<br><br>
+        好みのPiano 音源: Pianoteq 9 / 好みのDrums 音源: BF22<br><br>
         好きな童話: 鏡の国のアリス，注文の多い料理店 etc …
     </div>
 
-    <div style="clear: both;"></div>
+    <div style="clear: both; margin-top: 20px;"></div>
 
     <hr>
-
     <h3 class="section-title">研究上の興味<br><small>Reserch Interests</small></h3>
     <p>
-        数理論理学，その中でも特に <span style="color:blue;">Gödel の不完全性定理の代数的・圏論的側面</span>を研究している．
+        数理論理学，その中でも特に <span style="color:#0000FF;">Gödel の不完全性定理の代数的・圏論的側面</span>を研究している．
     </p>
     <ul>
         <li>抽象代数，普遍代数，抽象代数論理 (AAL)</li>
@@ -193,6 +200,7 @@
         <li>圏論的論理学, <span style="color:red;">K4- Locale 理論</span></li>
     </ul>
 
+    <hr>
     <h3 class="section-title">研究紹介<br><small>Topic Level</small></h3>
     <ul>
         <li>論理の創発性を創造する．</li>
@@ -201,27 +209,23 @@
     </ul>
 
     <hr>
-
     <h3 class="section-title">私 (論理学者) についての注記<br><small>Remarks about ME</small></h3>
     <p><span style="color:red;">Remark 1;</span> 私は所謂ところの証明可能性論理やMagari 代数の研究家ではない．</p>
-    <p><span style="color:blue;">Remark 2;</span> 私は数理論理学の専門家であり，圏論やCSの専門家ではない．</p>
+    <p><span style="color:#0000FF;">Remark 2;</span> 私は数理論理学の専門家であり，圏論やCSの専門家ではない．</p>
 
     <hr>
-
     <h3 class="section-title">最近の更新<br><small>Recent UPDATES</small></h3>
     <p id="updates">
-        [2026.04.29] webpage の明晰化・レイアウトの大規模修正を実施。<br>
+        [2026.04.29] 景観の「ぱきっと」した再構築を完了。ドットと線の色彩を純青へと移行。<br>
         [2026.03.15] 邨の境界線を再定義。
     </p>
 
     <hr>
-
-    <!-- フッター -->
     <div class="footer-left">
         <div id="last-updated"></div>
     </div>
 
-    <div class="footer-center">
+    <div class="footer-bottom">
         <script>
             const date = new Date(document.lastModified);
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
