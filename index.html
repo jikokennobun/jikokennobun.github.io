@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>内包的な人ノ邨 (Intensional Hito-no-Mura)</title>
+    <!-- 数式表示用 (MathJax) -->
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <style>
-        /* 配色と基本フォント設定 */
+        /* Beklemishev風の配色設定 */
         body {
             background-color: #e6f2ff; /* 薄い青背景 */
             color: #333;
             font-family: "MS PMincho", "Hiragino Mincho ProN", serif; /* 本文は明朝 */
-            line-height: 1.5;
-            margin: 0 auto; /* 上詰めのため上マージン0 */
-            max-width: 950px;
-            padding: 20px;
+            line-height: 1.6;
+            margin: 0 auto;
+            max-width: 900px;
+            padding: 0 20px 40px 20px; /* 上詰めのため上パディング0 */
         }
 
         /* ゴシック体・太字の設定 */
@@ -22,94 +23,109 @@
             font-weight: bold;
         }
 
-        /* タイトルエリア（センター・上詰め） */
+        /* ヘッダーエリア（センター配置・上詰め） */
         .header-area {
             text-align: center;
-            margin-top: 0;
-            padding-top: 10px;
+            padding-top: 40px;
+            margin-bottom: 30px;
         }
-        .main-title { font-size: 3.2em; margin-bottom: 5px; } /* とても大きく */
-        .sub-title { font-size: 1.8em; margin-top: 0; } /* それなりに大きく */
-        .tagline { font-size: 1.1em; margin-top: -10px; color: #555; }
+        .main-title { font-size: 3.8em; margin-bottom: 10px; } /* とても大きく */
+        .sub-title { font-size: 2.2em; margin-top: 0; margin-bottom: 15px; } /* それなりに大きく */
+        .tagline { font-size: 1.2em; color: #555; margin-bottom: 25px; }
 
-        /* セクションタイトル（右揃え・ゴシック太字） */
+        /* リンク置き場（垂直配置・中央揃え） */
+        .links-vertical {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+        .link-item {
+            text-decoration: none;
+            color: #0000cd;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        .link-item:hover { text-decoration: underline; }
+
+        /* セクションタイトル（中央揃え・ゴシック太字） */
         h3 {
-            text-align: right;
-            font-size: 1.4em;
+            text-align: center;
+            font-size: 1.5em;
             color: #003366;
-            margin-top: 40px;
+            margin-top: 50px;
+            margin-bottom: 20px;
         }
 
-        /* 区切り線（濃い青） */
+        /* 区切り線（薄く、控えめに） */
         hr {
             border: 0;
-            border-top: 3px solid #00008b; /* 濃い青色 */
-            margin: 20px 0;
+            border-top: 1px solid #b0c4de; /* 薄い青灰色 */
+            margin: 40px 0;
         }
 
-        /* リンク置き場 */
-        .links-bar {
-            text-align: center;
-            margin: 25px 0;
-            font-size: 1.1em;
-        }
-        .link-item { margin: 0 15px; text-decoration: none; color: #0000cd; font-weight: bold; }
-        
-        /* 特定のスタイル */
+        /* 特有の強調 */
         .blue-bold { color: blue; font-weight: bold; }
         .red-bold { color: red; font-weight: bold; }
         i { font-style: italic; } /* 斜体用 */
 
-        /* 自画像 */
+        /* 自画像と基本情報 */
+        .profile-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            margin-top: 20px;
+        }
         .portrait {
-            float: left;
-            margin-right: 25px;
-            margin-bottom: 15px;
-            width: 160px;
-            border: 1px solid #00008b;
+            width: 170px;
+            border: 1px solid #ccc;
             background-color: white;
         }
 
         /* 脚注・フッター */
-        .footnote-area { font-size: 0.9em; margin-top: 50px; border-top: 1px solid #666; padding-top: 15px; }
-        .footer { text-align: center; margin-top: 60px; padding-bottom: 40px; }
-        #last-updated { font-size: 0.9em; color: #666; font-family: sans-serif; }
+        .footnote-area { font-size: 0.9em; margin-top: 60px; padding: 20px; background-color: rgba(255,255,255,0.3); }
+        .footer { text-align: center; margin-top: 80px; }
+        #last-updated { font-size: 0.9em; color: #777; font-family: sans-serif; }
     </style>
 </head>
 <body>
 
+    <!-- タイトルエリア -->
     <div class="header-area">
         <h1 class="main-title">自己嫌悪文 (<i>Jikokenno-bun</i>) の webpage.</h1>
         <h2 class="sub-title">内包的な人ノ邨 (<i>Intensional Hito-no-Mura</i>)</h2>
         <p class="tagline">That's what "your which meets this" is.</p>
-    </div>
-
-    <div class="links-bar">
-        <span class="link-item">🔳<a href="https://note.com/jikokennobun">Note</a></span>
-        <span class="link-item">🔳<a href="https://zenn.dev/jikokennobun/articles/ad5276b390786e">Zenn</a></span>
-        <span class="link-item">🔳<a href="https://mathlog.info/articles/a75zVNvFJB8BpwiNKnTX">Mathlog</a></span>
-        <span class="link-item">🔳<a href="https://on.soundcloud.com/xmMBSUpdLnknl4GoIO">Soundcloud</a></span>
+        
+        <!-- 垂直リンク置き場 -->
+        <div class="links-vertical">
+            <a href="https://note.com/jikokennobun" class="link-item">Note</a>
+            <a href="https://zenn.dev/jikokennobun/articles/ad5276b390786e" class="link-item">Zenn</a>
+            <a href="https://mathlog.info/articles/a75zVNvFJB8BpwiNKnTX" class="link-item">Mathlog (定理の証明)</a>
+            <a href="https://on.soundcloud.com/xmMBSUpdLnknl4GoIO" class="link-item">Soundcloud (音楽活動)</a>
+        </div>
     </div>
 
     <hr>
 
-    <img src="jikokennobunn.png" alt="自画像 (IR.)" class="portrait">
-    <p>
-        自己嫌悪文 (<i>Jikokenno-bun</i>) の webpage.<br>
-        内包的な人ノ邨 (<i>Intensional Hito-no-Mura</i>)<br>
-        Rmk. <a href="#fn1" class="footnote">[1]</a><br>
-        エルデシュ数; n＝? <br>
-        身分: 学生 (<i>Students</i>)
-    </p>
-
-    <div style="clear: both;"></div>
-
-    <hr>
+    <!-- プロフィールセクション -->
+    <div class="profile-container">
+        <img src="jikokennobunn.png" alt="自画像 (IR.)" class="portrait">
+        <div>
+            <p>
+                自己嫌悪文 (<i>Jikokenno-bun</i>) の webpage.<br>
+                内包的な人ノ邨 (<i>Intensional Hito-no-Mura</i>)<br>
+                Rmk. <a href="#fn1" class="footnote">[1]</a><br>
+                エルデシュ数; n＝? <br>
+                身分: 学生 (<i>Students</i>)
+            </p>
+        </div>
+    </div>
 
     <h3>Reserch Interests</h3>
     <p>
         数理論理学，その中でも特に <span class="blue-bold">Gödel の不完全性定理の代数的・圏論的側面</span>を研究している．<br>
-        これに付随して以下のような分野・研究トピックスにも興味を抱いている．
+        これに付随して以下のような分野・研究トピックスにも興味を抱いている：
     </p>
     <ul>
         <li>抽象代数，普遍代数，抽象代数論理 (<i>AAL</i>)</li>
@@ -120,7 +136,7 @@
         <li>解釈可能性次数, 可述的包括関手 (特に，Pakhomov and Visser [2022])</li>
     </ul>
 
-    <h3>研究紹介 (Topics Level)</h3>
+    <h3>研究紹介</h3>
     <ul>
         <li>論理の創発性を創造する．
             <ul><li>[生命的体系としての論理] 含意 (<i>Implication</i>) は如何にして誕生するか？</li></ul>
@@ -136,8 +152,6 @@
     <p><span class="red-bold">Remark 1;</span> よく勘違いされることがあるが，私は所謂ところの証明可能性論理やMagari 代数の研究家ではない．</p>
     <p><span class="blue-bold">Remark 2;</span> 当たり前のことだが，私は数理論理学 (特に不完全性定理周辺) の専門家であり，圏論や<i>CS</i>の専門家ではない．</p>
 
-    <hr>
-
     <h3>参加した主な研究集会</h3>
     <ul>
         <li>名古屋 証明論 (2024-12-14 <i>Fri.?</i> - )</li>
@@ -148,33 +162,26 @@
 
     <hr>
 
-    <h3>最近の更新</h3>
-    <p>
-        [2026.04.29] 「内包的な人ノ邨」webpage の全面改修を実施。<br>
-        [2026.03.15] <i>Algebraic G2-Zoo</i> 資料の更新。
-    </p>
-
-    <hr>
-
     <h3>MISC / 学術記事</h3>
     <ul>
-        <li>アリスは笑わない。 <img src="icon_satire1.gif" alt="satire" width="20"></li>
+        <li>アリスは笑わない。 <img src="icon_satire1.gif" alt="" width="20" style="vertical-align: middle;"></li>
         <li>資源としての自己言及 (<i>Self-Reference as resources</i>)</li>
         <li><i>Jesoslow-Type Sentence</i> を可算個含む<i>APS</i>モデルの構造論について</li>
         <li>代数的第二不完全性定理動物園 (<i>Algebraic G2-Zoo</i>)</li>
     </ul>
 
+    <h3>趣味</h3>
+    <p><i>DTM (I-R P)</i>, ボーカロイド批評, ゆずソフト, 東海オンエア, 進化心理学.</p>
+
     <hr>
 
-    <h3>趣味 (Hobbies) 等</h3>
-    <p><i>DTM (I-R P)</i>, ボーカロイド批評, ゆずソフト, 金色ラブリッチェ, 東海オンエア, 興味ある分野 (<i>Math & Logic; Others</i>).</p>
-
+    <!-- 脚注 -->
     <div class="footnote-area">
-        <p id="fn1">[1] ここに脚注の内容を記述。脚注内でも英語は <i>italicized</i> にすることを推奨します。</p>
+        <p id="fn1">[1] 脚注の集積所。ここに内包的な独白や、技術的な補足（例えば \(wM\) を公理ではなく規則として扱う妥当性 など）を記述します。</p>
     </div>
 
+    <!-- フッター -->
     <div class="footer">
-        <hr>
         <div id="last-updated"></div>
         <script>
             const date = new Date(document.lastModified);
@@ -184,10 +191,8 @@
 
         <br>
         <img src="https://hits.dwyl.com/yourusername/jikokennobun.svg" alt="Hits">
-        
         <br><br>
-        <img src="anim_log_disj.gif" alt="anim" width="40">
-        <p style="font-size: 0.8em; color: #555;">Shibuya Iori / Intensional Hito-no-Mura</p>
+        <p style="font-size: 0.8em; color: #777;">Shibuya Iori / Intensional Hito-no-Mura</p>
     </div>
 
 </body>
