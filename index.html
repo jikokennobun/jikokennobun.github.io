@@ -6,57 +6,80 @@
     <title>自己嫌悪文 (Jikokenno-bun) の webpage.</title>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <style>
-        /* 背景色 (#d8eaff) / 本文は「やや太め(600)」にして見出しと区別 */
+        /* 背景色 (#d8eaff) / レスポンシブ対応の余白設定 */
         body {
             background-color: #d8eaff; 
             color: #000000; 
             font-family: "MS PMincho", "Hiragino Mincho ProN", serif;
-            font-weight: 600; /* 本文の太さを少し抑え、見出しを際立たせる */
+            font-weight: 600; 
             line-height: 1.6;
             margin: 0 auto;
-            max-width: 1100px;
+            max-width: 1000px; /* PCでの広がりすぎを防止 */
             width: 94%;
             padding: 20px 0;
             text-rendering: optimizeLegibility;
         }
 
-        /* ゴシック体・極太設定（見出し・強調語をはっきり区別） */
+        /* ゴシック体・極太設定 */
         h1, h2, h3, .strong-text, a {
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             font-weight: 900;
         }
 
-        /* リンク（昔ながらの青と下線、ホバーで赤になるレトロ仕様） */
+        /* リンク（青・下線・ホバーで赤+黄色背景のレトロ仕様） */
         a { color: #0000FF; text-decoration: underline; }
-        a:hover { color: #FF0000; background-color: #ffff99; } /* カーソルを合わせると蛍光色+赤 */
+        a:hover { color: #FF0000; background-color: #ffff99; } 
 
         /* タイトルエリア */
         .header-area {
             text-align: center;
             margin-top: 0;
             padding-top: 10px;
-            border: 3px double #000080; /* 昔風の二重線フレーム */
-            background-color: #cce0ff;
-            padding: 15px;
-            margin-bottom: 10px;
-        }
-        .main-title { font-size: 1.8em; margin-bottom: 5px; color: #000080; } 
-        .sub-title { font-size: 1.4em; margin-top: 0; margin-bottom: 5px; }
-        .tagline { font-size: 0.9em; margin-top: 0; color: #333; }
-
-        /* 懐かしのMarquee（流れる文字）エリア */
-        .marquee-box {
-            font-size: 0.9em;
-            color: #000080;
             margin-bottom: 20px;
+        }
+        
+        /* 派手な多色グラデーションタイトル + 村の画像配置 */
+        .title-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap; /* スマホで折り返す用 */
+        }
+        .title-village-img {
+            width: 80px;
+            height: auto;
+            border: 3px ridge #000080;
+            border-radius: 8px;
+        }
+        .header-area h1 {
+            font-size: 2.2em;
+            margin: 10px 0;
+            padding: 15px;
+            background-image: linear-gradient(to right, #0000cc, #0066cc, #33cccc, #cc33cc, #33cc33, #cccc00);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            border: 4px groove #000080;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        .sub-title { font-size: 1.4em; margin-top: 5px; margin-bottom: 5px; color: #000080; }
+        .tagline { font-size: 0.95em; margin-top: 0; font-weight: 900; }
+
+        /* 懐かしのMarquee（流れる文字） */
+        .marquee-box {
+            font-size: 1.0em;
+            color: #000080;
+            margin-bottom: 25px;
             font-weight: 900;
         }
 
-        /* ヘッダーコンテナ */
+        /* ヘッダーリンクコンテナ */
         .header-nav-container {
             position: relative;
             margin: 20px 0;
-            min-height: 180px;
+            min-height: 200px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -67,34 +90,35 @@
             align-items: center;
             text-align: center;
             font-size: 1.05em;
-            line-height: 1.25;
+            line-height: 1.35;
             z-index: 2;
-            border: 2px dashed #0000FF; /* リンク集を囲むレトロな破線 */
-            padding: 15px 30px;
+            border: 2px dashed #0000FF;
+            padding: 20px 40px;
             background-color: #e6f0ff;
         }
-        .links-header a { padding: 2px 0; }
+        .links-header a { padding: 3px 0; }
         
+        /* 落下するアリス（右側配置） */
         .alice-gif {
             position: absolute;
             right: 0;
             top: 50%;
             transform: translateY(-50%);
-            width: 130px; 
+            width: 140px; 
             height: auto;
             z-index: 1;
         }
 
-        /* セクションタイトル（昔のサイト風：紺色背景に白抜き文字） */
+        /* セクションタイトル（紺色背景・白抜き・立体枠） */
         .section-title {
             text-align: center;
             background-color: #000080;
             color: #ffffff;
-            padding: 8px;
+            padding: 10px;
             margin-top: 40px; 
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             line-height: 1.2;
-            border: 3px ridge #aaaaff; /* レトロな立体枠 */
+            border: 3px ridge #aaaaff;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
         }
         .section-title small {
@@ -103,59 +127,62 @@
             color: #ccccff;
         }
 
-        /* 区切り線（細い青線） */
+        /* 区切り線（細い青線、上下に十分な余裕） */
         hr {
             border: 0;
             border-top: 1px solid #000080; 
-            margin: 35px 0 25px 0; 
+            margin: 40px 0 35px 0; 
         }
 
-        /* 箇条書き：四角いマーカー（▪） */
+        /* 箇条書き：ご指定の「□」マーカー */
         ul {
             list-style: none;
-            padding-left: 1.5em; 
-            margin: 10px 0;
+            padding-left: 20px;
         }
-        ul li { position: relative; margin-bottom: 6px; }
+        ul li {
+            position: relative;
+            margin-bottom: 6px;
+        }
         ul li::before {
-            content: "▪"; 
+            content: "□"; 
             color: #0000FF; 
-            font-size: 1.1em;
+            font-size: 1.1em; 
             position: absolute;
-            left: -1.2em; 
-            top: 0.05em; 
+            left: -1.3em;
+            top: 0.05em;
         }
         ul ul li::before { content: "-"; font-size: 1em; left: -1.2em; top: 0; }
 
-        /* プロフィールエリア */
+        /* プロフィールエリア（Flexbox） */
         .profile-container {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             margin-top: 20px;
         }
-        .profile-left { flex: 1; padding-right: 20px; }
+        .profile-left { flex: 1; padding-right: 25px; }
         .profile-right { width: 380px; text-align: right; font-size: 0.95em; }
 
-        /* 昔のHTMLタグ Fieldset を使ったContacts */
+        /* fieldset Contacts */
         fieldset.contacts-block {
-            margin-top: 25px;
+            margin-top: 30px;
             border: 2px groove #000080;
-            padding: 10px;
+            padding: 15px;
             background-color: #eef5ff;
         }
-        legend { font-weight: 900; color: #000080; padding: 0 5px; }
+        legend { font-weight: 900; color: #000080; padding: 0 10px; }
 
-        /* 自画像（右側・立体枠） */
+        /* 自画像 */
         .portrait {
             float: right;
-            margin-left: 20px;
+            margin-left: 25px;
             margin-bottom: 10px;
-            width: 150px;
+            width: 160px;
             border: 4px ridge #000080;
             background-color: white;
         }
 
+        /* フッター */
         .footer-left {
             text-align: left;
             font-size: 1.0em;
@@ -165,8 +192,8 @@
         }
         .footer-bottom {
             text-align: center;
-            margin-top: 40px;
-            padding-bottom: 30px;
+            margin-top: 50px;
+            padding-bottom: 40px;
         }
 
         /* === スマホ用レスポンシブデザイン === */
@@ -189,8 +216,10 @@
 <body>
 
     <div class="header-area">
-        <h1 class="main-title">自己嫌悪文 (Jikokenno-bun) の webpage.</h1>
-        <h2 class="sub-title">内包的な人ノ邨 (Intensional Hito-no-Mura)</h2>
+        <div class="title-wrapper">
+            <img src="Village-5-7.jpg" alt="Village" class="title-village-img">
+            <h1>自己嫌悪文 (Jikokenno-bun) の webpage.<br>内包的な人ノ邨 (Intensional Hito-no-Mura)</h1>
+        </div>
         <p class="tagline">That's what "your which meets this" is.</p>
     </div>
 
@@ -211,7 +240,7 @@
             <a href="#jesoslow">Jesoslow-Type Sentence を可算個含むAPSモデルの構造論について</a>
             <a href="https://researchmap.jp/your-id">Reserch map 上のページ</a>
         </div>
-        <img src="alice_falling.gif" alt="Falling Alice" class="alice-gif">
+        <img src="30i1cif3v4gf1.gif" alt="Falling Alice" class="alice-gif">
     </div>
 
     <img src="jikokennobunn.png" alt="自画像" class="portrait">
@@ -219,7 +248,7 @@
     <div class="profile-container">
         <div class="profile-left">
             <p>
-                <span class="strong-text" style="font-size:1.3em;">WHAT AM I ?</span><br>
+                <span class="strong-text" style="font-size:1.35em;">WHAT AM I ?</span><br>
                 自己嫌悪文 (Jikokenno-bun)．閉鎖的自意識の並行世界 (Parallel World) に安置する人ノ邨 (Hito-no-Mura) の住人．
             </p>
             <p>
@@ -227,8 +256,8 @@
                 初めまして．自己嫌悪文という名前で X (旧Twitter) をやっている者です．
             </p>
             
-            <div style="margin-top: 25px;">
-                <span class="strong-text" style="font-size:1.2em;">報告・予定 等</span><br>
+            <div style="margin-top: 30px;">
+                <span class="strong-text" style="font-size:1.25em;">報告・予定 等</span><br>
                 2026年度前期 B2DForum @大岡山キャンパスTakiplaza に参加します．B2D学生の皆さん宜しくお願い致します．<br><br>
                 数学基礎論若手の会 2026@エスポワールみやぎで不完全性現象の代数的側面に関する研究の口頭発表を行う予定です．
             </div>
@@ -254,7 +283,7 @@
 
     <div style="clear: both;"></div>
 
-    <p style="margin-top: 20px;">
+    <p style="margin-top: 25px;">
         <span class="strong-text">指導教官</span>: 鹿島亮 先生 (専門: 非古典論理，特に様相論理, 直感主義論理)<br>
         <span class="strong-text">卒業論文 (2026)</span> : Title: 未定<br>
         <span class="strong-text">修士論文 (2028)</span> : Title: 未定
@@ -336,7 +365,7 @@
     <h3 class="section-title">作成資料・学術ノート・発表スライド<br><small>(MISC & Notes)</small></h3>
     <p><span class="strong-text">MISC</span></p>
     <ul>
-        <li>アリスは笑わない。 <img src="icon_satire1.gif" alt="satire" width="20"></li>
+        <li>アリスは笑わない。 <img src="30i1cif3v4gf1.gif" alt="satire" width="20"></li>
         <li>アリスはまだ笑わない。</li>
         <li id="jesoslow">Jesoslow-Type Sentence を可算個含むAPSモデルの構造論について</li>
         <li>圏論的抽象代数論理入門Ⅰ / (圏論的抽象代数論理入門Ⅱ)</li>
@@ -403,10 +432,10 @@
     </ul>
 
     <h3 class="section-title" id="links">リンク集<br><small>(Links)</small></h3>
-    <div style="text-align: center; margin-bottom: 20px;">
-        <a href="#" style="margin: 0 10px;">My scrapbox</a>
-        <a href="#" style="margin: 0 10px;">Note／Zenn／Mathlog</a>
-        <a href="#" style="margin: 0 10px;">My Research map</a>
+    <div style="text-align: center; margin-bottom: 25px;">
+        <a href="#" style="margin: 0 15px;">My scrapbox</a>
+        <a href="#" style="margin: 0 15px;">Note／Zenn／Mathlog</a>
+        <a href="#" style="margin: 0 15px;">My Research map</a>
     </div>
     
     <p><span class="strong-text">[記事を解説 or 考察する記事]</span></p>
@@ -439,10 +468,11 @@
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('last-updated').innerHTML = "Last updated: " + date.toLocaleDateString('en-US', options);
         </script>
-        <img src="https://hits.dwyl.com/yourusername/jikokennobun.svg" alt="Hits">
-        <br><br>
-        <img src="anim_log_disj.gif" alt="anim" width="40">
-        <p style="font-size: 1.0em;">Shibuya Iori / Intensional Hito-no-Mura</p>
+        
+        <div style="display: flex; justify-content: center; align-items: center; gap: 30px; margin-top: 30px;">
+            <img src="images (1).png" alt="アクセスカウンター">
+            <img src="2580.gif" alt="二重トーラスGIF" width="100">
+        </div>
     </div>
 
 </body>
