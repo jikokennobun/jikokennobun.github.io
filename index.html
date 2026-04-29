@@ -2,6 +2,8 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <!-- スマホ対応必須タグ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>自己嫌悪文 (Jikokenno-bun) の webpage.</title>
     <!-- 数式表示用 (MathJax) -->
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
@@ -29,13 +31,14 @@
         /* ハイパーリンクの基本設定 */
         a {
             color: #0000FF;
-            text-decoration: none;
+            text-decoration: underline;
         }
         a:hover {
             text-decoration: underline;
+            color: #000080;
         }
 
-        /* タイトルエリア（イラストとテキストを横並びにする設定） */
+        /* タイトルエリア */
         .header-area {
             margin-top: 10px;
             padding-top: 10px;
@@ -44,7 +47,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 25px; /* イラストとテキストの隙間 */
+            gap: 25px;
         }
         .title-text {
             text-align: center;
@@ -54,18 +57,20 @@
         .tagline { font-size: 1.0em; margin-top: 0; font-weight: normal; }
         
         .village-img {
-            width: 140px; /* イラストのサイズ */
+            width: 140px; 
             height: auto;
-            border: 2px solid #000080; /* 全体のトーンに合わせた枠線 */
+            border: 2px solid #000080; 
         }
 
         /* ヘッダーコンテナ（重なりを防止） */
         .header-nav-container {
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 30px;
             margin: 20px 0;
+            min-height: 180px;
         }
         .links-header {
             display: flex;
@@ -74,16 +79,23 @@
             text-align: center;
             font-size: 1.1em;
             line-height: 1.2;
+            z-index: 2;
         }
         .links-header a {
             padding: 2px 0;
         }
         .alice-gif {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
             width: 120px; 
             height: auto;
+            z-index: 1;
+            opacity: 0.9;
         }
 
-        /* セクションタイトル（中央揃え・二段・余白ゼロ） */
+        /* セクションタイトル */
         .section-title {
             text-align: center;
             margin-top: 0; 
@@ -96,7 +108,7 @@
             display: block;
         }
 
-        /* 見出し語（WHAT AM I ?, Remark about me 等） */
+        /* 見出し語 */
         .paragraph-heading {
             font-size: 1.25em;
             margin-top: 25px;
@@ -104,14 +116,14 @@
             display: block;
         }
 
-        /* 区切り線（濃紺・極細1px・隙間排除） */
+        /* 区切り線 */
         hr {
             border: 0;
             border-top: 1px solid #000080; 
             margin: 0; 
         }
 
-        /* Markdown風箇条書き：枠付き四角（◽） */
+        /* Markdown風箇条書き */
         ul {
             list-style: none;
             padding-left: 1.5em;
@@ -138,7 +150,7 @@
             top: 0;
         }
 
-        /* 自画像（右側・重なり防止） */
+        /* 自画像 */
         .portrait {
             float: right;
             margin-left: 20px;
@@ -156,15 +168,15 @@
             font-size: 0.95em;
         }
 
-        /* 左詰め Contacts（枠で囲う） */
+        /* 左詰め Contacts */
         .contacts-box {
             text-align: left;
             margin-top: 20px;
             margin-bottom: 30px;
             padding: 15px;
-            border: 2px solid #000080; /* 濃紺の枠線 */
+            border: 2px solid #000080; 
             display: inline-block;
-            background-color: #eaf3ff; /* 枠内だけほんのり明るく */
+            background-color: #eaf3ff; 
         }
 
         /* 最終更新日 */
@@ -174,14 +186,56 @@
             font-family: sans-serif;
             margin-top: 2px;
         }
+
+        /* =========================================
+           スマホ対応 (Mobile Responsiveness)
+           画面幅が768px以下の場合に適用されるスタイル
+           ========================================= */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 0 10px 30px 10px; /* 左右の余白を少し狭く */
+            }
+            .title-container {
+                flex-direction: column; /* イラストとタイトルを縦並びに */
+                gap: 10px;
+            }
+            .main-title { font-size: 1.6em; }
+            .sub-title { font-size: 1.2em; }
+            
+            .header-nav-container {
+                flex-direction: column; /* リンクとアリスを縦に分ける */
+                min-height: auto;
+                gap: 20px;
+            }
+            .alice-gif {
+                position: static; /* 絶対配置を解除し、リンクの下に配置 */
+                transform: none;
+                width: 100px;
+                margin-top: 10px;
+            }
+            
+            .portrait {
+                width: 110px; /* スマホでは自画像を少し小さく */
+                margin-left: 10px;
+            }
+            
+            .profile-right-block {
+                text-align: left; /* スマホでは読みやすいように左寄せに */
+                margin-top: 20px;
+            }
+            
+            .contacts-box {
+                width: 100%; /* コンタクト枠が画面外にはみ出ないように調整 */
+                box-sizing: border-box;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- タイトルエリア（イラストとテキストを横並びに） -->
+    <!-- タイトルエリア -->
     <div class="header-area">
         <div class="title-container">
-            <!-- 村のイラスト (ファイル名: village.jpg) -->
             <img src="village.jpg" alt="人ノ邨のイラスト" class="village-img">
             <div class="title-text">
                 <h1 class="main-title">自己嫌悪文 (Jikokenno-bun) の webpage.</h1>
@@ -195,7 +249,7 @@
     <div class="header-nav-container">
         <div class="links-header">
             <a href="#updates">更新記録／etc.</a>
-            <a href="links_page.html">リンク集</a> <!-- 別ページへのリンクを想定 -->
+            <a href="links_page.html">リンク集</a>
             <a href="./en/">English Version</a>
             <a href="https://note.com/jikokennobun">Note／Zenn／Mathlog</a>
             <a href="https://on.soundcloud.com/xmMBSUpdLnknl4GoIO">Soundcloud</a>
@@ -207,16 +261,13 @@
             <a href="seminar_page.html#jesoslow">Jesoslow-Type Sentence を可算個含むAPSモデルの構造論について</a>
             <a href="https://researchmap.jp/your-id">Reserch map 上のページ</a>
         </div>
-        <!-- 落下するアリスのGIF (ファイル名: alice_falling.gif) -->
         <img src="alice_falling.gif" alt="Falling Alice" class="alice-gif">
     </div>
 
     <hr>
 
-    <!-- 自画像 (ファイル名: jikokennobunn.png) -->
     <img src="jikokennobunn.png" alt="自画像" class="portrait">
 
-    <!-- 自己紹介など -->
     <span class="paragraph-heading">WHAT AM I ?</span>
     自己嫌悪文 (Jikokenno-bun)．閉鎖的自意識の並行世界 (Parallel World) に安置する人ノ邨 (Hito-no-Mura) の住人．<br>
     
@@ -227,7 +278,6 @@
     🔷 2026年度前期 B2DForum @大岡山キャンパスTakiplaza に参加します．B2D学生の皆さん宜しくお願い致します．(2026-4-20 Thu.)<br>
     🔷 数学基礎論若手の会 2026@エスポワールみやぎで不完全性現象の代数的側面に関する研究の口頭発表を行う予定です．
 
-    <!-- 右詰めブロック -->
     <div class="profile-right-block">
         Rmk. (anything): <a href="#fn1">[1]</a><br><br>
         エルデシュ数 (Erdős number); n＝?<br>
@@ -238,12 +288,11 @@
         愛読書 (精神安定本); ゲーデル、エッシャー、バッハ―あるいは不思議の環 (Douglas Richard Hofstadter, 1979)
     </div>
 
-    <!-- 左詰め コンタクト（枠で囲む） -->
     <div class="contacts-box">
         <span class="paragraph-heading" style="margin-top: 0; font-size: 1.1em;">--Contacts--</span>
         Twitter: <a href="https://twitter.com/jikokennobun">@jikokennobun</a> (更新控えめ)<br>
-        E-mail (Public): shibuya.i.9f75@m.isct.ac.jp<br>
-        E-mail (Private): yizhi6331@gmail.com
+        E-mail (Public): <a href="mailto:shibuya.i.9f75@m.isct.ac.jp">shibuya.i.9f75@m.isct.ac.jp</a><br>
+        E-mail (Private): <a href="mailto:yizhi6331@gmail.com">yizhi6331@gmail.com</a>
     </div>
 
     <div style="clear: both;"></div>
@@ -314,7 +363,6 @@
 
     <hr>
     
-    <!-- 最終更新日 -->
     <div class="footer-left">
         <div id="last-updated"></div>
         <script>
@@ -324,12 +372,9 @@
         </script>
     </div>
 
-    <!-- アクセスカウンターと動く画像 -->
     <div style="text-align: center; margin-top: 40px;">
-        <!-- アクセスカウンター (hits.dwyl.com のサービスを利用) -->
         <img src="https://hits.dwyl.com/yourusername/jikokennobun.svg" alt="Hits">
         <br><br>
-        <!-- 動く画像 (ファイル名: anim_log_disj.gif) -->
         <img src="anim_log_disj.gif" alt="anim" width="40">
     </div>
 
