@@ -2,44 +2,52 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>自己嫌悪文 (Jikokenno-bun) の webpage.</title>
-    <!-- 数式表示用 (MathJax) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>自己嫌悪文 (Jikokenno-bun) の webpage.</title>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <style>
-        /* 背景色 (#d8eaff) / テキストは極太(900) */
+        /* 背景色 / テキスト極太 */
         body {
             background-color: #d8eaff; 
             color: #000000; 
             font-family: "MS PMincho", "Hiragino Mincho ProN", serif;
             font-weight: 900; 
-            line-height: 1.5;
+            line-height: 1.6;
             margin: 0 auto;
-            max-width: 950px;
-            padding: 0 20px;
+            max-width: 1100px; /* PCでは広く画面を使う */
+            width: 94%; /* スマホでは横幅いっぱいに広げる */
+            padding: 20px 0;
             text-rendering: optimizeLegibility;
         }
 
         /* ゴシック体・極太設定 */
-        h1, h2, h3, .gothic-bold, .links-header a {
+        h1, h2, h3, .gothic-bold, a {
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             font-weight: 900;
-            color: #000000;
+        }
+
+        /* リンク（常にアンダーラインを表示するハイパーテキスト仕様） */
+        a {
+            color: #0000FF;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #000080; /* ホバー時は少し濃く */
         }
 
         /* タイトルエリア */
         .header-area {
             text-align: center;
             margin-top: 0;
-            padding-top: 5px;
+            padding-top: 10px;
         }
-        .main-title { font-size: 1.8em; margin-bottom: 2px; } 
-        .sub-title { font-size: 1.4em; margin-top: 0; margin-bottom: 2px; }
-        .tagline { font-size: 0.95em; margin-top: 0; }
+        .main-title { font-size: 1.8em; margin-bottom: 5px; } 
+        .sub-title { font-size: 1.4em; margin-top: 0; margin-bottom: 5px; }
+        .tagline { font-size: 0.9em; margin-top: 0; color: #333; }
 
-        /* ヘッダーコンテナ（アリスを右端に固定） */
+        /* ヘッダーコンテナ（PC用） */
         .header-nav-container {
             position: relative;
-            margin: 10px 0;
+            margin: 20px 0;
             min-height: 180px;
             display: flex;
             justify-content: center;
@@ -51,16 +59,11 @@
             align-items: center;
             text-align: center;
             font-size: 1.05em;
-            line-height: 1.15;
+            line-height: 1.25;
             z-index: 2;
         }
-        .links-header a {
-            text-decoration: none;
-            color: #0000FF;
-            padding: 1px 0;
-        }
-        .links-header a:hover { text-decoration: underline; }
-
+        .links-header a { padding: 2px 0; }
+        
         .alice-gif {
             position: absolute;
             right: 0;
@@ -69,47 +72,46 @@
             width: 130px; 
             height: auto;
             z-index: 1;
-            opacity: 0.9;
         }
 
-        /* セクションタイトル（中央揃え・二段・余白ゼロ） */
+        /* セクションタイトル（中央揃え） */
         .section-title {
             text-align: center;
-            margin-top: 0; 
-            margin-bottom: 10px;
-            line-height: 1.1;
+            margin-top: 15px; 
+            margin-bottom: 20px;
+            line-height: 1.2;
         }
         .section-title small {
             font-size: 0.75em;
             display: block;
         }
 
-        /* 区切り線（濃紺・極細1px・隙間排除） */
+        /* 区切り線（濃紺・極細1px・上下に余裕を持たせる） */
         hr {
             border: 0;
             border-top: 1px solid #000080; 
-            margin: 0; 
+            margin: 35px 0 25px 0; /* ここで空間の余裕を確保 */
         }
 
-        /* Markdown風箇条書き：ぱきっとした青の極小ドット */
+        /* Markdown風箇条書き：四角いマーカー（▪） */
         ul {
             list-style: none;
-            padding-left: 1.5em; /* Markdownのインデント幅 */
-            margin: 5px 0;
+            padding-left: 1.5em; 
+            margin: 10px 0;
         }
         ul li {
             position: relative;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         ul li::before {
-            content: "●"; 
+            content: "▪"; /* 四角いマーカー */
             color: #0000FF; 
-            font-size: 0.45em; /* さらに極小化 */
+            font-size: 1.1em;
             position: absolute;
-            left: -1.8em; /* 位置調整 */
-            top: 0.75em; /* 中央に揃える */
+            left: -1.2em; 
+            top: 0.05em; 
         }
-        /* 入れ子リスト（Markdownのハイフン風） */
+        /* 入れ子リスト */
         ul ul li::before {
             content: "-";
             font-size: 1em;
@@ -117,13 +119,12 @@
             top: 0;
         }
 
-        /* プロフィールエリア（Flexboxで左右に分割・空白を活かす） */
+        /* プロフィールエリア（Flexbox） */
         .profile-container {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-top: 15px;
-            margin-bottom: 15px;
+            margin-top: 20px;
         }
         .profile-left {
             flex: 1;
@@ -134,60 +135,81 @@
             text-align: right;
             font-size: 0.95em;
         }
-        .profile-right a {
-            color: #0000FF;
-            text-decoration: none;
-        }
-        .profile-right a:hover { text-decoration: underline; }
 
         /* 左詰め Contacts */
         .contacts-block {
-            margin-top: 20px;
-            padding-top: 10px;
-            border-top: 1px dashed #000080; /* 空白を埋める視覚的アクセント */
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px dashed #000080; 
         }
 
         /* 自画像（右側） */
         .portrait {
             float: right;
             margin-left: 20px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             width: 150px;
             border: 2px solid #000080;
             background-color: white;
         }
 
-        /* リンク集の横並び用 */
-        .inline-links a {
-            color: #0000FF;
-            text-decoration: none;
-            margin-right: 15px;
+        .inline-links {
+            text-align: center; 
+            margin-bottom: 20px;
         }
+        .inline-links a { margin: 0 10px; }
 
-        /* フッター */
         .footer-left {
             text-align: left;
             font-size: 1.0em;
             font-weight: 900;
             font-family: sans-serif;
-            margin-top: 2px;
+            margin-top: 5px;
         }
         .footer-bottom {
             text-align: center;
             margin-top: 40px;
             padding-bottom: 30px;
         }
+
+        /* === スマホ用レスポンシブデザイン === */
+        @media screen and (max-width: 768px) {
+            .profile-container {
+                flex-direction: column; /* 縦並びに変更 */
+            }
+            .profile-left {
+                padding-right: 0;
+            }
+            .profile-right {
+                width: 100%;
+                text-align: left; /* スマホでは読みやすく左寄せ */
+                margin-top: 20px;
+                padding-top: 15px;
+                border-top: 1px dashed #000080;
+            }
+            .portrait {
+                width: 120px; /* 画像も少し小さく */
+            }
+            .header-nav-container {
+                flex-direction: column;
+                min-height: auto;
+            }
+            .alice-gif {
+                position: static;
+                transform: none;
+                margin-top: 20px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- タイトルエリア -->
     <div class="header-area">
         <h1 class="main-title">自己嫌悪文 (Jikokenno-bun) の webpage.</h1>
         <h2 class="sub-title">内包的な人ノ邨 (Intensional Hito-no-Mura)</h2>
+        <p class="tagline">That's what "your which meets this" is.</p>
     </div>
 
-    <!-- ヘッダーリンク欄 -->
     <div class="header-nav-container">
         <div class="links-header">
             <a href="#updates">更新記録／etc.</a>
@@ -206,46 +228,49 @@
         <img src="alice_falling.gif" alt="Falling Alice" class="alice-gif">
     </div>
 
-    <!-- 自画像 -->
+    <hr>
+
     <img src="jikokennobunn.png" alt="自画像" class="portrait">
 
-    <!-- 自己紹介とRmkの左右分割エリア -->
     <div class="profile-container">
-        <!-- 左側 -->
         <div class="profile-left">
-            <p><span style="font-size:1.2em;">WHAT AM I ?</span>: 自己嫌悪文 (Jikokenno-bun)．閉鎖的自意識の並行世界 (Parallel World) に安置する人ノ邨 (Hito-no-Mura) の住人．</p>
-            <p><strong>自己紹介 (Self−Introduction)</strong>: 初めまして．自己嫌悪文という名前で X (旧Twitter) をやっている者です．</p>
+            <p>
+                <span style="font-size:1.2em;">WHAT AM I ?</span>:<br>
+                自己嫌悪文 (Jikokenno-bun)．閉鎖的自意識の並行世界 (Parallel World) に安置する人ノ邨 (Hito-no-Mura) の住人．
+            </p>
+            <p>
+                <strong>自己紹介 (Self−Introduction)</strong>:<br>
+                初めまして．自己嫌悪文という名前で X (旧Twitter) をやっている者です．
+            </p>
             
-            <div style="margin-top: 15px;">
+            <div style="margin-top: 25px;">
                 <span style="font-size:1.2em;">報告・予定 等</span><br>
-                2026年度前期 B2DForum @大岡山キャンパスTakiplaza に参加します．B2D学生の皆さん宜しくお願い致します．<br>
+                2026年度前期 B2DForum @大岡山キャンパスTakiplaza に参加します．B2D学生の皆さん宜しくお願い致します．<br><br>
                 数学基礎論若手の会 2026@エスポワールみやぎで不完全性現象の代数的側面に関する研究の口頭発表を行う予定です．
             </div>
 
-            <!-- Contactsエリア -->
             <div class="contacts-block">
                 --Contacts--<br>
-                Twitter: @jikokennobun (更新控えめ)<br>
+                Twitter: <a href="#">@jikokennobun</a> (更新控えめ)<br>
                 E-mail (Public): shibuya.i.9f75@m.isct.ac.jp<br>
                 E-mail (Private): yizhi6331@gmail.com
             </div>
         </div>
 
-        <!-- 右側 -->
         <div class="profile-right">
             Rmk. (anything): <a href="#fn1">[1]</a><br><br>
             エルデシュ数 (Erdős number); n＝?<br>
             私の身分 (My social status): 学生 (Students)<br><br>
             好みのPiano 音源: <a href="https://www.minet.jp/brand/modartt/pianoteq-9/">Pianoteq 9</a><br>
             好みのDrums 音源: <a href="https://www.minet.jp/brand/bfd/bfd3/">BFD2</a><br><br>
-            お気に入りの童話: 鏡の国のアリス (Lewis Carroll, 1871)，<br>注文の多い料理店 (宮沢賢治, 1921.11.10)<br>
-            愛読書 (精神安定本): ゲーデル、エッシャー、バッハ<br>―あるいは不思議の環 (Douglas Richard Hofstadter, 1979)
+            お気に入りの童話:<br>鏡の国のアリス (Lewis Carroll, 1871)，<br>注文の多い料理店 (宮沢賢治, 1921.11.10)<br><br>
+            愛読書 (精神安定本):<br>ゲーデル、エッシャー、バッハ<br>―あるいは不思議の環 (Douglas Richard Hofstadter, 1979)
         </div>
     </div>
 
     <div style="clear: both;"></div>
 
-    <p style="margin-top:0;">
+    <p style="margin-top: 20px;">
         指導教官: 鹿島亮 先生 (専門: 非古典論理，特に様相論理, 直感主義論理)<br>
         卒業論文 (2026) : Title: 未定<br>
         修士論文 (2028) : Title: 未定
@@ -403,7 +428,7 @@
 
     <hr>
     <h3 class="section-title" id="links">リンク集<br><small>(Links)</small></h3>
-    <div class="inline-links" style="text-align: center; margin-bottom: 20px;">
+    <div class="inline-links">
         <a href="#">My scrapbox</a>
         <a href="#">Note／Zenn／Mathlog</a>
         <a href="#">My Research map</a>
@@ -417,12 +442,12 @@
     
     <p><strong>[関連する研究者 (Researcher) の webpage.]</strong></p>
     <ul>
-        <li>L. D. Beklemishev</li>
-        <li>Shamkanov</li>
-        <li>F. Pakhomov</li>
-        <li>G. Voutsadakis</li>
-        <li>倉橋太志 (Kurahashi Taishi)</li>
-        <li>木原貴行 (Kihara Takayuki)</li>
+        <li><a href="#">L. D. Beklemishev</a></li>
+        <li><a href="#">Shamkanov</a></li>
+        <li><a href="#">F. Pakhomov</a></li>
+        <li><a href="#">G. Voutsadakis</a></li>
+        <li><a href="#">倉橋太志 (Kurahashi Taishi)</a></li>
+        <li><a href="#">木原貴行 (Kihara Takayuki)</a></li>
     </ul>
 
     <p><strong>[抽象的証明可能体系動物園 (Zoo of APS)]</strong></p>
