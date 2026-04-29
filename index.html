@@ -3,244 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <title>内包的な人ノ邨 (Intensional Hito-no-Mura)</title>
-    <!-- 数式表示用 (MathJax) -->
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <style>
-        /* Beklemishev風配色と高コントラスト設定 */
+        /* 背景色を少し濃く、テキストを漆黒にして明晰さを出す */
         body {
-            background-color: #e6f2ff; /* 薄い青背景 */
-            color: #000000; /* 文字を濃く */
+            background-color: #accfff; /* 以前より少し濃い青 */
+            color: #000000; /* 完全な黒でコントラストを最大化 */
             font-family: "MS PMincho", "Hiragino Mincho ProN", serif;
             line-height: 1.6;
             margin: 0 auto;
-            max-width: 1000px;
-            padding: 0 20px 60px 20px;
+            max-width: 900px;
+            padding: 20px;
         }
 
-        /* ゴシック体・太字（タイトル・セクション用） */
+        /* タイトル・セクションタイトル（ゴシック・太字・黒） */
         h1, h2, h3, .gothic-bold {
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             font-weight: bold;
+            color: #000000;
         }
 
-        /* ヘッダーエリア（センター配置・上詰め） */
+        /* タイトルエリア（センター・上詰め・1行サイズ） */
         .header-area {
             text-align: center;
-            padding-top: 50px;
-            margin-bottom: 20px;
+            margin-top: 10px;
         }
-        .main-title { font-size: 4.2em; margin-bottom: 0; } /* とても大きく */
-        .sub-title { font-size: 2.5em; margin-top: 5px; margin-bottom: 5px; } /* それなりに大きく */
-        .tagline { font-size: 1.3em; margin-bottom: 20px; }
+        .main-title { font-size: 2.0em; margin-bottom: 5px; } 
+        .sub-title { font-size: 1.5em; margin-top: 0; }
+        .tagline { font-size: 1.0em; margin-top: 5px; }
 
-        /* ヘッダーリンク集（ぎっしりと固める） */
-        .header-links {
+        /* セクションタイトル（右揃え・ゴシック太字・[]なし） */
+        h3 {
+            text-align: right;
+            font-size: 1.3em;
+            margin-top: 50px;
+            border: none;
+        }
+
+        /* 区切り線（非常に濃い紺・太め） */
+        hr {
+            border: 0;
+            border-top: 5px solid #000055; 
+            margin: 30px 0;
+        }
+
+        /* リンク置き場（縦並び・装飾なし） */
+        .links-column {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
-            margin-bottom: 30px;
-            font-size: 1.1em;
+            margin: 20px 0;
+            gap: 8px;
         }
-        .link-row { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-        .link-item { text-decoration: none; color: #0000cd; font-weight: bold; }
-        .link-item:hover { text-decoration: underline; }
+        .links-column a {
+            text-decoration: none;
+            color: #0000ee;
+            font-weight: bold;
+        }
+        .links-column a:hover { text-decoration: underline; }
 
-        /* セクションタイトル（中央揃え・ゴシック太字） */
-        h3 {
-            text-align: center;
-            font-size: 1.6em;
-            color: #003366;
-            margin-top: 60px;
-            margin-bottom: 25px;
+        /* 箇条書き：色付きの◽️（小さい四角） */
+        ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        ul li::before {
+            content: "◽"; 
+            color: #00008b; /* 濃い青の四角 */
+            font-weight: bold;
+            display: inline-block;
+            width: 1.5em;
+            margin-left: -1.5em;
         }
 
-        /* 区切り線（薄く、控えめに） */
-        hr {
-            border: 0;
-            border-top: 1px solid #c0d6eb; 
-            margin: 40px 0;
-        }
-
-        /* 強調色（Beklemishev風） */
-        .blue-bold { color: #0000ff; font-weight: bold; }
-        .red-bold { color: #ff0000; font-weight: bold; }
-        i { font-style: italic; } /* 斜体 */
-
-        /* 自画像と基本情報 */
-        .profile-section {
-            display: flex;
-            align-items: flex-start;
-            gap: 25px;
-            margin-bottom: 40px;
-        }
+        /* 自画像 */
         .portrait {
-            width: 150px;
-            border: 1px solid #003366;
+            float: left;
+            margin-right: 25px;
+            margin-bottom: 15px;
+            width: 160px;
+            border: 2px solid #000055;
             background-color: white;
         }
 
-        /* 脚注・フッター */
-        .footnote-area { font-size: 0.9em; margin-top: 80px; padding: 20px; border-top: 1px solid #bbb; }
-        .footer { margin-top: 80px; }
-        .footer-content { text-align: center; }
-        #last-updated { text-align: left; font-size: 0.9em; color: #333; margin-bottom: 10px; }
+        /* 最終更新日・フッター */
+        .footer { text-align: center; margin-top: 80px; padding-bottom: 50px; }
+        #last-updated { font-size: 1.0em; font-weight: bold; font-family: sans-serif; }
+        
+        /* 脚注 */
+        .footnote-area { font-size: 0.9em; margin-top: 60px; border-top: 2px solid #000055; padding-top: 20px; }
     </style>
 </head>
 <body>
 
-    <!-- タイトルエリア -->
     <div class="header-area">
-        <p style="font-size: 0.9em;">#内包的な村人2 ? / #内包的な人村2 ?</p>
-        <h1 class="main-title">自己嫌悪文 (<i>Jikokenno-bun</i>) の webpage.</h1>
-        <h2 class="sub-title">内包的な人ノ邨 (<i>Intensional Hito-no-Mura</i>)</h2>
+        <h1 class="main-title">自己嫌悪文 (Jikokenno-bun) の webpage.</h1>
+        <h2 class="sub-title">内包的な人ノ邨 (Intensional Hito-no-Mura)</h2>
         <p class="tagline">That's what "your which meets this" is.</p>
-        
-        <!-- ぎっしりと固めたリンク集 -->
-        <div class="header-links">
-            <div class="link-row">
-                <a href="https://note.com/jikokennobun" class="link-item">Note</a>
-                <a href="https://zenn.dev/jikokennobun/articles/ad5276b390786e" class="link-item">Zenn</a>
-                <a href="https://mathlog.info/articles/a75zVNvFJB8BpwiNKnTX" class="link-item">Mathlog (定理の証明)</a>
-                <a href="https://on.soundcloud.com/xmMBSUpdLnknl4GoIO" class="link-item">Soundcloud (音楽活動)</a>
-            </div>
-            <div class="link-row">
-                <a href="#links-collection" class="link-item">🔳 リンク集</a>
-                <a href="https://jikokennobun.github.io" class="link-item">jikokennobun.github.io</a>
-                <a href="#zoo-aps" class="link-item">抽象的証明可能体系動物園 (<i>Zoo of APS</i>)</a>
-            </div>
-        </div>
+    </div>
+
+    <div class="links-column">
+        <a href="https://note.com/jikokennobun">Note</a>
+        <a href="https://zenn.dev/jikokennobun/articles/ad5276b390786e">Zenn</a>
+        <a href="https://mathlog.info/articles/a75zVNvFJB8BpwiNKnTX">Mathlog (定理の証明)</a>
+        <a href="https://on.soundcloud.com/xmMBSUpdLnknl4GoIO">Sound cloud (音楽活動)</a>
     </div>
 
     <hr>
 
-    <!-- プロフィール -->
-    <div class="profile-section">
-        <img src="jikokennobunn.png" alt="自画像" class="portrait">
-        <div>
-            <p>
-                #内包的な邨人 / #記人，号人，句人<br><br>
-                自己嫌悪文 (<i>Jikokenno-bun</i>) の webpage.<br>
-                内包的な人ノ邨 (<i>Intensional Hito-no-Mura</i>)<br>
-                Rmk. (<i>anything</i>) <a href="#fn1" class="footnote">[1]</a><br>
-                エルデシュ数; n＝? <br>
-                身分: 学生 (<i>Students</i>)
-            </p>
-        </div>
-    </div>
+    <img src="jikokennobunn.png" alt="自画像" class="portrait">
+    <p>
+        自己嫌悪文 (Jikokenno-bun) の webpage.<br>
+        内包的な人ノ邨 (Intensional Hito-no-Mura)<br>
+        Rmk. <a href="#fn1" class="footnote">[1]</a><br>
+        エルデシュ数; n＝? <br>
+        身分: 学生 (Students)
+    </p>
+
+    <div style="clear: both;"></div>
+
+    <hr>
 
     <h3>Reserch Interests</h3>
-    <p>数理論理学，その中でも特に <span class="blue-bold">Gödel の不完全性定理の代数的・圏論的側面</span>を研究している．これに付随して以下のような分野・研究トピックスにも興味を抱いている．</p>
+    <p>
+        数理論理学，その中でも特に <span style="font-weight:bold; color:blue;">Gödel の不完全性定理の代数的・圏論的側面</span>を研究している．<br>
+        これに付随して以下のような分野・研究トピックスにも興味を抱いている．
+    </p>
     <ul>
-        <li>抽象代数，普遍代数，抽象代数論理 (<i>AAL</i>)</li>
+        <li>抽象代数，普遍代数，抽象代数論理 (AAL)</li>
         <li>(圏論的)領域理論, 計算論的意味論, 表示的意味論</li>
         <li>部分構造論理，線形論理，アフィン論理</li>
         <li>余代数，オートマトン，非整楚集合論，循環性，非可述性</li>
-        <li>圏論的論理学 (ハイパードクトリン, \(\pi\)-インスティチューション)，圏論的双対性, <span class="red-bold">K4- Locale 理論</span></li>
+        <li>圏論的論理学 (ハイパードクトリン, \(\pi\)-インスティチューション)，圏論的双対性, <span style="font-weight:bold; color:red;">K4- Locale 理論</span></li>
         <li>解釈可能性次数, 可述的包括関手 (特に，Pakhomov and Visser [2022])</li>
     </ul>
 
     <h3>研究紹介 (Topics Level)</h3>
     <ul>
         <li>論理の創発性を創造する．
-            <ul><li>[生命的体系としての論理] 含意 (<i>Implication</i>) は如何にして誕生するか？</li></ul>
+            <ul><li>[生命的体系としての論理] 含意 (Implication) は如何にして誕生するか？</li></ul>
         </li>
         <li>計算と論理の相互作用; 代数, 位相, 圏の視点から</li>
         <li>不完全性現象の代数逆数学</li>
-        <li><span class="blue-bold">圏論的第二不完全性定理 (Categorical G2)</span></li>
+        <li>圏論的第二不完全性定理 (Categorical G2)</li>
     </ul>
-
-    <p>My Research map URL: [リンク先をここに]</p>
 
     <hr>
 
     <h3>Remark about me</h3>
-    <p><span class="red-bold">Remark 1;</span> よく勘違いされることがあるが，私は所謂ところの証明可能性論理やMagari 代数の研究家ではない．</p>
-    <p><span class="blue-bold">Remark 2;</span> 当たり前のことだが，私は数理論理学 (特に不完全性定理周辺) の専門家であり，圏論や<i>CS</i>の専門家ではない．</p>
-    <p><span class="red-bold">Remark 3;</span> 参加した主な研究集会</p>
+    <p><span style="font-weight:bold; color:red;">Remark 1;</span> よく勘違いされることがあるが，私は所謂ところの証明可能性論理やMagari 代数の研究家ではない．</p>
+    <p><span style="font-weight:bold; color:blue;">Remark 2;</span> 当たり前のことだが，私は数理論理学 (特に不完全性定理周辺) の専門家であり，圏論やCSの専門家ではない．</p>
+
+    <hr>
+
+    <h3>参加した主な研究集会</h3>
     <ul>
-        <li>名古屋 証明論 (2024-12-14 <i>Fri.?</i> - )</li>
+        <li>名古屋 証明論 (2024-12-14 Fri.? - )</li>
         <li>東北大 数学基礎論若手の会 (2026-10-14?)
             <ul><li>Title: 不完全性現象の代数的逆数学; 抽象的証明可能構造の観点から</li></ul>
         </li>
     </ul>
 
-    <p>指導教官: 鹿島 亮 先生 (専門: 非古典論理，特に様相論理, 直感主義論理)</p>
-    <p>卒業論文 (2026) : Title:</p>
-
     <hr>
 
     <h3>最近の更新</h3>
-    <p>[<i>B2D Forum</i>] 2026年度前期 / 修士論文 (2028) : Title: / プレプリント (<i>arXiv</i>)</p>
-
-    <h3>学術論文・記事</h3>
-    <p>[査読付き学術論文] / [査読無し学術論文]</p>
-    <p>[学術記事 (<i>Academic Notes</i>)]</p>
-    <ul>
-        <li>第二不完全性定理 (<i>G2</i>) の内包性問題 (<i>Intensionality Problems</i>) に関する一詳察</li>
-        <li>安定領域理論 (<i>Stable Domain Theory</i>)の勉強ブログ</li>
-    </ul>
-
-    <h3>MISC</h3>
-    <ul>
-        <li>アリスは笑わない。 / アリスはまだ笑わない。 <img src="icon_satire1.gif" alt="" width="20" style="vertical-align: middle;"></li>
-        <li><i>Jesoslow-Type Sentence</i> を可算個含む<i>APS</i>モデルの構造論について</li>
-        <li>圏論的抽象代数論理入門Ⅰ (Ⅱ)</li>
-        <li>代数的第二不完全性定理動物園 (<i>Algebraic G2-Zoo</i>)</li>
-        <li>トイモデルから始める第二不完全性定理 (<i>G2</i>) の代数的逆数学</li>
-        <li>使用と言及の代数系; 非古典化された不動点コンビネータを添えて</li>
-        <li>資源としての自己言及 (<i>Self-Reference as resources</i>)</li>
-    </ul>
+    <p>
+        [2026.04.29] webpage の明晰化工事を完了。<br>
+        [2026.03.15] 邨の境界線を再定義。
+    </p>
 
     <hr>
 
-    <h3 id="links-collection">リンク集</h3>
-    <p>[記事を解説 or 考察する記事]: 矢田部俊介 / 矛盾は矛盾か (岡田)</p>
-    <p>[関連する研究者 (<i>Researcher</i>) の <i>webpage</i>.]: L. D. Beklemishev / F. Pakhomov / 倉橋太志 (Kurahashi Taishi) / 木原貴行 (Kihara Takayuki)</p>
+    <h3>MISC / 学術記事</h3>
+    <ul>
+        <li>アリスは笑わない。 <img src="icon_satire1.gif" alt="satire" width="20"></li>
+        <li>資源としての自己言及 (Self-Reference as resources)</li>
+        <li>Jesoslow-Type Sentence を可算個含むAPSモデルの構造論について</li>
+        <li>代数的第二不完全性定理動物園 (Algebraic G2-Zoo)</li>
+    </ul>
+
+    <hr>
 
     <h3>趣味 (Hobbies) 等</h3>
-    <ul>
-        <li><i>DTM, Sound Cloud</i>, ココナラ (あいあーるP (I®))</li>
-        <li>二次創作 / <i>Scrapbox</i></li>
-        <li><i>Note, Mathlog</i> (<i>Löb</i>の定理と証明, 外延的天才と内包的天才, ツイッター絵師の自意識に関する考察等)</li>
-        <li>ボーカロイド批評 (辛口), アニメ(なろう系)評論, <i>MCbattle</i> 観測記録</li>
-        <li>[小説] 華氏451℃, ハーモニー考察 / ゆずソフト, 金色ラブリッチェ</li>
-        <li>興味ある分野 (<i>Math & Logic</i>): 集合論 (基数不変量, 強制法, 巨大基数), 計算可能性理論, 証明論 (循環型証明体系), 作用素環論, 代数的位相幾何学 (4-<i>Dim</i>), 幾何解析, 確率微分方程式論</li>
-        <li>興味ある分野 (<i>Others</i>): 擬態の科学, 生命物理学, 進化心理学</li>
-    </ul>
+    <p>DTM (I-R P), ボーカロイド批評, ゆずソフト, 金色ラブリッチェ, 東海オンエア, 興味ある分野 (Math & Logic; Others).</p>
 
-    <hr>
-
-    <h3>仕事・経歴</h3>
-    <p>個別指導塾<i>Exsia</i>での指導 (約3年) / インターン: 小学館, <i>KADOKAWA</i>等</p>
-    <p>横浜サイエンスフロンティア高校 (2020-2023) → 東京科学大学 情報理工学院 (2023-2027)</p>
-    <p>奨学金 (<i>Fellowship</i>): <i>JASSO</i>, 日本学術振興会 / 履歴書<i>pdf</i></p>
-
-    <h3>Contacts</h3>
-    <p>Twitter: @jikokennobun / E-mail: shibuya.i.9f75@m.isct.ac.jp / yizhi6331@gmail.com</p>
-
-    <!-- 脚注 -->
     <div class="footnote-area">
-        <p id="fn1">[1] 脚注の断片。内包的な自己言及の集積地です。</p>
+        <p id="fn1">[1] 脚注の内容。英語は斜体にせず、本文と同じ明晰な書体で記載します。</p>
     </div>
 
-    <!-- フッター -->
     <div class="footer">
-        <!-- 最終更新日（左揃え） -->
+        <hr>
         <div id="last-updated"></div>
         <script>
             const date = new Date(document.lastModified);
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('last-updated').innerHTML = "Last updated: " + date.toLocaleDateString('en-US', options);
         </script>
-
-        <div class="footer-content">
-            <hr>
-            <img src="https://hits.dwyl.com/jikokennobun/jikokennobun.github.io.svg" alt="Hits">
-            <br><br>
-            <img src="anim_log_disj.gif" alt="" width="40">
-            <p style="font-size: 0.9em;">Shibuya Iori / Intensional Hito-no-Mura</p>
-        </div>
+        <br>
+        <img src="https://hits.dwyl.com/yourusername/jikokennobun.svg" alt="Hits">
+        <br><br>
+        <img src="anim_log_disj.gif" alt="anim" width="40">
+        <p style="font-size: 0.9em; font-weight: bold;">Shibuya Iori / Intensional Hito-no-Mura</p>
     </div>
 
 </body>
