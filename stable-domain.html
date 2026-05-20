@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安定領域理論 - 内包的な人ノ邨</title>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <style>
+        body {
+            background-color: #d8eaff;
+            color: #000000;
+            font-family: "MS PMincho", "Hiragino Mincho ProN", serif;
+            font-weight: 900;
+            line-height: 1.72;
+            margin: 0 auto;
+            max-width: 1040px;
+            padding: 20px;
+        }
+        h1, h2, h3, h4, nav a, .back-home, .label, th {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            font-weight: 900;
+        }
+        a {
+            color: #0000FF;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #000080;
+        }
+        .back-home {
+            margin-bottom: 18px;
+        }
+        .page-title {
+            background-color: #000080;
+            border: 3px ridge #aaaaff;
+            color: #ffffff;
+            margin: 28px 0 18px 0;
+            padding: 14px;
+            text-align: center;
+        }
+        .page-title small {
+            color: #ccccff;
+            display: block;
+            font-size: 0.75em;
+        }
+        .abstract {
+            background-color: #eaf3ff;
+            border: 2px solid #000080;
+            margin: 18px 0 24px 0;
+            padding: 14px 18px;
+        }
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px 16px;
+            justify-content: center;
+            margin: 18px 0 30px 0;
+        }
+        section {
+            border-top: 1px solid #000080;
+            margin-top: 30px;
+            padding-top: 26px;
+        }
+        section h3 {
+            color: #000080;
+            font-size: 1.35em;
+            margin: 0 0 10px 0;
+        }
+        h4 {
+            font-size: 1.08em;
+            margin: 18px 0 6px 0;
+        }
+        p {
+            margin: 10px 0;
+        }
+        ul, ol {
+            margin: 8px 0 16px 0;
+            padding-left: 26px;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 14px 0 20px 0;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #000080;
+            padding: 8px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #eaf3ff;
+        }
+        .definition, .proposition, .example, .warning, .proof-sketch {
+            border-left: 4px solid #000080;
+            margin: 14px 0;
+            padding: 10px 14px;
+        }
+        .definition {
+            background-color: #f3f8ff;
+        }
+        .proposition {
+            background-color: #edf5ff;
+        }
+        .example {
+            background-color: #f7fbff;
+        }
+        .warning {
+            background-color: #fff7db;
+            border-left-color: #9a6a00;
+        }
+        .proof-sketch {
+            background-color: #eef8ee;
+            border-left-color: #006b2d;
+        }
+        .label {
+            color: #000080;
+        }
+        .references li {
+            margin-bottom: 10px;
+        }
+        footer {
+            border-top: 1px solid #000080;
+            font-family: Arial, sans-serif;
+            font-size: 0.9em;
+            margin-top: 36px;
+            padding-top: 16px;
+        }
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+            .page-title {
+                margin-top: 18px;
+            }
+            table {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="back-home"><a href="seminar_page.html#stable-domain">← Seminar Notes の Stable Domain Theory へ戻る</a></div>
+
+    <h3 class="page-title">安定領域理論<br><small>Berry stability, stable order, and dI-domains</small></h3>
+
+    <div class="abstract">
+        <span class="label">Abstract.</span>
+        本稿の目的は，通常の Scott 連続性が捉える「有限情報による近似可能性」を一段細かくし，
+        値を生むために実際に必要な入力情報の最小性を保存する写像として Berry 安定性を定式化することである。
+        主役は，dcpo 上の Scott 連続写像ではなく，互換な情報の meet を保存する安定写像と，
+        それらを点wise順序ではなく安定順序で並べた関数空間である。
+        最後に，dI-domain がなぜ cartesian closed な安定意味論を与えるかを，圏論的な構造だけ見える程度にまとめる。
+    </div>
+
+    <nav>
+        <a href="#preliminaries">1. 領域の前提</a>
+        <a href="#stability">2. 安定性</a>
+        <a href="#examples">3. 例と反例</a>
+        <a href="#stable-order">4. 安定順序</a>
+        <a href="#traces">5. Trace 表現</a>
+        <a href="#didomains">6. dI-domain</a>
+        <a href="#logic">7. 論理との接続</a>
+        <a href="#references">References</a>
+    </nav>
+
+    <section id="preliminaries">
+        <h3>1. 領域の前提</h3>
+        <p>
+            領域理論では，順序 \(x \sqsubseteq y\) を「\(y\) は \(x\) 以上の情報をもつ」と読む。
+            この読み方では，未定義値 \(\bot\) は最小情報であり，増大列や directed set の上限は，有限段階の近似を極限として貼り合わせた値である。
+        </p>
+
+        <div class="definition">
+            <span class="label">Definition 1.1.</span>
+            半順序 \(D\) が <em>dcpo</em> であるとは，任意の directed subset \(X\subseteq D\) が上限 \(\bigsqcup X\) をもつことをいう。
+            写像 \(f:D\to E\) が Scott 連続であるとは，単調であり，任意の directed \(X\) について
+            \[
+                f(\bigsqcup X)=\bigsqcup f[X]
+            \]
+            が成り立つことをいう。
+        </div>
+
+        <div class="definition">
+            <span class="label">Definition 1.2.</span>
+            \(a\ll x\) は，任意の directed \(X\) について \(x\sqsubseteq\bigsqcup X\) ならば，ある \(u\in X\) が存在して \(a\sqsubseteq u\) となることを表す。
+            \(k\ll k\) を満たす \(k\) を compact，または finite element と呼ぶ。
+            各 \(x\in D\) が自分以下の compact 元の directed supremum として表されるとき，\(D\) は algebraic である。
+        </div>
+
+        <p>
+            以下では，主に algebraic bounded-complete dcpo を念頭に置く。
+            \(X\subseteq D\) が bounded であるとは，ある \(u\) が存在して全ての \(x\in X\) が \(x\sqsubseteq u\) を満たすことである。
+            bounded-complete ならば bounded な集合の join が存在し，特に \(\emptyset\) の join として \(\bot\) が得られる。
+        </p>
+
+        <div class="definition">
+            <span class="label">Definition 1.3.</span>
+            二元 \(x,y\in D\) が共通上界をもつとき \(x\uparrow y\) と書き，compatible であるという。
+            bounded-complete dcpo では全ての二元 meet \(x\sqcap y\) が存在する。
+            互換な二元については join \(x\sqcup y\) も存在する。
+        </div>
+
+        <div class="warning">
+            <span class="label">Warning.</span>
+            本稿で扱う「安定」は安定ホモトピー論や安定モデル圏の安定性ではない。
+            ここでの安定性は，連続写像が出力情報を得る際に必要とする入力情報の「最小原因」をもつ，という順序論的・意味論的な条件である。
+        </div>
+    </section>
+
+    <section id="stability">
+        <h3>2. 安定性: 情報の最小原因</h3>
+        <p>
+            Scott 連続性は「有限出力情報は有限入力情報から既に観測できる」と言う。
+            しかし，その入力情報が一意に最小であるとは言わない。
+            Berry の安定性は，この不足を補うために，出力情報 \(e\) を作るのに本当に必要だった入力断片を関数の構造として要求する。
+        </p>
+
+        <div class="definition">
+            <span class="label">Definition 2.1 (modulus of stability).</span>
+            \(D,E\) を algebraic dcpo とし，\(B_E\) を \(E\) の compact basis とする。
+            Scott 連続写像 \(f:D\to E\)，点 \(x\in D\)，および \(e\in B_E\) with \(e\sqsubseteq f(x)\) に対して，
+            \[
+                M(f,x,e)
+            \]
+            とは，条件
+            \[
+                d\sqsubseteq x,\qquad e\sqsubseteq f(d)
+            \]
+            を満たす \(d\) の中で最小のものが存在するとき，その最小元を表す。
+            すべての \(x,e\) についてこの最小元が存在するとき，\(f\) は安定である，と読む。
+        </div>
+
+        <p>
+            この定義は直観的だが，実際の計算では bounded meet を保存する形の方が扱いやすい。
+            \(D,E\) が十分に lattice-like，たとえば L-domain や dI-domain の文脈にあるとき，次の形が標準的な作業定義になる。
+        </p>
+
+        <div class="proposition">
+            <span class="label">Proposition 2.2 (meet preservation).</span>
+            \(D,E\) を本稿の作業文脈にある領域とする。
+            Scott 連続写像 \(f:D\to E\) が安定であることは，任意の互換な \(x,y\in D\) について
+            \[
+                f(x\sqcap y)=f(x)\sqcap f(y)
+            \]
+            が成り立つことと同値である。
+            より強く，任意の non-empty bounded subset \(A\subseteq D\) について
+            \[
+                f(\bigwedge A)=\bigwedge f[A]
+            \]
+            と書ける。
+        </div>
+
+        <div class="proof-sketch">
+            <span class="label">Proof sketch.</span>
+            meet 保存性があれば，\(e\sqsubseteq f(d_1)\) かつ \(e\sqsubseteq f(d_2)\) で \(d_1,d_2\sqsubseteq x\) のとき，
+            \(e\sqsubseteq f(d_1)\sqcap f(d_2)=f(d_1\sqcap d_2)\) となる。
+            したがって，\(e\) を生む入力候補の集合は meet で閉じ，algebraic な近似のもとで最小候補をもつ。
+            逆向きには，最小原因の存在を \(x,y\) に同時に適用すると，両方から得られる出力情報は共有部分 \(x\sqcap y\) から既に得られる。
+        </div>
+    </section>
+
+    <section id="examples">
+        <h3>3. 例と反例</h3>
+
+        <div class="example">
+            <span class="label">Example 3.1 (projections and constants).</span>
+            積領域 \(D\times E\) の射影 \(\pi_1,\pi_2\) は安定である。
+            また，定数写像 \(c_d(x)=d\) も安定である。
+            どちらも互換 meet を明らかに保存する。
+        </div>
+
+        <p>
+            安定性が本当に排除するのは，複数の入力成分を並列に覗くことで最小原因を曖昧にする写像である。
+            代表例が parallel-or である。
+        </p>
+
+        <div class="example">
+            <span class="label">Example 3.2 (parallel-or is not stable).</span>
+            flat boolean 領域
+            \[
+                \mathbb{B}_\bot=\{\bot,\mathsf{tt},\mathsf{ff}\}
+            \]
+            を考える。
+            parallel-or
+            \[
+                \mathsf{por}:\mathbb{B}_\bot\times\mathbb{B}_\bot\to\mathbb{B}_\bot
+            \]
+            は
+            \[
+                \mathsf{por}(\mathsf{tt},\bot)=\mathsf{tt},\qquad
+                \mathsf{por}(\bot,\mathsf{tt})=\mathsf{tt},\qquad
+                \mathsf{por}(\bot,\bot)=\bot
+            \]
+            を満たす。
+            ここで
+            \[
+                (\mathsf{tt},\bot)\uparrow(\bot,\mathsf{tt}),\qquad
+                (\mathsf{tt},\bot)\sqcap(\bot,\mathsf{tt})=(\bot,\bot)
+            \]
+            である。
+            もし \(\mathsf{por}\) が安定ならば
+            \[
+                \mathsf{por}(\bot,\bot)
+                =
+                \mathsf{por}(\mathsf{tt},\bot)\sqcap
+                \mathsf{por}(\bot,\mathsf{tt})
+                =
+                \mathsf{tt}
+            \]
+            となるが，左辺は \(\bot\) である。
+            よって \(\mathsf{por}\) は Scott 連続であっても安定ではない。
+        </div>
+
+        <div class="example">
+            <span class="label">Example 3.3 (left sequential or).</span>
+            左引数を先に読む逐次的な or を
+            \[
+            \mathsf{lor}(x,y)=
+            \begin{cases}
+                \mathsf{tt} & x=\mathsf{tt},\\
+                y & x=\mathsf{ff},\\
+                \bot & x=\bot
+            \end{cases}
+            \]
+            と定める。
+            \(\mathsf{tt}\) を返す最小原因は \((\mathsf{tt},\bot)\) であり，
+            左引数が \(\mathsf{ff}\) のときだけ右引数の情報が必要になる。
+            この依存の非対称性は operational には逐次性であり，順序論的には meet 保存性として現れる。
+        </div>
+    </section>
+
+    <section id="stable-order">
+        <h3>4. 安定順序</h3>
+        <p>
+            安定写像の関数空間では，点wise順序だけでは粗すぎる。
+            \(f\sqsubseteq g\) が各点で \(f(x)\sqsubseteq g(x)\) を意味しても，
+            \(f\) と \(g\) が同じ最小原因を使っているとは限らないからである。
+            安定領域理論で重要なのは，出力の大きさだけでなく，その出力を生む依存構造を比較する順序である。
+        </p>
+
+        <div class="definition">
+            <span class="label">Definition 4.1 (stable order).</span>
+            安定写像 \(f,g:D\to E\) について，
+            \[
+                f\sqsubseteq_s g
+            \]
+            とは，任意の \(x\sqsubseteq y\) について
+            \[
+                f(x)=f(y)\sqcap g(x)
+            \]
+            が成り立つことをいう。
+            特に \(x=y\) とおけば \(f(x)=f(x)\sqcap g(x)\) なので，\(f\sqsubseteq_s g\) は点wise に \(f\sqsubseteq g\) を含意する。
+        </div>
+
+        <p>
+            この順序は「\(g\) は \(f\) より多くの出力情報を出すが，\(f\) が既に出していた情報については同じ原因を保つ」と読むとよい。
+            すなわち，安定順序は extensional な情報増大と intensional な依存保存を同時に要求する。
+        </p>
+
+        <div class="proposition">
+            <span class="label">Proposition 4.2.</span>
+            \(D,E\) が dI-domain のとき，安定写像全体 \([D\to_s E]\) は安定順序 \(\sqsubseteq_s\) によって再び dI-domain になる。
+            この関数空間が指数対象となり，評価写像
+            \[
+                \mathsf{eval}:[D\to_s E]\times D\to E
+            \]
+            と curry 化は安定である。
+        </div>
+
+        <p>
+            ここに通常の連続領域理論との大きな違いがある。
+            安定意味論では，関数空間の順序は点wise順序ではなく Berry の安定順序であり，
+            そのおかげで「関数が入力をどう読むか」を高階型の意味論の中に保持できる。
+        </p>
+    </section>
+
+    <section id="traces">
+        <h3>5. Trace 表現</h3>
+        <p>
+            algebraic な状況では，安定写像は有限入力情報と有限出力情報の対応表として読める。
+            これは proof-theoretic にも扱いやすい。
+        </p>
+
+        <div class="definition">
+            <span class="label">Definition 5.1.</span>
+            \(K(D),K(E)\) を compact 元全体とする。
+            安定写像 \(f:D\to E\) の trace を
+            \[
+                \mathrm{Tr}(f)=
+                \{(a,b)\in K(D)\times K(E)
+                    \mid b\sqsubseteq f(a),\ 
+                    \text{\(a\) は \(b\) を生む最小 compact 入力である}\}
+            \]
+            と書く。
+        </div>
+
+        <div class="proposition">
+            <span class="label">Proposition 5.2.</span>
+            適切な一貫性条件を満たす trace \(T\subseteq K(D)\times K(E)\) は安定写像を定める。
+            その値は
+            \[
+                f_T(x)=
+                \bigsqcup\{\,b\in K(E)\mid \exists a\in K(D)\ (a\sqsubseteq x\ \&\ (a,b)\in T)\,\}
+            \]
+            によって与えられる。
+        </div>
+
+        <p>
+            trace 表現で見れば，安定写像は単なるグラフではない。
+            \((a,b)\) は「入力 \(a\) があれば出力 \(b\) が得られる」という十分条件であるだけでなく，
+            \(b\) に対して \(a\) が最小原因であることを記録している。
+            これにより，parallel-or のような複数の独立した最小原因をもつ振る舞いは trace として整合しない。
+        </p>
+    </section>
+
+    <section id="didomains">
+        <h3>6. dI-domain と cartesian closedness</h3>
+        <p>
+            Berry の dI-domain は，安定写像の関数空間を閉じるために設計された領域のクラスである。
+            直観的には，Scott domain に次の二つの制御を加える。
+        </p>
+
+        <div class="definition">
+            <span class="label">Definition 6.1 (working form).</span>
+            dI-domain は algebraic bounded-complete dcpo \(D\) で，次の二つの追加公理を満たすものとして扱う。
+            <ol>
+                <li><span class="label">Axiom d.</span> compatible join に関して meet が分配的に振る舞う。すなわち \(y\uparrow z\) なら
+                    \[
+                        x\sqcap(y\sqcup z)=(x\sqcap y)\sqcup(x\sqcap z).
+                    \]
+                </li>
+                <li><span class="label">Axiom I.</span> 任意の compact 元 \(k\) は very finite である。すなわち下方集合
+                    \[
+                        \downarrow k=\{x\in D\mid x\sqsubseteq k\}
+                    \]
+                    は有限集合である。</li>
+            </ol>
+            Axiom d は局所的な distributivity，Axiom I は finitary さを保証する条件として働く。
+        </div>
+
+        <p>
+            Axiom d は，情報を合成した後に共通部分を取る操作と，共通部分を取ってから情報を合成する操作が一致することを主張する。
+            これは安定写像の meet 保存性と相性がよい。
+            Axiom I は，関数空間の compact basis が制御不能に大きくならないための有限性条件である。
+        </p>
+
+        <div class="proposition">
+            <span class="label">Theorem 6.2 (Berry).</span>
+            dI-domain と安定写像は cartesian closed category をなす。
+            積，指数 \([D\to_s E]\)，評価，curry 化がこのクラス内で定義できる。
+        </div>
+
+        <p>
+            この定理の意味は，安定性が単なる一階関数の性質ではなく，高階関数を含む型付きラムダ計算の意味論として閉じている，ということである。
+            通常の連続関数空間では並列的な関数が入ってしまうが，安定関数空間は依存構造を保持することで，より逐次的な意味論に近いモデルを与える。
+        </p>
+
+        <div class="warning">
+            <span class="label">Caution.</span>
+            安定性は逐次性そのものではない。
+            stable functions は parallel-or を排除するが，operational な逐次アルゴリズム全体をちょうど特徴づけるには，
+            concrete data structures，sequential algorithms，game semantics など，さらに intensional な装置が必要になる。
+        </div>
+    </section>
+
+    <section id="logic">
+        <h3>7. 論理との接続</h3>
+        <p>
+            安定領域理論が論理側から面白いのは，含意や証明可能性を「出力を得るために必要な前提情報の最小原因」として読む余地を与える点にある。
+            Scott 連続性は「十分な有限証拠がある」と言うが，安定性は「その証拠の最小依存が保存される」と言う。
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>領域理論</th>
+                    <th>論理的な読み</th>
+                    <th>注意点</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>\(x\sqsubseteq y\)</td>
+                    <td>\(y\) は \(x\) 以上の証拠・情報を含む。</td>
+                    <td>順序は真理値順序ではなく情報順序である。</td>
+                </tr>
+                <tr>
+                    <td>Scott 連続性</td>
+                    <td>有限観測は有限段階で確定する。</td>
+                    <td>最小の証拠までは指定しない。</td>
+                </tr>
+                <tr>
+                    <td>安定性</td>
+                    <td>出力証拠には最小原因がある。</td>
+                    <td>並列的な観測を排除する方向に働く。</td>
+                </tr>
+                <tr>
+                    <td>安定順序</td>
+                    <td>証拠量だけでなく依存構造も比較する。</td>
+                    <td>点wise順序とは別物である。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            したがって，抽象的証明可能体系や自己言及のモデルを作るとき，
+            安定性は「どの前提がどの証明可能性情報を発生させたのか」を捨てないための候補になる。
+            特に，含意を単なる真理関数ではなく，情報の消費・保存・発生の構造として見る場合，
+            安定領域理論は線形論理やゲーム意味論へ続く自然な入口になる。
+        </p>
+    </section>
+
+    <section id="references">
+        <h3>References</h3>
+        <ol class="references">
+            <li>
+                Samson Abramsky and Achim Jung,
+                <a href="https://www.cs.famaf.unc.edu.ar/~mpagano/cursos/dominios/libros/abramsky-jung-domain-theory.pdf">Domain Theory</a>,
+                in <em>Handbook of Logic in Computer Science</em>, 1994.
+            </li>
+            <li>
+                Roberto M. Amadio and Pierre-Louis Curien,
+                <a href="https://www.cambridge.org/core/books/abs/domains-and-lambda-calculi/stability/0B2322B3C47E8606A54933FE9FB478A8">Stability</a>,
+                Chapter 12 of <em>Domains and Lambda-Calculi</em>, Cambridge University Press, 1998.
+            </li>
+            <li>
+                Gérard Berry,
+                <a href="https://doi.org/10.1007/3-540-08860-1_7">Stable Models of Typed Lambda-Calculi</a>,
+                ICALP 1978, LNCS 62, Springer, 1978.
+            </li>
+            <li>
+                Paul Taylor,
+                <a href="https://www.paultaylor.eu/stable/">Stable Domain Theory</a>,
+                notes and project page.
+            </li>
+            <li>
+                Herman Geuvers,
+                <a href="https://www.cs.ru.nl/~herman/onderwijs/semantics2017/didomainsnote.pdf">Notes on dI domains</a>,
+                semantics and domain theory course notes, 2017.
+            </li>
+        </ol>
+    </section>
+
+    <footer>
+        <a href="seminar_page.html#stable-domain">Stable Domain Theory index</a> /
+        <a href="topics.html">Research Topics</a> /
+        <a href="index.html">Home</a>
+    </footer>
+</body>
+</html>
