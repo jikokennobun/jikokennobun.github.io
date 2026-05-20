@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研究ノート・セミナー - 内包的な人ノ邨</title>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <style>
+        body {
+            background-color: #d8eaff;
+            color: #000000;
+            font-family: "MS PMincho", "Hiragino Mincho ProN", serif;
+            font-weight: 900;
+            line-height: 1.65;
+            margin: 0 auto;
+            max-width: 1000px;
+            padding: 20px;
+        }
+        h1, h2, h3, h4, nav a, .back-home {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            font-weight: 900;
+        }
+        a {
+            color: #0000FF;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #000080;
+        }
+        .back-home {
+            margin-bottom: 18px;
+        }
+        .page-title {
+            background-color: #000080;
+            border: 3px ridge #aaaaff;
+            color: #ffffff;
+            margin: 28px 0 18px 0;
+            padding: 12px;
+            text-align: center;
+        }
+        .page-title small {
+            color: #ccccff;
+            display: block;
+            font-size: 0.75em;
+        }
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px 16px;
+            justify-content: center;
+            margin: 18px 0 28px 0;
+        }
+        section {
+            border-top: 1px solid #000080;
+            padding-top: 24px;
+            margin-top: 28px;
+        }
+        section h3 {
+            color: #000080;
+            font-size: 1.35em;
+            margin: 0 0 10px 0;
+        }
+        ul {
+            list-style: none;
+            margin: 8px 0 18px 0;
+            padding-left: 22px;
+        }
+        li {
+            margin-bottom: 7px;
+            position: relative;
+        }
+        li::before {
+            color: #0000FF;
+            content: "◆";
+            font-size: 0.9em;
+            left: -1.45em;
+            position: absolute;
+            top: 0.06em;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 14px 0 20px 0;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #000080;
+            padding: 8px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #eaf3ff;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+        }
+        .note {
+            background-color: #eaf3ff;
+            border-left: 4px solid #000080;
+            padding: 10px 14px;
+        }
+        .tag {
+            color: #000080;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+        }
+        footer {
+            border-top: 1px solid #000080;
+            font-family: Arial, sans-serif;
+            font-size: 0.9em;
+            margin-top: 36px;
+            padding-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="back-home"><a href="index.html">← 邨の入り口 (Home) へ戻る</a></div>
+
+    <h3 class="page-title">研究ノート・セミナー<br><small>(Seminar Notes and Research Pages)</small></h3>
+
+    <p class="note">
+        トップページから参照する研究メモ，読書リスト，業績リストを置くための統合ページです。
+        各項目は作業中の草稿として，後からPDF・ノート・発表資料へ伸ばせるようにしてあります。
+    </p>
+
+    <nav>
+        <a href="#misc">圏論は笑わない。</a>
+        <a href="#aps-zoo">Zoo of APS</a>
+        <a href="#wishlist">Wish-readings</a>
+        <a href="#publications">業績リスト</a>
+        <a href="#stable-domain">Stable Domain Theory</a>
+        <a href="#jesoslow">Jesoslow-Type Sentence</a>
+    </nav>
+
+    <section id="misc">
+        <h3>圏論は笑わない。</h3>
+        <p>
+            圏論を，万能の抽象化装置としてではなく，証明・計算・意味論の形を静かに観察するための言語として読むためのメモ。
+            ここでは主に，代数的意味論や領域理論に入ってくる最小限の圏論的道具を整理します。
+        </p>
+        <ul>
+            <li><span class="tag">目標:</span> 関手，随伴，モナド，余代数を，論理との接続が見える粒度で読む。</li>
+            <li><span class="tag">関心:</span> 構文と意味論の対応，反射原理の抽象化，固定点・循環性の扱い。</li>
+            <li><span class="tag">方針:</span> 定義を過剰に一般化せず，具体例から必要な分だけ引き上げる。</li>
+        </ul>
+    </section>
+
+    <section id="aps-zoo">
+        <h3>抽象的証明可能体系動物園 (Zoo of APS)</h3>
+        <p>
+            APS は Abstract Provability System の略称として扱っています。
+            証明可能性述語や反射原理を，算術の内部だけでなく，抽象的な代数・順序・圏論的構造の上で眺めるための分類表です。
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Class</th>
+                    <th>Core idea</th>
+                    <th>Typical questions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Hilbert-Bernays-Lob type</td>
+                    <td>導出可能性条件と Lob 型原理を中心にした体系。</td>
+                    <td>どの条件から固定点・反射・不完全性が立ち上がるか。</td>
+                </tr>
+                <tr>
+                    <td>Modal / algebraic type</td>
+                    <td>様相演算子や代数的演算として証明可能性を表す体系。</td>
+                    <td>Magari 代数的な見方と一般の抽象代数論理の距離。</td>
+                </tr>
+                <tr>
+                    <td>Coalgebraic type</td>
+                    <td>状態遷移・観測・循環性から証明可能性を読む体系。</td>
+                    <td>自己言及や循環的証明をどの構造で扱うか。</td>
+                </tr>
+                <tr>
+                    <td>Domain-theoretic type</td>
+                    <td>近似，安定性，順序構造を使って意味を構成する体系。</td>
+                    <td>不動点や情報増大が証明可能性にどう反映されるか。</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            この動物園は完成表というより，体系同士の変換，包含，反例を置いていくための作業場です。
+        </p>
+    </section>
+
+    <section id="wishlist">
+        <h3>読みたい本 (Wish-readings)</h3>
+        <p>
+            研究の地図を広げるための読書候補です。読み終えたものはメモ化して，関連するセクションへ移す予定です。
+        </p>
+        <ul>
+            <li>証明可能性論理と反射原理に関する標準的文献。</li>
+            <li>Abstract Algebraic Logic と universal algebra の入門・発展文献。</li>
+            <li>Domain theory, stable domains, denotational semantics の基礎文献。</li>
+            <li>Coalgebra, automata, circular proofs, non-well-founded set theory 周辺。</li>
+            <li>圏論的論理，topos，locale，linear logic に関する文献。</li>
+        </ul>
+    </section>
+
+    <section id="publications">
+        <h3>業績リスト</h3>
+        <p>
+            現在は準備中の項目を置いています。発表・プレプリント・査読状況が固まり次第，詳細を追加します。
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Type</th>
+                    <th>Title / Topic</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2026</td>
+                    <td>Talk</td>
+                    <td>不完全性現象の代数的・圏論的側面</td>
+                    <td>予定</td>
+                </tr>
+                <tr>
+                    <td>2026</td>
+                    <td>Note</td>
+                    <td>抽象的証明可能体系の分類メモ</td>
+                    <td>草稿</td>
+                </tr>
+                <tr>
+                    <td>2028</td>
+                    <td>Thesis</td>
+                    <td>未定</td>
+                    <td>構想中</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="stable-domain">
+        <h3>安定領域理論 (Stable Domain Theory) の勉強記事</h3>
+        <p>
+            安定領域理論を，表示的意味論だけの話としてではなく，論理の不動点・近似・証明可能性を考えるための道具として読むメモです。
+        </p>
+        <ul>
+            <li><span class="tag">Part 1:</span> dcpo，Scott topology，連続写像の基本。</li>
+            <li><span class="tag">Part 2:</span> stable functions と情報の依存関係。</li>
+            <li><span class="tag">Part 3:</span> 固定点定理と再帰的定義の意味論。</li>
+            <li><span class="tag">Part 4:</span> 証明可能性・反射・自己言及との接続候補。</li>
+        </ul>
+    </section>
+
+    <section id="jesoslow">
+        <h3>Jesoslow-Type Sentence を可算個含むAPSモデルの構造論について</h3>
+        <p>
+            Jesoslow 型の文を可算個もつ抽象的証明可能体系のモデルに対して，どのような構造的制約が生じるかを調べるための研究メモです。
+            とくに，独立性・反射・自己言及の相互作用を，算術的具体例から一段抽象化して扱うことを目指します。
+        </p>
+        <ul>
+            <li>可算族の自己言及文をもつモデルの最小条件を整理する。</li>
+            <li>各文が誘導する反射原理の独立性・従属性を調べる。</li>
+            <li>代数的表示，順序表示，圏論的表示の間で保存される性質を比較する。</li>
+            <li>具体的な算術モデルと抽象モデルの往復を記録する。</li>
+        </ul>
+        <p>
+            作業上の中心問題は，「無数の自己言及を許したとき，証明可能性構造はどこまで自由で，どこから強制されるのか」です。
+        </p>
+    </section>
+
+    <footer>
+        <a href="index.html">Home</a> / <a href="links_page.html">Links</a> / <a href="en/">English Version</a>
+    </footer>
+</body>
+</html>

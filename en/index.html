@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jikokenno-bun - English Version</title>
+    <style>
+        body {
+            background-color: #d8eaff;
+            color: #000000;
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 700;
+            line-height: 1.6;
+            margin: 0 auto;
+            max-width: 950px;
+            padding: 0 20px 50px 20px;
+        }
+        h1, h2, h3, nav a, .label {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            font-weight: 900;
+        }
+        a {
+            color: #0000FF;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #000080;
+        }
+        header {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .title-row {
+            align-items: center;
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+        }
+        .village-img {
+            border: 2px solid #000080;
+            height: auto;
+            width: 130px;
+        }
+        h1 {
+            color: #000080;
+            font-size: 2.1em;
+            margin: 0 0 4px 0;
+        }
+        h2 {
+            font-size: 1.35em;
+            margin: 0;
+        }
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 18px;
+            justify-content: center;
+            margin: 24px 0;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #000080;
+            margin: 24px 0;
+        }
+        .portrait {
+            background-color: white;
+            border: 2px solid #000080;
+            float: right;
+            margin: 0 0 12px 20px;
+            width: 150px;
+        }
+        .section-title {
+            color: #000080;
+            font-size: 1.25em;
+            margin: 24px 0 8px 0;
+        }
+        ul {
+            list-style: none;
+            margin: 6px 0;
+            padding-left: 1.5em;
+        }
+        li {
+            margin-bottom: 5px;
+            position: relative;
+        }
+        li::before {
+            color: #0000FF;
+            content: "*";
+            left: -1.2em;
+            position: absolute;
+        }
+        .contact-box {
+            background-color: #eaf3ff;
+            border: 2px solid #000080;
+            display: inline-block;
+            margin-top: 14px;
+            padding: 14px;
+        }
+        footer {
+            clear: both;
+            font-family: Arial, sans-serif;
+            font-size: 0.9em;
+            margin-top: 34px;
+        }
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 0 10px 30px 10px;
+            }
+            .title-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            h1 {
+                font-size: 1.55em;
+            }
+            h2 {
+                font-size: 1.1em;
+            }
+            .portrait {
+                width: 110px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="title-row">
+            <img src="../assets/images/village.jpg" alt="Illustration of Hito-no-Mura" class="village-img">
+            <div>
+                <h1>Jikokenno-bun</h1>
+                <h2>Intensional Hito-no-Mura</h2>
+                <p>English version of the personal webpage.</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <a href="../index.html">Japanese Home</a>
+        <a href="../seminar_page.html#publications">Publications</a>
+        <a href="../seminar_page.html#aps-zoo">Zoo of APS</a>
+        <a href="../seminar_page.html#wishlist">Wish-readings</a>
+        <a href="../links_page.html">Links</a>
+    </nav>
+
+    <hr>
+
+    <img src="../assets/images/jikokennobunn.png" alt="Portrait" class="portrait">
+
+    <h3 class="section-title">Profile</h3>
+    <p>
+        Jikokenno-bun is a student interested in mathematical logic, especially
+        the algebraic and categorical aspects surrounding Godel's incompleteness
+        theorems. This page is a compact English guide to the Japanese homepage.
+    </p>
+
+    <h3 class="section-title">Research Interests</h3>
+    <ul>
+        <li>Abstract algebraic logic, universal algebra, and related algebraic semantics.</li>
+        <li>Provability, incompleteness phenomena, and formal theories of arithmetic.</li>
+        <li>Substructural, linear, affine, and modal-logical viewpoints.</li>
+        <li>Coalgebra, automata, circularity, and non-well-founded structures.</li>
+        <li>Domain-theoretic and categorical perspectives on logic.</li>
+    </ul>
+
+    <h3 class="section-title">Current Notes</h3>
+    <p>
+        The Japanese site contains working notes, reading lists, and topic pages.
+        The English version keeps a lighter summary while pointing to the same
+        research materials and seminar pages.
+    </p>
+
+    <div class="contact-box">
+        <span class="label">Contact</span><br>
+        X/Twitter: <a href="https://twitter.com/jikokennobun">@jikokennobun</a><br>
+        Public email: <a href="mailto:shibuya.i.9f75@m.isct.ac.jp">shibuya.i.9f75@m.isct.ac.jp</a><br>
+        Private email: <a href="mailto:yizhi6331@gmail.com">yizhi6331@gmail.com</a>
+    </div>
+
+    <footer>
+        <hr>
+        <a href="../index.html">Back to Japanese home</a>
+    </footer>
+</body>
+</html>

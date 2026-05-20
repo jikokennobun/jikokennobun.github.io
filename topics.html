@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研究トピック小辞典 - 内包的な人ノ邨</title>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <style>
+        body {
+            background-color: #d8eaff;
+            color: #000000;
+            font-family: "MS PMincho", "Hiragino Mincho ProN", serif;
+            font-weight: 900;
+            line-height: 1.65;
+            margin: 0 auto;
+            max-width: 1000px;
+            padding: 20px;
+        }
+        h1, h2, h3, nav a, .back-home {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            font-weight: 900;
+        }
+        a {
+            color: #0000FF;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #000080;
+        }
+        .back-home {
+            margin-bottom: 18px;
+        }
+        .page-title {
+            background-color: #000080;
+            border: 3px ridge #aaaaff;
+            color: #ffffff;
+            margin: 28px 0 18px 0;
+            padding: 12px;
+            text-align: center;
+        }
+        .page-title small {
+            color: #ccccff;
+            display: block;
+            font-size: 0.75em;
+        }
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px 16px;
+            justify-content: center;
+            margin: 18px 0 28px 0;
+        }
+        section {
+            border-top: 1px solid #000080;
+            margin-top: 26px;
+            padding-top: 22px;
+        }
+        section h3 {
+            color: #000080;
+            font-size: 1.3em;
+            margin: 0 0 8px 0;
+        }
+        .note {
+            background-color: #eaf3ff;
+            border-left: 4px solid #000080;
+            padding: 10px 14px;
+        }
+        ul {
+            list-style: none;
+            margin: 8px 0 14px 0;
+            padding-left: 22px;
+        }
+        li {
+            margin-bottom: 6px;
+            position: relative;
+        }
+        li::before {
+            color: #0000FF;
+            content: "◆";
+            font-size: 0.9em;
+            left: -1.45em;
+            position: absolute;
+            top: 0.06em;
+        }
+        footer {
+            border-top: 1px solid #000080;
+            font-family: Arial, sans-serif;
+            font-size: 0.9em;
+            margin-top: 36px;
+            padding-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="back-home"><a href="index.html">← 邨の入り口 (Home) へ戻る</a></div>
+
+    <h3 class="page-title">研究トピック小辞典<br><small>(Small Glossary of Research Topics)</small></h3>
+
+    <p class="note">
+        トップページで触れている用語の短い説明を置くページです。
+        研究ノート本文ではなく，関心の地図として少しずつ育てていく場所です。
+    </p>
+
+    <nav>
+        <a href="#provability-logic">証明可能性論理</a>
+        <a href="#magari-algebra">Magari 代数</a>
+        <a href="#category-theory">圏論</a>
+        <a href="#goedel-incompleteness">不完全性定理</a>
+        <a href="#abstract-algebra">抽象代数</a>
+        <a href="#universal-algebra">普遍代数</a>
+        <a href="#linear-logic">線形論理</a>
+        <a href="#coalgebra">余代数</a>
+        <a href="#automata">オートマトン</a>
+        <a href="#living-logic">生命的体系としての論理</a>
+    </nav>
+
+    <section id="provability-logic">
+        <h3>証明可能性論理</h3>
+        <p>
+            証明可能性論理は，「ある文が理論 \(T\) で証明可能である」という述語を様相演算子のように扱い，
+            その振る舞いを論理体系として調べる分野です。Lob の定理や反射原理が中心的な例です。
+        </p>
+    </section>
+
+    <section id="magari-algebra">
+        <h3>Magari 代数</h3>
+        <p>
+            Magari 代数は，証明可能性の代数的側面を抽象化するための構造です。
+            証明可能性論理を代数的意味論の側から眺めるときの古典的な足場になります。
+        </p>
+    </section>
+
+    <section id="category-theory">
+        <h3>圏論</h3>
+        <p>
+            圏論は，対象そのものよりも対象間の射と合成を主役にする数学の言語です。
+            このサイトでは，論理の構文・意味論・モデルのあいだの対応を記述するための補助線として扱います。
+        </p>
+    </section>
+
+    <section id="goedel-incompleteness">
+        <h3>Godel の不完全性定理</h3>
+        <p>
+            Godel の不完全性定理は，十分に強い形式的理論が，自分自身の無矛盾性や真理を完全には捉えられないことを示す定理群です。
+            ここでの関心は，この現象の代数的・圏論的・抽象的な姿です。
+        </p>
+    </section>
+
+    <section id="abstract-algebra">
+        <h3>抽象代数</h3>
+        <p>
+            抽象代数は，群・環・束・代数などの構造を共通の操作と法則から研究します。
+            論理の代数的意味論では，論理結合子や証明関係を代数的構造として表現します。
+        </p>
+    </section>
+
+    <section id="universal-algebra">
+        <h3>普遍代数</h3>
+        <p>
+            普遍代数は，演算記号と等式で定まる代数構造を一括して扱う理論です。
+            抽象代数論理では，論理体系の性質を代数的クラスの性質として読み替えるための基礎になります。
+        </p>
+    </section>
+
+    <section id="linear-logic">
+        <h3>線形論理</h3>
+        <p>
+            線形論理は，仮定を何度でも使えるものとして扱わず，資源として管理する論理です。
+            部分構造論理の代表例であり，証明・計算・圏論的意味論の接点が豊富です。
+        </p>
+    </section>
+
+    <section id="coalgebra">
+        <h3>余代数</h3>
+        <p>
+            余代数は，状態・観測・遷移の構造を記述する枠組みです。
+            オートマトン，無限過程，循環構造，自己言及の形式化と相性がよい見方です。
+        </p>
+    </section>
+
+    <section id="automata">
+        <h3>オートマトン</h3>
+        <p>
+            オートマトンは，状態と入力によって動く計算モデルです。
+            形式言語や計算理論だけでなく，余代数的な状態システムの典型例としても現れます。
+        </p>
+    </section>
+
+    <section id="living-logic">
+        <h3>生命的体系としての論理</h3>
+        <p>
+            「生命的体系としての論理」は，含意や推論規則を静的な記号操作だけでなく，
+            発生・維持・変化する体系として見るための作業名です。
+            含意がどのように誕生し，体系の中でどのように安定するのかを考えるための入口です。
+        </p>
+    </section>
+
+    <footer>
+        <a href="index.html">Home</a> / <a href="seminar_page.html">Seminar Notes</a> / <a href="links_page.html">Links</a>
+    </footer>
+</body>
+</html>
