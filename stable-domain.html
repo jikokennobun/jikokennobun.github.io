@@ -427,26 +427,28 @@
 
         <div class="definition">
             <span class="label">Definition 6.1 (working form).</span>
-            dI-domain は algebraic bounded-complete dcpo \(D\) で，次の二つの追加公理を満たすものとして扱う。
+            dI-domain は，標準的には Scott domain に分配性と有限性の条件を加えた領域として導入される。
+            本稿では，厳密な公理化は文献に譲り，次の二つを作業用の読みとして使う。
             <ol>
                 <li><span class="label">Axiom d.</span> compatible join に関して meet が分配的に振る舞う。すなわち \(y\uparrow z\) なら
                     \[
                         x\sqcap(y\sqcup z)=(x\sqcap y)\sqcup(x\sqcap z).
                     \]
                 </li>
-                <li><span class="label">Axiom I.</span> 任意の compact 元 \(k\) は very finite である。すなわち下方集合
+                <li><span class="label">Axiom I.</span> compact 元の下に現れる有限情報が制御できる。典型的には，各 compact 元 \(k\) について compact な近似
                     \[
-                        \downarrow k=\{x\in D\mid x\sqsubseteq k\}
+                        \{a\in K(D)\mid a\sqsubseteq k\}
                     \]
-                    は有限集合である。</li>
+                    が有限的に振る舞う，という形で使われる。</li>
             </ol>
-            Axiom d は局所的な distributivity，Axiom I は finitary さを保証する条件として働く。
+            Axiom d は局所的な distributivity，Axiom I は関数空間の compact basis が制御不能に増えないための finitary さとして働く。
         </div>
 
         <p>
             Axiom d は，情報を合成した後に共通部分を取る操作と，共通部分を取ってから情報を合成する操作が一致することを主張する。
             これは安定写像の meet 保存性と相性がよい。
-            Axiom I は，関数空間の compact basis が制御不能に大きくならないための有限性条件である。
+            Axiom I の正確な述べ方は採用する基底や very finite element の定義に依存するので，
+            ここでは「有限近似を追跡できる」という役割だけを固定しておく。
         </p>
 
         <div class="proposition">

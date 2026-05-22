@@ -12,8 +12,14 @@
     a { color:#0044aa; }
     nav a { display:block; margin:0.12em 0; }
     .head-image { display:block; max-width:100%; max-height:360px; height:auto; margin:0.5em 0 1em; }
+    .zoo-map { display:block; width:100%; max-width:860px; height:auto; margin:0.8em 0 1.2em; border:1px solid #d7a7bb; background:#fff9fb; }
     .mark { color:#8a3050; }
     .note { font-size:0.95em; }
+    @media (max-width: 640px) {
+      body { padding:1em 1.1em 2.2em; }
+      h1 { font-size:1.45em; }
+      .head-image { max-height:260px; }
+    }
   </style>
 </head>
 <body>
@@ -21,6 +27,7 @@
   <img class="head-image" src="aps-zoo-head.jpg" alt="APS-ZOO">
   <p>抽象的証明可能体系 (APS) と第二不完全性現象のための TeX/PDF 中心の小さな動物園です。</p>
   <p class="note">URL上のフォルダ名は歴史的に G2-ZOO ですが、この入口ページの公開名は APS-ZOO です。</p>
+  <img class="zoo-map" src="aps-zoo-diagram.svg" alt="APS-ZOO の含意・分離・未解決方向の概略図">
 
   <p><a href="https://jikokennobun.github.io/">&larr; 自己嫌悪文のページへ戻る</a></p>
 

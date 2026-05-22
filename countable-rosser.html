@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可算 Rosser 型文 - 内包的な人ノ邨</title>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <style>
+        body {
+            background-color: #d8eaff;
+            color: #000000;
+            font-family: "MS PMincho", "Hiragino Mincho ProN", serif;
+            font-weight: 700;
+            line-height: 1.72;
+            margin: 0 auto;
+            max-width: 1040px;
+            padding: 20px;
+        }
+        h1, h2, h3, h4, nav a, .back-home, .label, th {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            font-weight: 900;
+        }
+        a {
+            color: #0000FF;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #000080;
+        }
+        .back-home {
+            margin-bottom: 18px;
+        }
+        .page-title {
+            background-color: #000080;
+            border: 3px ridge #aaaaff;
+            color: #ffffff;
+            margin: 28px 0 18px 0;
+            padding: 14px;
+            text-align: center;
+        }
+        .page-title small {
+            color: #ccccff;
+            display: block;
+            font-size: 0.75em;
+        }
+        .abstract {
+            background-color: #eaf3ff;
+            border: 2px solid #000080;
+            margin: 18px 0 24px 0;
+            padding: 14px 18px;
+        }
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px 16px;
+            justify-content: center;
+            margin: 18px 0 30px 0;
+        }
+        section {
+            border-top: 1px solid #000080;
+            margin-top: 30px;
+            padding-top: 26px;
+        }
+        section h3 {
+            color: #000080;
+            font-size: 1.35em;
+            margin: 0 0 10px 0;
+        }
+        p {
+            margin: 10px 0;
+        }
+        ul, ol {
+            margin: 8px 0 16px 0;
+            padding-left: 26px;
+        }
+        li {
+            margin-bottom: 7px;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 14px 0 20px 0;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #000080;
+            padding: 8px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #eaf3ff;
+        }
+        .definition, .proposition, .warning, .example, .question {
+            border-left: 4px solid #000080;
+            margin: 14px 0;
+            padding: 10px 14px;
+        }
+        .definition {
+            background-color: #f3f8ff;
+        }
+        .proposition {
+            background-color: #edf5ff;
+        }
+        .warning {
+            background-color: #fff7db;
+            border-left-color: #9a6a00;
+        }
+        .example {
+            background-color: #f7fbff;
+        }
+        .question {
+            background-color: #eef8ee;
+            border-left-color: #006b2d;
+        }
+        .label {
+            color: #000080;
+        }
+        .references li {
+            margin-bottom: 10px;
+        }
+        footer {
+            border-top: 1px solid #000080;
+            font-family: Arial, sans-serif;
+            font-size: 0.9em;
+            margin-top: 36px;
+            padding-top: 16px;
+        }
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+            table {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="back-home"><a href="seminar_page.html#countable-rosser">← Seminar Notes の可算 Rosser へ戻る</a></div>
+
+    <h3 class="page-title">可算 Rosser 型文<br><small>independence, towers, and APS representations</small></h3>
+
+    <div class="abstract">
+        <span class="label">Abstract.</span>
+        Rosser の定理は，整合的な再帰的公理化理論に対して，\(\omega\)-整合性を仮定せずに決定不能文を作る方法である。
+        ただし「Rosser 型文が可算個ある」という言い方には複数の意味がある。
+        本稿では，固定された理論の上での可算族，拡大列に沿って作る Rosser 塔，そして APS モデルにおける抽象的な独立性グラフを区別する。
+    </div>
+
+    <nav>
+        <a href="#single">1. Rosser 文</a>
+        <a href="#countable">2. 可算族の三つの意味</a>
+        <a href="#tower">3. Rosser 塔</a>
+        <a href="#aps">4. APS 表現</a>
+        <a href="#pitfalls">5. 注意点</a>
+        <a href="#references">References</a>
+    </nav>
+
+    <section id="single">
+        <h3>1. 一つの Rosser 文</h3>
+        <p>
+            \(T\) を十分な算術を含む再帰的公理化理論とし，\(\mathrm{Prf}_T(p,x)\) を
+            「\(p\) はゲーデル数 \(x\) をもつ文の \(T\)-証明である」という標準的な証明述語とする。
+            Rosser の trick は，単に「証明があるか」ではなく，「反対側のより早い証明に負けない証明があるか」を見る点にある。
+        </p>
+
+        <div class="definition">
+            <span class="label">Definition 1.1.</span>
+            Rosser 型の証明可能性述語を，概念的には
+            \[
+                \mathrm{Pr}^R_T(x)\;:\!\!\Longleftrightarrow\;
+                \exists p\bigl(\mathrm{Prf}_T(p,x)\wedge
+                \forall q\leq p\,\neg \mathrm{Prf}_T(q,\mathrm{neg}(x))\bigr)
+            \]
+            と読む。
+            ここで \(\mathrm{neg}(x)\) は，ゲーデル数 \(x\) の文の否定を表すコードを返す原始再帰関数である。
+            対角線補題により
+            \[
+                T\vdash R_T\leftrightarrow \neg \mathrm{Pr}^R_T(\ulcorner R_T\urcorner)
+            \]
+            を満たす文 \(R_T\) が得られる。
+        </div>
+
+        <div class="proposition">
+            <span class="label">Theorem 1.2 (Rosser).</span>
+            \(T\) が整合的で，Rosser 構成を表現できるだけの算術を含むならば，
+            \(T\) は \(R_T\) も \(\neg R_T\) も証明しない。
+        </div>
+
+        <p>
+            ここで重要なのは，通常の Gödel 文の不完全性証明で現れる \(\omega\)-整合性や 1-整合性の代わりに，
+            単なる整合性で十分になることである。
+            その代償として，\(\mathrm{Pr}^R_T\) は通常の証明可能性述語ほど素直ではなく，Hilbert-Bernays-Lob 型の導出可能性条件をそのまま期待してはいけない。
+        </p>
+    </section>
+
+    <section id="countable">
+        <h3>2. 「可算族」の三つの意味</h3>
+        <p>
+            可算 Rosser 型文という言い方は，少なくとも次の三通りに分かれる。
+            これを分けるだけで，主張すべき定理の形がかなり透明になる。
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>読み方</th>
+                    <th>意味</th>
+                    <th>危険な混同</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>同一理論上の族</td>
+                    <td>固定した \(T\) に対して，異なる符号化・証明述語・固定点から得る Rosser 文の族。</td>
+                    <td>互いに非同値，または互いに独立とは限らない。</td>
+                </tr>
+                <tr>
+                    <td>拡大列に沿う族</td>
+                    <td>\(T_0,T_1,T_2,\ldots\) を作り，各段階で \(T_n\) の Rosser 文 \(R_n\) を選ぶ。</td>
+                    <td>\(R_n\) は \(T_n\) から独立だが，元の \(T_0\) 上の一括した独立族とは別物。</td>
+                </tr>
+                <tr>
+                    <td>APS モデル上の族</td>
+                    <td>文・否定・証明可能性・反射原理を抽象構造として持ち，可算個の Rosser 型ノードを配置する。</td>
+                    <td>算術的実現可能性と抽象的整合性を同一視しない。</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="tower">
+        <h3>3. Rosser 塔</h3>
+        <p>
+            もっとも扱いやすい可算構成は，理論を一段ずつ拡大する塔である。
+            これは「可算に多くの Rosser 型決定を積む」ための保守的な模型として使える。
+        </p>
+
+        <div class="example">
+            <span class="label">Construction 3.1.</span>
+            \(T_0=T\) とする。
+            \(T_n\) が整合的な再帰的公理化理論として与えられたら，\(T_n\) の Rosser 文 \(R_n\) を取り，
+            \[
+                T_{n+1}=T_n+R_n
+            \]
+            と定める。
+            Rosser の定理より \(T_n\nvdash \neg R_n\) なので，各段階で \(T_{n+1}\) は整合的に保てる。
+            同様に，必要なら \(T_n+\neg R_n\) を選ぶ枝分かれもできる。
+        </div>
+
+        <p>
+            この塔は，有限段階ごとには Rosser 文の独立性を保証する。
+            しかし，\(\{R_n\mid n\in\mathbb{N}\}\) が最初の \(T\) に対して互いに独立である，という主張ではない。
+            したがって APS 側では，塔の段階 \(n\)，基礎理論 \(T_n\)，そこでの Rosser 述語をラベルとして保存するのが安全である。
+        </p>
+
+        <div class="question">
+            <span class="label">Working question.</span>
+            Rosser 塔を APS モデルに写したとき，段階を忘れたグラフ上でどの含意が残り，どの非含意が反例モデルを要求するか。
+            この問いが，動物園ページに載せるべき図式の基本になる。
+        </div>
+    </section>
+
+    <section id="aps">
+        <h3>4. APS 表現</h3>
+        <p>
+            APS モデルでは，Rosser 型文を単なる文の列としてではなく，次の情報をもつノードとして扱うと見通しがよい。
+        </p>
+        <ul>
+            <li><span class="label">base:</span> どの理論 \(T_n\) に対する Rosser 文か。</li>
+            <li><span class="label">predicate:</span> どの証明述語と Rosser 化を使ったか。</li>
+            <li><span class="label">polarity:</span> \(R_n\) を足した枝か，\(\neg R_n\) を足した枝か。</li>
+            <li><span class="label">reflection:</span> その文が誘導する局所反射原理，または無矛盾性主張。</li>
+            <li><span class="label">separation:</span> 他のノードとの非含意を示す反例モデル。</li>
+        </ul>
+        <p>
+            この設計にすると，Rosser 文そのものの非一意性と，APS 上の構造的自由度を分離できる。
+            つまり，算術のコード依存な細部を隠しすぎず，しかし動物園図では「どの矢印が証明済みか」「どの矢印が反例で壊れるか」を見える形で管理できる。
+        </p>
+    </section>
+
+    <section id="pitfalls">
+        <h3>5. 注意点</h3>
+        <div class="warning">
+            <span class="label">Caution 5.1.</span>
+            Rosser 文は一意ではない。
+            証明番号の順序，否定コード，証明述語の標準性，固定点の取り方により，得られる文の振る舞いが変わりうる。
+            Guaspari-Solovay 型の結果は，まさにこの非一意性が本質的であることを示している。
+        </div>
+
+        <div class="warning">
+            <span class="label">Caution 5.2.</span>
+            「可算個の文がある」こと自体は自明である。
+            研究上必要なのは，それらがどの理論に対して独立か，互いの含意関係は何か，反射原理として同じ強さか，という構造である。
+        </div>
+
+        <div class="warning">
+            <span class="label">Caution 5.3.</span>
+            Rosser provability は通常の provability と違い，導出可能性条件を自動では満たさない。
+            したがって Lob 論理，反射原理，Magari 代数へ移すときは，どの証明可能性述語を使っているかを明示する必要がある。
+        </div>
+    </section>
+
+    <section id="references">
+        <h3>References</h3>
+        <ol class="references">
+            <li>
+                J. Barkley Rosser,
+                <a href="https://doi.org/10.2307/2269028">Extensions of some theorems of Gödel and Church</a>,
+                <em>Journal of Symbolic Logic</em> 1(3), 1936, 87-91.
+            </li>
+            <li>
+                D. Guaspari and R. M. Solovay,
+                <a href="https://doi.org/10.1016/0003-4843(79)90017-2">Rosser sentences</a>,
+                <em>Annals of Mathematical Logic</em> 16(1), 1979, 81-99.
+            </li>
+            <li>
+                Christopher von Bülow,
+                <a href="https://doi.org/10.1016/j.apal.2007.10.002">A remark on equivalent Rosser sentences</a>,
+                <em>Annals of Pure and Applied Logic</em> 151(1), 2008, 62-67.
+            </li>
+            <li>
+                Graham Leach-Krouse,
+                <a href="https://doi.org/10.1007/s10992-013-9291-5">Yablifying the Rosser Sentence</a>,
+                <em>Journal of Philosophical Logic</em> 43(5), 2014, 827-834.
+            </li>
+            <li>
+                Petr Hájek and Pavel Pudlák,
+                <em>Metamathematics of First-Order Arithmetic</em>,
+                Springer, 1993.
+            </li>
+        </ol>
+    </section>
+
+    <footer>
+        <a href="seminar_page.html#countable-rosser">Countable Rosser index</a> /
+        <a href="G2-ZOO/">APS-ZOO</a> /
+        <a href="index.html">Home</a>
+    </footer>
+</body>
+</html>

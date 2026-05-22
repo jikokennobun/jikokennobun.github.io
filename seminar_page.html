@@ -127,7 +127,7 @@
         <a href="#wishlist">Wish-readings</a>
         <a href="#publications">業績リスト</a>
         <a href="#stable-domain">Stable Domain Theory</a>
-        <a href="#jesoslow">Jesoslow-Type Sentence</a>
+        <a href="#countable-rosser">Countable Rosser</a>
     </nav>
 
     <section id="misc">
@@ -148,6 +148,10 @@
         <p>
             APS は Abstract Provability System の略称として扱っています。
             証明可能性述語や反射原理を，算術の内部だけでなく，抽象的な代数・順序・圏論的構造の上で眺めるための分類表です。
+        </p>
+        <p>
+            TeX で出力した PDF と，動物園形式の入口は <a href="G2-ZOO/">APS-ZOO</a> にまとめています。
+            入口の URL は歴史的に G2-ZOO ですが，公開名は APS-ZOO として扱っています。
         </p>
         <table>
             <thead>
@@ -249,20 +253,22 @@
         </ul>
     </section>
 
-    <section id="jesoslow">
-        <h3>Jesoslow-Type Sentence を可算個含むAPSモデルの構造論について</h3>
+    <section id="countable-rosser">
+        <span id="jesoslow"></span>
+        <h3>可算 Rosser 型文と APS モデルの構造論について</h3>
         <p>
-            Jesoslow 型の文を可算個もつ抽象的証明可能体系のモデルに対して，どのような構造的制約が生じるかを調べるための研究メモです。
-            とくに，独立性・反射・自己言及の相互作用を，算術的具体例から一段抽象化して扱うことを目指します。
+            Rosser 型の自己言及文を可算族として扱うとき，何を「可算個ある」と呼ぶのかを分けておかないと，
+            同じ理論内の独立性，拡大列に沿った独立性，抽象モデル上の自由度が混ざってしまいます。
+            その整理のための専門記事を追加しました。
         </p>
         <ul>
-            <li>可算族の自己言及文をもつモデルの最小条件を整理する。</li>
-            <li>各文が誘導する反射原理の独立性・従属性を調べる。</li>
-            <li>代数的表示，順序表示，圏論的表示の間で保存される性質を比較する。</li>
-            <li>具体的な算術モデルと抽象モデルの往復を記録する。</li>
+            <li><span class="tag">Article:</span> <a href="countable-rosser.html">可算 Rosser 型文: 独立性・塔・APS 表現</a></li>
+            <li><span class="tag">Focus:</span> Rosser の trick，Rosser provability，countable family の三つの読み分け。</li>
+            <li><span class="tag">Caution:</span> 「同一理論上で互いに独立な可算族」と「拡大列に沿った可算族」は別問題として扱います。</li>
+            <li><span class="tag">Next:</span> 反射原理，代数的表示，順序表示の間で保存される性質を比較する予定です。</li>
         </ul>
         <p>
-            作業上の中心問題は，「無数の自己言及を許したとき，証明可能性構造はどこまで自由で，どこから強制されるのか」です。
+            作業上の中心問題は，「可算に多くの自己言及を許したとき，証明可能性構造はどこまで自由で，どこから強制されるのか」です。
         </p>
     </section>
 

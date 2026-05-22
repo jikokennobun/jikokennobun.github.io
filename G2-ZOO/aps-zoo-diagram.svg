@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
+  <title id="title">APS-ZOO implication and separation map</title>
+  <desc id="desc">A small zoo-style map for abstract provability systems, with implication, translation, separation, and open directions.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1d2433"/>
+    </marker>
+    <marker id="arrowPink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b0005a"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#217a55"/>
+    </marker>
+    <filter id="paper" x="-8%" y="-8%" width="116%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#5a2340" flood-opacity="0.18"/>
+    </filter>
+    <style>
+      .bg { fill: #fff9fb; }
+      .node { fill: #ffffff; stroke: #8a3050; stroke-width: 2.2; filter: url(#paper); }
+      .core { fill: #ffe0ec; stroke: #b0005a; }
+      .soft { fill: #f9eef3; }
+      .text { fill: #26141b; font-family: "Noto Serif JP", "Yu Mincho", "Times New Roman", serif; font-size: 22px; font-weight: 700; text-anchor: middle; }
+      .small { fill: #4a2a35; font-size: 14px; font-weight: 500; }
+      .edge { fill: none; stroke: #1d2433; stroke-width: 2.6; marker-end: url(#arrow); }
+      .sep { fill: none; stroke: #b0005a; stroke-width: 2.6; stroke-dasharray: 8 7; marker-end: url(#arrowPink); }
+      .open { fill: none; stroke: #217a55; stroke-width: 2.6; stroke-dasharray: 3 7; marker-end: url(#arrowGreen); }
+      .label { fill: #333333; font-family: "Noto Serif JP", "Yu Mincho", "Times New Roman", serif; font-size: 13px; text-anchor: middle; }
+      .legend { fill: #5c4250; font-size: 13px; text-anchor: start; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="900" height="560" rx="0"/>
+  <text class="text" x="450" y="42" style="font-size:28px; fill:#b0005a;">APS-ZOO map</text>
+  <text class="label" x="450" y="66">arrows are schematic: exact strength is recorded in the PDFs</text>
+
+  <path class="edge" d="M 450 144 C 340 164, 270 180, 190 218"/>
+  <path class="edge" d="M 450 144 C 560 164, 630 180, 710 218"/>
+  <path class="edge" d="M 195 286 C 210 345, 260 382, 338 405"/>
+  <path class="edge" d="M 705 286 C 686 348, 638 384, 562 405"/>
+  <path class="open" d="M 450 164 C 450 238, 450 318, 450 390"/>
+  <path class="sep" d="M 300 246 C 385 288, 520 288, 600 246"/>
+  <path class="sep" d="M 570 444 C 660 456, 718 436, 762 376"/>
+
+  <rect class="node core" x="330" y="88" width="240" height="82" rx="8"/>
+  <text class="text" x="450" y="123">APS core</text>
+  <text class="text small" x="450" y="148">provability / reflection / order</text>
+
+  <rect class="node" x="58" y="210" width="274" height="88" rx="8"/>
+  <text class="text" x="195" y="247">HBL type</text>
+  <text class="text small" x="195" y="273">derivability conditions</text>
+
+  <rect class="node" x="568" y="210" width="274" height="88" rx="8"/>
+  <text class="text" x="705" y="247">modal / algebraic</text>
+  <text class="text small" x="705" y="273">Magari-style operations</text>
+
+  <rect class="node soft" x="72" y="382" width="254" height="88" rx="8"/>
+  <text class="text" x="199" y="419">Rosser side</text>
+  <text class="text small" x="199" y="445">consistency-only independence</text>
+
+  <rect class="node soft" x="323" y="394" width="254" height="88" rx="8"/>
+  <text class="text" x="450" y="431">domain side</text>
+  <text class="text small" x="450" y="457">stable dependence / traces</text>
+
+  <rect class="node soft" x="574" y="382" width="254" height="88" rx="8"/>
+  <text class="text" x="701" y="419">countermodels</text>
+  <text class="text small" x="701" y="445">separation witnesses</text>
+
+  <rect x="60" y="510" width="16" height="3" fill="#1d2433"/>
+  <text class="legend" x="84" y="516">implication or translation</text>
+  <rect x="292" y="510" width="28" height="3" fill="#b0005a"/>
+  <rect x="304" y="510" width="8" height="3" fill="#fff9fb"/>
+  <text class="legend" x="330" y="516">known separation / countermodel</text>
+  <circle cx="602" cy="511" r="3" fill="#217a55"/>
+  <circle cx="616" cy="511" r="3" fill="#217a55"/>
+  <circle cx="630" cy="511" r="3" fill="#217a55"/>
+  <text class="legend" x="646" y="516">open or conjectural direction</text>
+</svg>

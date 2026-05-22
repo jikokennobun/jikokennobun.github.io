@@ -1,0 +1,63 @@
+{
+  "project": "Jikokenno-bun incompleteness research",
+  "focus": "Algebraic, categorical, and abstract-provability approaches to Godel/Rosser style incompleteness phenomena.",
+  "global_terms": [
+    "Godel",
+    "Gödel",
+    "Rosser",
+    "incompleteness",
+    "provability",
+    "APS",
+    "G2",
+    "Magari",
+    "Lob",
+    "Loeb",
+    "Prf_T",
+    "Pr_T",
+    "不完全",
+    "証明可能",
+    "無矛盾",
+    "可算",
+    "反例",
+    "独立"
+  ],
+  "workstreams": [
+    {
+      "id": "countable-rosser",
+      "title": "Countable Rosser variants",
+      "terms": ["Rosser", "countable", "tower", "independence", "可算", "独立"],
+      "seed_artifacts": ["countable-rosser.html", "seminar_page.html"]
+    },
+    {
+      "id": "aps-zoo",
+      "title": "Abstract provability systems zoo",
+      "terms": ["APS", "abstract provability", "countermodel", "truth table", "implication"],
+      "seed_artifacts": ["G2-ZOO/index.html", "G2-ZOO/aps-zoo.pdf"]
+    },
+    {
+      "id": "g2-zoo",
+      "title": "G2 and derivability-condition hierarchy",
+      "terms": ["G2", "FG2", "derivability", "consistency", "lattice"],
+      "seed_artifacts": ["G2-ZOO/g2-zoo.pdf", "G2-ZOO/g2-lattice.pdf", "G2-ZOO/g2-chain.pdf"]
+    },
+    {
+      "id": "stable-domain-bridge",
+      "title": "Stable domain semantics bridge",
+      "terms": ["stable", "domain", "Berry", "dI-domain", "trace"],
+      "seed_artifacts": ["stable-domain.html"]
+    }
+  ],
+  "queue_markers": [
+    "TODO",
+    "FIXME",
+    "Working question",
+    "Question",
+    "Open problem",
+    "Problem",
+    "Caution",
+    "Warning",
+    "未解決",
+    "問題",
+    "注意"
+  ]
+}

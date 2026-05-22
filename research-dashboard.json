@@ -1,0 +1,1083 @@
+{
+  "project": "Jikokenno-bun incompleteness research",
+  "focus": "Algebraic, categorical, and abstract-provability approaches to Godel/Rosser style incompleteness phenomena.",
+  "generated_at": "2026-05-21T21:57:43+00:00",
+  "summary": {
+    "artifacts": 28,
+    "html": 17,
+    "pdf": 10,
+    "svg": 1,
+    "broken_local_links": 0,
+    "queue_items": 14
+  },
+  "workstreams": [
+    {
+      "id": "countable-rosser",
+      "title": "Countable Rosser variants",
+      "terms": [
+        "countable",
+        "independence",
+        "Rosser",
+        "tower",
+        "可算",
+        "独立"
+      ],
+      "artifacts": [
+        "countable-rosser.html",
+        "index.html",
+        "links_page.html",
+        "misc.html",
+        "seminar_page.html",
+        "stable-domain.html"
+      ],
+      "marker_counts": {
+        "Caution": 5,
+        "Construction": 1,
+        "Definition": 12,
+        "Example": 7,
+        "Proof sketch": 1,
+        "Proposition": 7,
+        "Question": 3,
+        "Theorem": 2,
+        "Warning": 5,
+        "Working question": 1
+      }
+    },
+    {
+      "id": "aps-zoo",
+      "title": "Abstract provability systems zoo",
+      "terms": [
+        "abstract provability",
+        "APS",
+        "countermodel",
+        "implication",
+        "truth table"
+      ],
+      "artifacts": [
+        "G2-ZOO/aps-classification.pdf",
+        "G2-ZOO/aps-countermodels.pdf",
+        "G2-ZOO/aps-implication-matrix.pdf",
+        "G2-ZOO/aps-truth-tables.pdf",
+        "G2-ZOO/aps-zoo-diagram.svg",
+        "G2-ZOO/aps-zoo.pdf",
+        "G2-ZOO/index.html",
+        "G2-ZOO/profile.html",
+        "G2-ZOO/slides/aps_g2_algebraic_reverse_math_v4.pdf",
+        "countable-rosser.html",
+        "en/index.html",
+        "index.html",
+        "links_page.html",
+        "misc.html",
+        "resume.html",
+        "seminar_page.html",
+        "stable-domain.html"
+      ],
+      "marker_counts": {
+        "Caution": 5,
+        "Construction": 1,
+        "Definition": 12,
+        "Example": 7,
+        "Proof sketch": 1,
+        "Proposition": 7,
+        "Question": 3,
+        "Theorem": 2,
+        "Warning": 5,
+        "Working question": 1
+      }
+    },
+    {
+      "id": "g2-zoo",
+      "title": "G2 and derivability-condition hierarchy",
+      "terms": [
+        "consistency",
+        "derivability",
+        "FG2",
+        "G2",
+        "lattice"
+      ],
+      "artifacts": [
+        "G2-ZOO/algebra-domain.pdf",
+        "G2-ZOO/aps-classification.pdf",
+        "G2-ZOO/aps-countermodels.pdf",
+        "G2-ZOO/aps-implication-matrix.pdf",
+        "G2-ZOO/aps-truth-tables.pdf",
+        "G2-ZOO/aps-zoo-diagram.svg",
+        "G2-ZOO/aps-zoo.pdf",
+        "G2-ZOO/g2-chain.pdf",
+        "G2-ZOO/g2-lattice.pdf",
+        "G2-ZOO/g2-zoo.pdf",
+        "G2-ZOO/index.html",
+        "G2-ZOO/profile.html",
+        "G2-ZOO/slides/aps_g2_algebraic_reverse_math_v4.pdf",
+        "index.html",
+        "misc.html",
+        "seminar_page.html",
+        "stable-domain.html"
+      ],
+      "marker_counts": {
+        "Caution": 2,
+        "Definition": 9,
+        "Example": 5,
+        "Proof sketch": 1,
+        "Proposition": 5,
+        "Theorem": 1,
+        "Warning": 3
+      }
+    },
+    {
+      "id": "stable-domain-bridge",
+      "title": "Stable domain semantics bridge",
+      "terms": [
+        "Berry",
+        "dI-domain",
+        "domain",
+        "stable",
+        "trace"
+      ],
+      "artifacts": [
+        "G2-ZOO/algebra-domain.pdf",
+        "en/index.html",
+        "index.html",
+        "links_page.html",
+        "misc.html",
+        "seminar_page.html",
+        "stable-domain.html"
+      ],
+      "marker_counts": {
+        "Caution": 2,
+        "Definition": 9,
+        "Example": 5,
+        "Proof sketch": 1,
+        "Proposition": 5,
+        "Theorem": 1,
+        "Warning": 3
+      }
+    }
+  ],
+  "broken_links": [],
+  "queue": [
+    {
+      "path": "countable-rosser.html",
+      "line": 156,
+      "marker": "注意",
+      "text": "5. 注意点"
+    },
+    {
+      "path": "countable-rosser.html",
+      "line": 259,
+      "marker": "Working question",
+      "text": "Working question."
+    },
+    {
+      "path": "countable-rosser.html",
+      "line": 284,
+      "marker": "注意",
+      "text": "5. 注意点"
+    },
+    {
+      "path": "countable-rosser.html",
+      "line": 286,
+      "marker": "Caution",
+      "text": "Caution 5.1."
+    },
+    {
+      "path": "countable-rosser.html",
+      "line": 293,
+      "marker": "Caution",
+      "text": "Caution 5.2."
+    },
+    {
+      "path": "countable-rosser.html",
+      "line": 299,
+      "marker": "Caution",
+      "text": "Caution 5.3."
+    },
+    {
+      "path": "misc.html",
+      "line": 34,
+      "marker": "問題",
+      "text": "第二不完全性定理 (G2) の内包性問題に関する一詳察"
+    },
+    {
+      "path": "seminar_page.html",
+      "line": 161,
+      "marker": "Question",
+      "text": "Typical questions"
+    },
+    {
+      "path": "seminar_page.html",
+      "line": 267,
+      "marker": "Caution",
+      "text": "Caution: 「同一理論上で互いに独立な可算族」と「拡大列に沿った可算族」は別問題として扱います。"
+    },
+    {
+      "path": "seminar_page.html",
+      "line": 267,
+      "marker": "問題",
+      "text": "Caution: 「同一理論上で互いに独立な可算族」と「拡大列に沿った可算族」は別問題として扱います。"
+    },
+    {
+      "path": "seminar_page.html",
+      "line": 271,
+      "marker": "問題",
+      "text": "作業上の中心問題は，「可算に多くの自己言及を許したとき，証明可能性構造はどこまで自由で，どこから強制されるのか」です。"
+    },
+    {
+      "path": "stable-domain.html",
+      "line": 209,
+      "marker": "Warning",
+      "text": "Warning."
+    },
+    {
+      "path": "stable-domain.html",
+      "line": 466,
+      "marker": "Caution",
+      "text": "Caution."
+    },
+    {
+      "path": "stable-domain.html",
+      "line": 485,
+      "marker": "注意",
+      "text": "注意点"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "G2-ZOO/algebra-domain.pdf",
+      "kind": "pdf",
+      "size_bytes": 15398,
+      "signals": [
+        "domain",
+        "G2"
+      ],
+      "headings": [],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "G2-ZOO/aps-classification.pdf",
+      "kind": "pdf",
+      "size_bytes": 16350,
+      "signals": [
+        "APS",
+        "G2"
+      ],
+      "headings": [],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "G2-ZOO/aps-countermodels.pdf",
+      "kind": "pdf",
+      "size_bytes": 12952,
+      "signals": [
+        "APS",
+        "countermodel",
+        "G2"
+      ],
+      "headings": [],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "G2-ZOO/aps-implication-matrix.pdf",
+      "kind": "pdf",
+      "size_bytes": 58989,
+      "signals": [
+        "APS",
+        "G2",
+        "implication"
+      ],
+      "headings": [],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "G2-ZOO/aps-truth-tables.pdf",
+      "kind": "pdf",
+      "size_bytes": 12748,
+      "signals": [
+        "APS",
+        "G2"
+      ],
+      "headings": [],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "G2-ZOO/aps-zoo-diagram.svg",
+      "kind": "svg",
+      "size_bytes": 4602,
+      "signals": [
+        "APS",
+        "G2"
+      ],
+      "headings": [],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "G2-ZOO/aps-zoo.pdf",
+      "kind": "pdf",
+      "size_bytes": 121536,
+      "signals": [
+        "APS",
+        "G2"
+      ],
+      "headings": [],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "G2-ZOO/g2-chain.pdf",
+      "kind": "pdf",
+      "size_bytes": 56796,
+      "signals": [
+        "G2"
+      ],
+      "headings": [],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "G2-ZOO/g2-lattice.pdf",
+      "kind": "pdf",
+      "size_bytes": 34985,
+      "signals": [
+        "G2",
+        "lattice"
+      ],
+      "headings": [],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "G2-ZOO/g2-zoo.pdf",
+      "kind": "pdf",
+      "size_bytes": 14279,
+      "signals": [
+        "G2"
+      ],
+      "headings": [],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "G2-ZOO/index.html",
+      "kind": "html",
+      "size_bytes": 2742,
+      "signals": [
+        "APS",
+        "FG2",
+        "G2",
+        "不完全",
+        "反例",
+        "無矛盾",
+        "証明可能"
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "text": "APS-ZOO"
+        },
+        {
+          "level": 2,
+          "text": "◆ TeX PDFs"
+        },
+        {
+          "level": 2,
+          "text": "◆ Profile / slides"
+        },
+        {
+          "level": 2,
+          "text": "◆ Notes"
+        }
+      ],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "G2-ZOO/profile.html",
+      "kind": "html",
+      "size_bytes": 1559,
+      "signals": [
+        "APS",
+        "G2"
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "text": "Jikokenno-Bun"
+        },
+        {
+          "level": 2,
+          "text": "◆ 自己紹介"
+        },
+        {
+          "level": 2,
+          "text": "◆ Slides"
+        }
+      ],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "G2-ZOO/slides/aps_g2_algebraic_reverse_math_v4.pdf",
+      "kind": "pdf",
+      "size_bytes": 208456,
+      "signals": [
+        "APS",
+        "G2"
+      ],
+      "headings": [],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "conference.html",
+      "kind": "html",
+      "size_bytes": 2115,
+      "signals": [
+        "不完全",
+        "証明可能"
+      ],
+      "headings": [
+        {
+          "level": 3,
+          "text": "研究集会・セミナー(Conference and Seminar)"
+        }
+      ],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "countable-rosser.html",
+      "kind": "html",
+      "size_bytes": 14336,
+      "signals": [
+        "APS",
+        "countable",
+        "Gödel",
+        "independence",
+        "Lob",
+        "Magari",
+        "provability",
+        "Rosser",
+        "tower",
+        "不完全",
+        "反例",
+        "可算",
+        "無矛盾",
+        "独立",
+        "証明可能"
+      ],
+      "headings": [
+        {
+          "level": 3,
+          "text": "可算 Rosser 型文independence, towers, and APS representations"
+        },
+        {
+          "level": 3,
+          "text": "1. 一つの Rosser 文"
+        },
+        {
+          "level": 3,
+          "text": "2. 「可算族」の三つの意味"
+        },
+        {
+          "level": 3,
+          "text": "3. Rosser 塔"
+        },
+        {
+          "level": 3,
+          "text": "4. APS 表現"
+        },
+        {
+          "level": 3,
+          "text": "5. 注意点"
+        },
+        {
+          "level": 3,
+          "text": "References"
+        }
+      ],
+      "marker_counts": {
+        "Definition": 3,
+        "Theorem": 1,
+        "Proposition": 2,
+        "Construction": 1,
+        "Example": 2,
+        "Question": 3,
+        "Working question": 1,
+        "Caution": 3,
+        "Warning": 2
+      },
+      "math_markers": 39,
+      "queue": [
+        {
+          "path": "countable-rosser.html",
+          "line": 156,
+          "marker": "注意",
+          "text": "5. 注意点"
+        },
+        {
+          "path": "countable-rosser.html",
+          "line": 259,
+          "marker": "Working question",
+          "text": "Working question."
+        },
+        {
+          "path": "countable-rosser.html",
+          "line": 284,
+          "marker": "注意",
+          "text": "5. 注意点"
+        },
+        {
+          "path": "countable-rosser.html",
+          "line": 286,
+          "marker": "Caution",
+          "text": "Caution 5.1."
+        },
+        {
+          "path": "countable-rosser.html",
+          "line": 293,
+          "marker": "Caution",
+          "text": "Caution 5.2."
+        },
+        {
+          "path": "countable-rosser.html",
+          "line": 299,
+          "marker": "Caution",
+          "text": "Caution 5.3."
+        }
+      ]
+    },
+    {
+      "path": "en/index.html",
+      "kind": "html",
+      "size_bytes": 5534,
+      "signals": [
+        "APS",
+        "domain",
+        "Godel",
+        "incompleteness",
+        "provability"
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "text": "Jikokenno-bun"
+        },
+        {
+          "level": 2,
+          "text": "Intensional Hito-no-Mura"
+        },
+        {
+          "level": 3,
+          "text": "Profile"
+        },
+        {
+          "level": 3,
+          "text": "Research Interests"
+        },
+        {
+          "level": 3,
+          "text": "Current Notes"
+        }
+      ],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "hobbies.html",
+      "kind": "html",
+      "size_bytes": 2533,
+      "signals": [],
+      "headings": [
+        {
+          "level": 3,
+          "text": "仕事・趣味(Jobs & Hobbies)"
+        }
+      ],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "index.html",
+      "kind": "html",
+      "size_bytes": 15482,
+      "signals": [
+        "APS",
+        "domain",
+        "G2",
+        "Gödel",
+        "implication",
+        "Magari",
+        "Rosser",
+        "stable",
+        "不完全",
+        "可算",
+        "証明可能"
+      ],
+      "headings": [
+        {
+          "level": 1,
+          "text": "自己嫌悪文 (Jikokenno-bun) の webpage."
+        },
+        {
+          "level": 2,
+          "text": "内包的な人ノ邨 (Intensional Hito-no-Mura)"
+        },
+        {
+          "level": 3,
+          "text": "私についての注記(Remarks about ME)"
+        },
+        {
+          "level": 3,
+          "text": "研究上の興味(Research Interests)"
+        },
+        {
+          "level": 3,
+          "text": "研究紹介(Research INTRO. / Topics Level)"
+        },
+        {
+          "level": 3,
+          "text": "最近の更新(Recent UPDATES)"
+        }
+      ],
+      "marker_counts": {},
+      "math_markers": 1,
+      "queue": []
+    },
+    {
+      "path": "links.html",
+      "kind": "html",
+      "size_bytes": 2058,
+      "signals": [],
+      "headings": [
+        {
+          "level": 3,
+          "text": "リンク集(Links)"
+        }
+      ],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "links_page.html",
+      "kind": "html",
+      "size_bytes": 4536,
+      "signals": [
+        "APS",
+        "domain",
+        "Godel",
+        "Lob",
+        "stable",
+        "不完全",
+        "可算",
+        "証明可能"
+      ],
+      "headings": [
+        {
+          "level": 3,
+          "text": "リンク集(Links)"
+        },
+        {
+          "level": 3,
+          "text": "My Platforms"
+        },
+        {
+          "level": 3,
+          "text": "Inside This Website"
+        },
+        {
+          "level": 3,
+          "text": "Researchers"
+        },
+        {
+          "level": 3,
+          "text": "Topics To Keep Nearby"
+        }
+      ],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "materials.html",
+      "kind": "html",
+      "size_bytes": 2212,
+      "signals": [],
+      "headings": [
+        {
+          "level": 3,
+          "text": "研究業績(Research material and Papers)"
+        }
+      ],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "misc.html",
+      "kind": "html",
+      "size_bytes": 2279,
+      "signals": [
+        "APS",
+        "domain",
+        "G2",
+        "stable",
+        "不完全",
+        "可算"
+      ],
+      "headings": [
+        {
+          "level": 3,
+          "text": "作成資料・学術ノート・発表スライド(MISC & Notes)"
+        }
+      ],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": [
+        {
+          "path": "misc.html",
+          "line": 34,
+          "marker": "問題",
+          "text": "第二不完全性定理 (G2) の内包性問題に関する一詳察"
+        }
+      ]
+    },
+    {
+      "path": "others.html",
+      "kind": "html",
+      "size_bytes": 1536,
+      "signals": [],
+      "headings": [
+        {
+          "level": 3,
+          "text": "その他(Others)"
+        }
+      ],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "remarks.html",
+      "kind": "html",
+      "size_bytes": 3707,
+      "signals": [
+        "不完全"
+      ],
+      "headings": [
+        {
+          "level": 3,
+          "text": "RemarksNotes about this webpage and its author"
+        },
+        {
+          "level": 3,
+          "text": "Rmk. [1]"
+        },
+        {
+          "level": 3,
+          "text": "Scope of Research"
+        },
+        {
+          "level": 3,
+          "text": "Site Policy"
+        }
+      ],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "resume.html",
+      "kind": "html",
+      "size_bytes": 5391,
+      "signals": [
+        "APS",
+        "Godel",
+        "不完全",
+        "証明可能"
+      ],
+      "headings": [
+        {
+          "level": 3,
+          "text": "ResumeCurriculum Vitae / HTML draft"
+        },
+        {
+          "level": 3,
+          "text": "Profile"
+        },
+        {
+          "level": 3,
+          "text": "Education"
+        },
+        {
+          "level": 3,
+          "text": "Research Interests"
+        },
+        {
+          "level": 3,
+          "text": "Talks and Activities"
+        },
+        {
+          "level": 3,
+          "text": "Fellowship"
+        }
+      ],
+      "marker_counts": {},
+      "math_markers": 0,
+      "queue": []
+    },
+    {
+      "path": "seminar_page.html",
+      "kind": "html",
+      "size_bytes": 11760,
+      "signals": [
+        "abstract provability",
+        "APS",
+        "Berry",
+        "countable",
+        "dI-domain",
+        "domain",
+        "G2",
+        "Lob",
+        "Magari",
+        "provability",
+        "Rosser",
+        "stable",
+        "不完全",
+        "反例",
+        "可算",
+        "独立",
+        "証明可能"
+      ],
+      "headings": [
+        {
+          "level": 3,
+          "text": "研究ノート・セミナー(Seminar Notes and Research Pages)"
+        },
+        {
+          "level": 3,
+          "text": "圏論は笑わない。"
+        },
+        {
+          "level": 3,
+          "text": "抽象的証明可能体系動物園 (Zoo of APS)"
+        },
+        {
+          "level": 3,
+          "text": "読みたい本 (Wish-readings)"
+        },
+        {
+          "level": 3,
+          "text": "業績リスト"
+        },
+        {
+          "level": 3,
+          "text": "安定領域理論 (Stable Domain Theory) の勉強記事"
+        },
+        {
+          "level": 3,
+          "text": "可算 Rosser 型文と APS モデルの構造論について"
+        }
+      ],
+      "marker_counts": {
+        "Caution": 1
+      },
+      "math_markers": 0,
+      "queue": [
+        {
+          "path": "seminar_page.html",
+          "line": 161,
+          "marker": "Question",
+          "text": "Typical questions"
+        },
+        {
+          "path": "seminar_page.html",
+          "line": 267,
+          "marker": "Caution",
+          "text": "Caution: 「同一理論上で互いに独立な可算族」と「拡大列に沿った可算族」は別問題として扱います。"
+        },
+        {
+          "path": "seminar_page.html",
+          "line": 267,
+          "marker": "問題",
+          "text": "Caution: 「同一理論上で互いに独立な可算族」と「拡大列に沿った可算族」は別問題として扱います。"
+        },
+        {
+          "path": "seminar_page.html",
+          "line": 271,
+          "marker": "問題",
+          "text": "作業上の中心問題は，「可算に多くの自己言及を許したとき，証明可能性構造はどこまで自由で，どこから強制されるのか」です。"
+        }
+      ]
+    },
+    {
+      "path": "stable-domain.html",
+      "kind": "html",
+      "size_bytes": 24821,
+      "signals": [
+        "APS",
+        "Berry",
+        "dI-domain",
+        "domain",
+        "lattice",
+        "stable",
+        "trace",
+        "反例",
+        "独立",
+        "証明可能"
+      ],
+      "headings": [
+        {
+          "level": 3,
+          "text": "安定領域理論Berry stability, stable order, and dI-domains"
+        },
+        {
+          "level": 3,
+          "text": "1. 領域の前提"
+        },
+        {
+          "level": 3,
+          "text": "2. 安定性: 情報の最小原因"
+        },
+        {
+          "level": 3,
+          "text": "3. 例と反例"
+        },
+        {
+          "level": 3,
+          "text": "4. 安定順序"
+        },
+        {
+          "level": 3,
+          "text": "5. Trace 表現"
+        },
+        {
+          "level": 3,
+          "text": "6. dI-domain と cartesian closedness"
+        },
+        {
+          "level": 3,
+          "text": "7. 論理との接続"
+        },
+        {
+          "level": 3,
+          "text": "References"
+        }
+      ],
+      "marker_counts": {
+        "Definition": 9,
+        "Theorem": 1,
+        "Proposition": 5,
+        "Example": 5,
+        "Caution": 1,
+        "Warning": 3,
+        "Proof sketch": 1
+      },
+      "math_markers": 110,
+      "queue": [
+        {
+          "path": "stable-domain.html",
+          "line": 209,
+          "marker": "Warning",
+          "text": "Warning."
+        },
+        {
+          "path": "stable-domain.html",
+          "line": 466,
+          "marker": "Caution",
+          "text": "Caution."
+        },
+        {
+          "path": "stable-domain.html",
+          "line": 485,
+          "marker": "注意",
+          "text": "注意点"
+        }
+      ]
+    },
+    {
+      "path": "topics.html",
+      "kind": "html",
+      "size_bytes": 7604,
+      "signals": [
+        "Godel",
+        "Lob",
+        "Magari",
+        "不完全",
+        "無矛盾",
+        "証明可能"
+      ],
+      "headings": [
+        {
+          "level": 3,
+          "text": "研究トピック小辞典(Small Glossary of Research Topics)"
+        },
+        {
+          "level": 3,
+          "text": "証明可能性論理"
+        },
+        {
+          "level": 3,
+          "text": "Magari 代数"
+        },
+        {
+          "level": 3,
+          "text": "圏論"
+        },
+        {
+          "level": 3,
+          "text": "Godel の不完全性定理"
+        },
+        {
+          "level": 3,
+          "text": "抽象代数"
+        },
+        {
+          "level": 3,
+          "text": "普遍代数"
+        },
+        {
+          "level": 3,
+          "text": "線形論理"
+        },
+        {
+          "level": 3,
+          "text": "余代数"
+        },
+        {
+          "level": 3,
+          "text": "オートマトン"
+        },
+        {
+          "level": 3,
+          "text": "生命的体系としての論理"
+        }
+      ],
+      "marker_counts": {},
+      "math_markers": 1,
+      "queue": []
+    }
+  ]
+}
