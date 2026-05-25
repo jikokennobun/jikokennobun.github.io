@@ -208,7 +208,7 @@
             <a href="#about">About</a>
             <a href="#note">Note</a>
             <a href="#works">Works</a>
-            <a href="../G2-ZOO/index.html">G2-ZOO</a>
+            <a class="g2-zoo-link" href="../G2-ZOO/index.html">G2-ZOO</a>
             <a href="#platforms">Platforms</a>
         </nav>
 
@@ -241,7 +241,7 @@
                     <span class="link-title">APS-ZOO</span>
                     <span class="link-desc">Abstract Provability Systems のPDF入口。</span>
                 </a>
-                <a href="../G2-ZOO/index.html">
+                <a class="g2-zoo-link" href="../G2-ZOO/index.html">
                     <span class="link-title">G2-ZOO</span>
                     <span class="link-desc">G2 原理と無矛盾性言明の関係図・PDF入口。</span>
                 </a>
@@ -270,5 +270,12 @@
             SNS share page. Last updated by document timestamp.
         </footer>
     </div>
+    <script>
+        if (window.location.protocol === "file:") {
+            document.querySelectorAll(".g2-zoo-link").forEach(function (link) {
+                link.href = "file:///C:/Users/20010215fjii/Documents/GitHub/jikokennobun.github.io/G2-ZOO/index.html";
+            });
+        }
+    </script>
 </body>
 </html>
