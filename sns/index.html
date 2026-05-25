@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jikokenno-bun | SNS profile</title>
-    <meta name="description" content="Jikokenno-bun のSNS公開用プロフィール。数学基礎論、証明可能性、抽象代数的な論理の公開ノートへの入口です。">
+    <meta name="description" content="Jikokenno-bun のSNS公開用プロフィール。公開ノートと関連プラットフォームへの入口です。">
     <meta property="og:title" content="Jikokenno-bun | SNS profile">
-    <meta property="og:description" content="数学基礎論、証明可能性、抽象代数的な論理の公開ノートへの入口。">
+    <meta property="og:description" content="公開ノートと関連プラットフォームへの入口。">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://jikokennobun.github.io/assets/images/village.jpg">
     <meta name="twitter:card" content="summary_large_image">
@@ -78,24 +78,10 @@
         h1 {
             color: var(--blue);
             font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(2.2rem, 6vw, 4.8rem);
+            font-size: 4.6rem;
             letter-spacing: 0;
             line-height: 1;
             margin: 0;
-        }
-
-        .lead {
-            color: var(--ink);
-            font-size: 1.12rem;
-            font-weight: 700;
-            margin: 22px 0 0;
-            max-width: 720px;
-        }
-
-        .note {
-            color: var(--muted);
-            margin: 14px 0 0;
-            max-width: 720px;
         }
 
         .visual {
@@ -140,43 +126,6 @@
 
         p {
             margin: 0 0 12px;
-        }
-
-        .topic-list {
-            display: grid;
-            gap: 14px;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            margin-top: 20px;
-        }
-
-        .topic {
-            background: #ffffff;
-            border: 1px solid var(--line);
-            border-left: 5px solid var(--teal);
-            padding: 16px;
-        }
-
-        .topic:nth-child(2) {
-            border-left-color: var(--red);
-        }
-
-        .topic:nth-child(3) {
-            border-left-color: var(--yellow);
-        }
-
-        .topic:nth-child(4) {
-            border-left-color: var(--blue);
-        }
-
-        .topic h3 {
-            font-size: 1rem;
-            margin: 0 0 8px;
-        }
-
-        .topic p {
-            color: var(--muted);
-            font-size: 0.94rem;
-            margin: 0;
         }
 
         .links {
@@ -229,11 +178,14 @@
                 padding-top: 8px;
             }
 
+            h1 {
+                font-size: 2rem;
+            }
+
             .visual {
                 max-width: 260px;
             }
 
-            .topic-list,
             .links {
                 grid-template-columns: 1fr;
             }
@@ -246,12 +198,6 @@
             <div class="title-block">
                 <p class="kicker">SNS public profile</p>
                 <h1>Jikokenno-bun</h1>
-                <p class="lead">
-                    数学基礎論・証明可能性・抽象代数的な論理の周辺を、ゆっくり掘っているアカウントです。
-                </p>
-                <p class="note">
-                    このページはSNS公開用の軽量版です。連絡先、所属、学歴、履歴書情報は掲載していません。
-                </p>
             </div>
             <div class="visual" aria-label="site visual">
                 <img src="../assets/images/village.jpg" alt="Intensional Hito-no-Mura">
@@ -260,7 +206,7 @@
 
         <nav aria-label="SNS profile navigation">
             <a href="#about">About</a>
-            <a href="#topics">Topics</a>
+            <a href="#note">Note</a>
             <a href="#works">Works</a>
             <a href="#platforms">Platforms</a>
         </nav>
@@ -268,30 +214,22 @@
         <section id="about">
             <h2>About</h2>
             <p>
-                主な関心は、Gödel の不完全性定理の周辺、証明可能性論理、抽象代数的論理、圏論的・領域論的な意味論です。
-                公開しているノートやPDFは、作業中の考えを整理するための入口として置いています。
+                東京科学大学 情報理工学院 数理・計算科学系の学部4年です。主な関心は、Gödel の不完全性定理の周辺、
+                証明可能構造、抽象代数的論理、圏論的・領域論的な意味論です。
             </p>
         </section>
 
-        <section id="topics">
-            <h2>Topics</h2>
-            <div class="topic-list">
-                <article class="topic">
-                    <h3>Provability</h3>
-                    <p>証明可能性述語、反射原理、Rosser 型の構成、固定点のまわり。</p>
-                </article>
-                <article class="topic">
-                    <h3>Algebraic Logic</h3>
-                    <p>抽象代数的論理、普遍代数、代数的意味論としての論理。</p>
-                </article>
-                <article class="topic">
-                    <h3>Category / Domain</h3>
-                    <p>圏論、安定領域、表示的意味論、構造を保つ写像の見方。</p>
-                </article>
-                <article class="topic">
-                    <h3>Coalgebra</h3>
-                    <p>循環性、オートマトン、非整礎的な構造、観測としての意味。</p>
-                </article>
+        <section id="note">
+            <h2>Note</h2>
+            <div class="links">
+                <a href="../stable-domain.html">
+                    <span class="link-title">Stable Domain Theory</span>
+                    <span class="link-desc">安定領域論を論理の側から読むための作業ノート。</span>
+                </a>
+                <a href="../countable-rosser.html">
+                    <span class="link-title">Countable Rosser</span>
+                    <span class="link-desc">Rosser 型文と APS モデル構成についてのノート。</span>
+                </a>
             </div>
         </section>
 
@@ -306,14 +244,6 @@
                     <span class="link-title">G2-ZOO</span>
                     <span class="link-desc">G2 周辺の図表・PDFの入口。</span>
                 </a>
-                <a href="../stable-domain.html">
-                    <span class="link-title">Stable Domain Theory</span>
-                    <span class="link-desc">安定領域論を論理の側から読むための作業ノート。</span>
-                </a>
-                <a href="../countable-rosser.html">
-                    <span class="link-title">Countable Rosser</span>
-                    <span class="link-desc">Rosser 型文とAPSモデル構成についてのノート。</span>
-                </a>
             </div>
         </section>
 
@@ -324,13 +254,13 @@
                     <span class="link-title">X / Twitter</span>
                     <span class="link-desc">@jikokennobun</span>
                 </a>
-                <a href="https://note.com/jikokennobun">
-                    <span class="link-title">Note</span>
-                    <span class="link-desc">公開用の文章置き場。</span>
-                </a>
                 <a href="https://on.soundcloud.com/xmMBSUpdLnknl4GoIO">
                     <span class="link-title">SoundCloud</span>
                     <span class="link-desc">音楽・音源の公開ページ。</span>
+                </a>
+                <a href="https://scrapbox.io/jikokennobunn">
+                    <span class="link-title">Scrapbox</span>
+                    <span class="link-desc">メモ置き場。</span>
                 </a>
             </div>
         </section>
