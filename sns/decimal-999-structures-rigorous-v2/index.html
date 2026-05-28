@@ -225,6 +225,26 @@
             font-weight: 900;
         }
 
+        .check-row {
+            align-items: flex-start;
+            background: #fff8f1;
+            border: 1px solid #e6cfa8;
+            display: flex;
+            gap: 10px;
+            font-weight: 800;
+            padding: 12px 14px;
+        }
+
+        .check-row input {
+            flex: 0 0 auto;
+            margin: 0.45em 0 0;
+            width: auto;
+        }
+
+        .check-row span {
+            display: block;
+        }
+
         .status {
             border-left: 4px solid var(--line);
             color: var(--muted);
@@ -346,6 +366,7 @@
                 </p>
                 <p class="meta">
                     初回のみ、受信先メールアドレス側でFormSubmitの確認が必要になる場合があります。
+                    誤って提出した場合は、このページから直前の提出IDを指定した取り消し依頼を送れます。
                 </p>
             </div>
 
@@ -368,17 +389,26 @@
                         <span class="meta">.tex / 10MB以内</span>
                         <input id="texInput" name="attachment" type="file" accept=".tex,text/x-tex,text/plain" required>
                     </label>
+                    <label class="wide check-row">
+                        <input id="confirmInput" type="checkbox" required>
+                        <span>
+                            送信内容と添付TeXを確認しました。提出後に誤りに気づいた場合、送信済みメール自体は消せませんが、
+                            直前の提出を無視するための取り消し依頼を送れることを理解しました。
+                        </span>
+                    </label>
                 </div>
 
-                <input type="hidden" name="_subject" value="[decimal-999] TeX修正提案">
+                <input type="hidden" id="subjectField" name="_subject" value="[decimal-999] TeX修正提案">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="source_url" value="https://jikokennobun.github.io/sns/decimal-999-structures-rigorous-v2/">
+                <input type="hidden" id="submissionIdField" name="submission_id">
                 <input type="hidden" id="diffField" name="diff">
                 <input type="hidden" id="metadataField" name="metadata">
 
                 <div class="form-actions">
                     <button class="button" id="submitButton" type="submit" disabled>提出する</button>
                     <button class="button secondary" id="copyDiffButton" type="button" disabled>差分をコピー</button>
+                    <button class="button secondary" id="cancelLastButton" type="button" disabled>直前の提出を取り消し依頼</button>
                 </div>
             </form>
 
@@ -390,6 +420,8 @@
     <script>
         const FORM_ENDPOINT = "https://formsubmit.co/ajax/shibuya.i.9f75@m.isct.ac.jp";
         const OFFICIAL_TEX_URL = "decimal-999-structures-survey-v10-corrected.tex";
+        const DEFAULT_SUBJECT = "[decimal-999] TeX修正提案";
+        const LAST_SUBMISSION_KEY = "decimal999LastSubmission";
         const refs = {
             form: document.querySelector("#correctionForm"),
             dropZone: document.querySelector("#dropZone"),
@@ -397,10 +429,14 @@
             nameInput: document.querySelector("#nameInput"),
             emailInput: document.querySelector("#emailInput"),
             messageInput: document.querySelector("#messageInput"),
+            confirmInput: document.querySelector("#confirmInput"),
+            subjectField: document.querySelector("#subjectField"),
+            submissionIdField: document.querySelector("#submissionIdField"),
             diffField: document.querySelector("#diffField"),
             metadataField: document.querySelector("#metadataField"),
             submitButton: document.querySelector("#submitButton"),
             copyDiffButton: document.querySelector("#copyDiffButton"),
+            cancelLastButton: document.querySelector("#cancelLastButton"),
             statusLine: document.querySelector("#statusLine"),
             diffView: document.querySelector("#diffView")
         };
@@ -408,7 +444,8 @@
             officialText: "",
             officialHash: "",
             currentFile: null,
-            currentPatch: ""
+            currentPatch: "",
+            currentMetadata: null
         };
 
         function setStatus(message, stateName = "") {
@@ -426,6 +463,46 @@
             return Array.from(new Uint8Array(digest))
                 .map((byte) => byte.toString(16).padStart(2, "0"))
                 .join("");
+        }
+
+        function makeSubmissionId() {
+            const random = crypto.getRandomValues(new Uint32Array(2));
+            return [
+                "decimal999",
+                Date.now().toString(36),
+                random[0].toString(36),
+                random[1].toString(36)
+            ].join("-");
+        }
+
+        function readLastSubmission() {
+            try {
+                return JSON.parse(localStorage.getItem(LAST_SUBMISSION_KEY) || "null");
+            } catch {
+                return null;
+            }
+        }
+
+        function updateRecoveryButton() {
+            const lastSubmission = readLastSubmission();
+            refs.cancelLastButton.disabled = !lastSubmission || Boolean(lastSubmission.cancelRequestedAt);
+        }
+
+        function updateSubmitButton() {
+            refs.submitButton.disabled = !(state.currentFile && refs.confirmInput.checked);
+        }
+
+        function updateMetadata(extra = {}) {
+            if (!state.currentMetadata) return;
+            const metadata = {
+                ...state.currentMetadata,
+                nameProvided: Boolean(refs.nameInput.value.trim()),
+                replyEmailProvided: Boolean(refs.emailInput.value.trim()),
+                messageLength: refs.messageInput.value.length,
+                ...extra
+            };
+            refs.submissionIdField.value = metadata.submissionId;
+            refs.metadataField.value = JSON.stringify(metadata, null, 2);
         }
 
         function commonPrefixLength(a, b) {
@@ -500,6 +577,7 @@
             const submittedHash = await sha256(submittedText);
             const patch = makePatch(state.officialText, submittedText, file.name);
             const metadata = {
+                submissionId: makeSubmissionId(),
                 sourceUrl: location.href,
                 officialTexUrl: new URL(OFFICIAL_TEX_URL, location.href).href,
                 officialSha256: state.officialHash,
@@ -511,12 +589,14 @@
 
             state.currentFile = file;
             state.currentPatch = patch;
+            state.currentMetadata = metadata;
+            refs.confirmInput.checked = false;
             refs.diffField.value = patch;
-            refs.metadataField.value = JSON.stringify(metadata, null, 2);
+            updateMetadata();
             renderDiff(patch);
-            refs.submitButton.disabled = false;
+            updateSubmitButton();
             refs.copyDiffButton.disabled = false;
-            setStatus(`${file.name} を読み込みました。内容を確認して提出できます。`, "ok");
+            setStatus(`${file.name} を読み込みました。内容を確認し、チェックを入れると提出できます。`, "ok");
         }
 
         async function loadOfficialTex() {
@@ -564,10 +644,85 @@
             }
         });
 
+        refs.confirmInput.addEventListener("change", updateSubmitButton);
+
+        refs.cancelLastButton.addEventListener("click", async () => {
+            const lastSubmission = readLastSubmission();
+            if (!lastSubmission || lastSubmission.cancelRequestedAt) {
+                updateRecoveryButton();
+                setStatus("取り消し依頼できる直前の提出がありません。", "error");
+                return;
+            }
+
+            const confirmed = window.confirm(
+                `提出ID ${lastSubmission.submissionId} の取り消し依頼を送ります。\n` +
+                "送信済みメールそのものは消えませんが、管理者側でこの提出を無視するための依頼を送信します。"
+            );
+            if (!confirmed) return;
+
+            refs.cancelLastButton.disabled = true;
+            setStatus("取り消し依頼を送信中です。ページを閉じずにお待ちください。");
+
+            const formData = new FormData();
+            formData.set("_subject", "[decimal-999] TeX提出取り消し依頼");
+            formData.set("_captcha", "false");
+            formData.set("request_type", "cancel_previous_submission");
+            formData.set("source_url", location.href);
+            formData.set("submission_id", lastSubmission.submissionId);
+            formData.set("submitted_filename", lastSubmission.submittedFilename);
+            formData.set("submitted_sha256", lastSubmission.submittedSha256);
+            formData.set("submitted_at", lastSubmission.submittedAt);
+            formData.set("message", [
+                "直前のTeX修正提案を誤って提出したため、該当提出を無視してください。",
+                `submission_id: ${lastSubmission.submissionId}`,
+                `filename: ${lastSubmission.submittedFilename}`,
+                `sha256: ${lastSubmission.submittedSha256}`,
+                `submitted_at: ${lastSubmission.submittedAt}`
+            ].join("\n"));
+
+            try {
+                const response = await fetch(FORM_ENDPOINT, {
+                    method: "POST",
+                    body: formData,
+                    headers: { Accept: "application/json" }
+                });
+                const result = await response.json().catch(() => ({}));
+                if (!response.ok) {
+                    throw new Error(result.message || `HTTP ${response.status}`);
+                }
+                const updated = {
+                    ...lastSubmission,
+                    cancelRequestedAt: new Date().toISOString()
+                };
+                localStorage.setItem(LAST_SUBMISSION_KEY, JSON.stringify(updated));
+                setStatus(`提出ID ${lastSubmission.submissionId} の取り消し依頼を送信しました。`, "ok");
+            } catch (error) {
+                refs.cancelLastButton.disabled = false;
+                setStatus(`取り消し依頼に失敗しました: ${error.message}`, "error");
+            } finally {
+                updateRecoveryButton();
+            }
+        });
+
         refs.form.addEventListener("submit", async (event) => {
             event.preventDefault();
             if (!state.currentFile) {
                 setStatus("提出するTeXファイルを選択してください。", "error");
+                return;
+            }
+            if (!refs.confirmInput.checked) {
+                setStatus("送信前の確認チェックを入れてください。", "error");
+                updateSubmitButton();
+                return;
+            }
+
+            updateMetadata({ confirmedAt: new Date().toISOString() });
+            const confirmed = window.confirm(
+                `提出ID ${state.currentMetadata.submissionId} として送信します。\n` +
+                "誤送信した場合は、このブラウザから直前の提出の取り消し依頼を送れます。"
+            );
+            if (!confirmed) {
+                updateSubmitButton();
                 return;
             }
 
@@ -587,18 +742,34 @@
                 if (!response.ok) {
                     throw new Error(result.message || `HTTP ${response.status}`);
                 }
+                const submittedAt = new Date().toISOString();
+                localStorage.setItem(LAST_SUBMISSION_KEY, JSON.stringify({
+                    submissionId: state.currentMetadata.submissionId,
+                    submittedFilename: state.currentMetadata.submittedFilename,
+                    submittedSha256: state.currentMetadata.submittedSha256,
+                    submittedAt,
+                    sourceUrl: location.href
+                }));
                 refs.form.reset();
-                refs.diffView.textContent = "提出ありがとうございました。確認後、必要に応じて反映します。";
+                refs.subjectField.value = DEFAULT_SUBJECT;
+                refs.submissionIdField.value = "";
+                refs.diffView.textContent =
+                    `提出ありがとうございました。提出ID: ${state.currentMetadata.submissionId}\n` +
+                    "誤って提出した場合は、「直前の提出を取り消し依頼」ボタンから取り消し依頼を送れます。";
                 state.currentFile = null;
                 state.currentPatch = "";
+                state.currentMetadata = null;
                 refs.copyDiffButton.disabled = true;
+                updateSubmitButton();
+                updateRecoveryButton();
                 setStatus("提出が完了しました。ありがとうございました。", "ok");
             } catch (error) {
-                refs.submitButton.disabled = false;
+                updateSubmitButton();
                 setStatus(`提出に失敗しました: ${error.message}`, "error");
             }
         });
 
+        updateRecoveryButton();
         loadOfficialTex();
     </script>
 </body>
