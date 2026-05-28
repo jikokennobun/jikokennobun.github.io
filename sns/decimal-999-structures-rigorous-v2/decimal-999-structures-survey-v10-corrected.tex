@@ -1,0 +1,2159 @@
+
+\documentclass[a4paper,11pt]{ltjsarticle}
+\usepackage{luatexja}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{booktabs,longtable,array,tabularx,multirow}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\geometry{margin=24mm}
+\hypersetup{unicode=true,colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,urlcolor=blue!45!black}
+\allowdisplaybreaks
+\setlist[enumerate]{leftmargin=2.2em,itemsep=.25em,topsep=.25em}
+\setlist[itemize]{leftmargin=2.2em,itemsep=.25em,topsep=.25em}
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{3pt}
+\newtheoremstyle{jpdef}{.8em}{.8em}{\normalfont}{}{}{.}{.5em}{\thmname{#1}\thmnumber{ #2}\thmnote{（#3）}}
+\newtheoremstyle{jpthm}{.8em}{.8em}{\normalfont}{}{}{.}{.5em}{\thmname{#1}\thmnumber{ #2}\thmnote{（#3）}}
+\theoremstyle{jpdef}
+\newtheorem{definition}{定義}[section]
+\newtheorem{remark}[definition]{補足}
+\newtheorem{convention}[definition]{規約}
+\newtheorem{warning}[definition]{注意}
+\newtheorem{example}[definition]{例}
+\theoremstyle{jpthm}
+\newtheorem{theorem}[definition]{定理}
+\newtheorem{proposition}[definition]{命題}
+\newtheorem{lemma}[definition]{補題}
+\newtheorem{corollary}[definition]{系}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Pow}{\mathcal P}
+\newcommand{\Lang}{\mathcal L}
+\newcommand{\Th}{\operatorname{Th}}
+\newcommand{\Term}{\operatorname{Term}}
+\newcommand{\Str}{\operatorname{Str}}
+\newcommand{\Syn}{=_{\mathrm{syn}}}
+\newcommand{\Dec}{\operatorname{Dec}_{10}}
+\newcommand{\Dig}{\operatorname{Dig}_{10}}
+\newcommand{\val}{\operatorname{val}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\Seq}{\operatorname{Seq}}
+\newcommand{\Const}{\operatorname{Const}}
+\newcommand{\Lim}{\operatorname{Lim}}
+\newcommand{\LimSet}{\operatorname{LimSet}}
+\newcommand{\st}{\operatorname{st}}
+\newcommand{\Fin}{\operatorname{Fin}}
+\newcommand{\Inf}{\operatorname{Inf}}
+\newcommand{\Ns}{\N_{>0}}
+\newcommand{\DN}{D_{\N}}
+\newcommand{\DStarN}{D_{{}^{\ast}\N}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\br}[1]{\left[#1\right]}
+\newcommand{\seq}[2]{\left\{#1\right\}_{#2}}
+\newcommand{\seqN}[1]{\left\{#1_n\right\}_{n\in \DN}}
+\newcommand{\net}[2]{\left\{#1_{\lambda}\right\}_{\lambda\in #2}}
+\newcommand{\ulim}[1]{{}^{\ast}#1}
+\newcommand{\mon}{\operatorname{mon}}
+\newcommand{\halo}{\operatorname{halo}}
+\newcommand{\near}{\operatorname{ns}}
+\newcommand{\intpart}{\operatorname{int}}
+\newcommand{\cl}{\operatorname{cl}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\subobj}{\operatorname{Sub}}
+\newcommand{\Sh}{\operatorname{Sh}}
+\newcommand{\Eff}{\operatorname{Eff}}
+\newcommand{\Mod}{\operatorname{Mod}}
+\newcommand{\Loeb}{\operatorname{Loeb}}
+\newcommand{\RealC}{\mathbb{R}_{\mathrm C}}
+\newcommand{\RealD}{\mathbb{R}_{\mathrm D}}
+\newcommand{\RealDed}{\mathbb{R}_{\mathrm{Ded}}}
+\newcommand{\RealCau}{\mathbb{R}_{\mathrm{Cau}}}
+\newcommand{\lowerR}{\mathbb{R}_{\mathrm{low}}}
+\newcommand{\upperR}{\mathbb{R}_{\mathrm{up}}}
+\newcommand{\Baire}{\mathbb{B}}
+\newcommand{\defeq}{:=}
+\newcommand{\taufullS}{\tau^{\mathrm{full}}_{S}}
+\newcommand{\tauintS}{\tau^{\mathrm{int}}_{S}}
+\newcommand{\taust}{\tau_{\mathrm{st}}}
+\newcommand{\tauRobS}{\tau^{\mathrm{Rob}}_{S}}
+\newcommand{\tauQ}{\tau_{Q}}
+\newcommand{\tauord}{\tau_{\mathrm{ord}}}
+\newcommand{\KL}{q_{\mathrm{KL}}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\eps}{\varepsilon}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+
+\title{\Large \(0.999\ldots=1\) を解釈する数学的構造\\
+\normalsize 言語・記号空間・解釈・商構造・位相・非標準解析からの精密サーベイ}
+\author{Draft version 10：S-位相三分割・章立て修正・周縁節精密化版}
+\date{2026年5月28日}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+本稿は等式
+\[
+ 0.999\ldots=1
+\]
+を，「実数のよく知られた計算」としてではなく，対象言語，記号空間，表示写像，モデル，商構造，極限関係，標準部写像の相互作用として再定式化する．本稿の中心命題は，\(0.999\ldots=1\) は生の記号列の同一性ではなく，指定された数学的パッケージのもとでの意味論的等号または商での等号である，という点にある．
+
+本版では，前版 v9 の検証で残った問題を修正した．第一に，S-topology という名称に頼らず，基底・近傍系によって S 型位相を三種に分ける．すなわち，標準開集合全体の超準拡大で生成する全標準開型 \(\taufullS\)，標準端点の有界区間と半直線の超準拡大で生成する区間・半直線生成型 \(\tauintS\)，標準部写像で生成する Robinson／標準部型 \(\tauRobS=\taust\) である．このとき
+\[
+\LimSet^{\DN}_{(\ulim\R,\taufullS)}(\mathbf s^{\DN})
+=
+\LimSet^{\DStarN}_{(\ulim\R,\taufullS)}(\mathbf s^{\DStarN})
+=\{1\},
+\]
+一方
+\[
+\LimSet^{\DN}_{(\ulim\R,\tauintS)}(\mathbf s^{\DN})
+=
+\LimSet^{\DStarN}_{(\ulim\R,\tauintS)}(\mathbf s^{\DStarN})
+=\mu^-(1)
+\]
+である．ここで \(\tauintS\) は無限大点を誤って収束先に含めないよう，標準半直線も基底に含める．第二に，Robinson 型位相は曖昧な非標準点モナドではなく，有限点上の標準部位相 \(\taust\) として定義し直した．第三に，Type-2 表現と topos 内部実数を別節として復元し，目次・章番号・結論節の崩れを直した．第四に，univoque 集合と Komornik--Loreti 定数の節では，Thue--Morse 列の添字シフトと「\(U_q\) 全体の相転移」と「固定点 \(1\) の展開」の違いを明記した．第五に，終余代数・双模倣の節では，純粋な小数部ストリームではなく整数部つき表示空間 \(\Dec\) を対象にするよう修正した．第六に，「イデアルでない合同」という誤用を避け，イデアル由来でない同値関係として記述し直した．
+
+以下では，すべての数列・ネットを添字有向集合つきで
+\[
+  \seq{x_d}{d\in D}
+\]
+と書く．特に有限近似は
+\[
+  \seq{s_n}{n\in\DN},\qquad \DN=(\Ns,\le),\qquad s_n=1-10^{-n}
+\]
+であり，定数列も
+\[
+  \seq{\mathbf1_n}{n\in\DN},\qquad \mathbf1_n=1
+\]
+と書く．極限記号には必ず
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}},\qquad \lim_{\lambda\in\Lambda}
+\]
+のように添字を付ける．非 Hausdorff 空間では関数記号としての \(\lim\) ではなく
+\[
+  \Lim_X^D(\seq{x_d}{d\in D},a)
+\]
+を基本概念とする．
+\end{abstract}
+
+\tableofcontents
+
+\section{導入：問題は等式ではなくパッケージである}
+
+初等的な説明では，しばしば
+\[
+ 0.999\ldots=\sum_{n=1}^{\infty}9\cdot 10^{-n}=1
+\]
+と書かれる．しかしこの式は，すでに複数の選択を含んでいる．第一に，\(0.999\ldots\) を有限文字列ではなく右無限桁列または級数として読んでいる．第二に，級数の和を実数値として解釈している．第三に，極限を通常の実数位相で取っている．第四に，等号を生の記号列の等号ではなく，実数の等号として読んでいる．
+
+したがって，本稿の最初の原則は次である．
+\[
+\text{構文的同一性}
+\neq\text{意味論的同一性}
+\neq\text{商での同一性}
+\neq\text{無限小近接性}.
+\]
+
+\begin{convention}[標準添字有向集合]
+本稿では，標準自然数添字の列を扱う場合，添字有向集合を
+\[
+  \DN=(\Ns,\le),\qquad \DStarN=(\ulim\Ns,\le)
+\]
+と固定する．ここで \(\DN\) は標準自然数添字の有向集合，\(\DStarN\) は超自然数添字の有向集合である．列オブジェクトは必ず
+\[
+  \seq{x_n}{n\in\DN}
+\]
+と書く．個々の第 \(n\) 項を指すときだけ \(x_n\) と書く．有限近似列は
+\[
+  \seq{s_n}{n\in\DN},\qquad s_n=1-10^{-n}
+\]
+であり，定数列は
+\[
+  \seq{\mathbf 1_n}{n\in\DN},\qquad \mathbf 1_n=1
+\]
+である．
+\end{convention}
+
+\begin{convention}[極限記号]
+本稿では極限記号に必ず添字を付ける．標準列なら
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^X\seq{x_n}{n\in\DN},
+\]
+一般の有向集合 \((\Lambda,\le_\Lambda)\) 上のネットなら
+\[
+  \lim_{\lambda\in\Lambda}^{X}\net{x}{\Lambda}
+\]
+と書く．ただし，\(\lim\) を関数記号として書くのは，収束先の一意性が保証される場合に限る．非 Hausdorff 空間では
+\[
+  \Lim_X^\Lambda(\net{x}{\Lambda},a)
+\]
+という関係記法を基本とする．
+\end{convention}
+
+\begin{definition}[厳密な議論単位：解釈パッケージ]
+\(0.999\ldots=1\) を厳密に述べるためのデータを，単なる四つ組ではなく次の解釈パッケージとして扱う．
+\[
+  \mathfrak P=(\mathsf B,\Lang,\mathsf{Syn},M,S,\iota,I,\Phi).
+\]
+各成分の意味は次の通りである．
+\begin{enumerate}
+\item \(\mathsf B\)：メタ体系．例：ZFC，二階算術 \(\mathsf{RCA}_0\)，Martin--Löf 型理論，HoTT，直観主義集合論など．
+\item \(\Lang\)：対象言語．例：環の言語，順序体の言語，多ソート列言語，桁列言語，集合論言語 \(\{\in\}\) など．
+\item \(\mathsf{Syn}\)：その言語の構文領域．項，式，証明，文字列，\(\omega\)-語などを含む．
+\item \(M\)：\(\Lang\)-構造または解釈先モデル．
+\item \(S\)：外部表示空間．例：有限文字列，右無限桁列，Cauchy 名，Type-2 名など．
+\item \(\iota:S\to \mathsf{Syn}\) または \(S\hookrightarrow\mathsf{Syn}\)：表示を対象言語の記号へ埋め込む写像．存在しない場合もある．
+\item \(I:S\to |M|\)：外部表示の意味論的解釈写像．
+\item \(\Phi\)：判定する命題．例：\(I(0;9^\omega)=1^M\)，または \((0;9^\omega)\sim(1;0^\omega)\) など．
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[四つ組では足りない理由]
+前版の \((S,M,I,\Phi)\) は，表示空間からモデルへの写像を強調するには十分だった．しかし，\(0.999\ldots\) が対象言語の項なのか，言語拡張で導入した定数なのか，数列ソートの元なのか，あるいはメタ言語上の略記なのかを区別するには不足している．本稿では，対象言語 \(\Lang\)，構文領域 \(\mathsf{Syn}\)，メタ体系 \(\mathsf B\) を明示的に含めることで，この不足を補う．
+\end{remark}
+
+\clearpage
+\begin{longtable}{L{30mm}L{43mm}L{75mm}}
+\caption{同じ \(0.999\ldots=1\) に見える主張の分解}\label{tab:package}\\
+\toprule
+レベル & 典型的な式 & 正確な意味 \\
+\midrule
+\endfirsthead
+\toprule
+レベル & 典型的な式 & 正確な意味 \\
+\midrule
+\endhead
+有限文字列 & \(\ulcorner 0.999\ldots\urcorner\) & 記号 \(\ldots\) を含む有限列．無限反復はまだ意味しない．\\
+\(\omega\)-語 & \(9^\omega\) & 関数 \(\Ns\to\{9\}\)．記号列ではなく可算添字列．\\
+桁列空間 & \((0;9^\omega)\in\Dec\) & 整数部と右無限桁列の対．生の集合の元として \((1;0^\omega)\) と異なる．\\
+評価写像 & \(\nu(0;9^\omega)=1\) & 桁列を実数へ送った後の等号．\\
+Cauchy 商 & \([\seq{s_n}{n\in\DN}]_C=[\seq{\mathbf 1_n}{n\in\DN}]_C\) & 差列 \(\seq{s_n-\mathbf1_n}{n\in\DN}\) が \(0\) へ収束するので同じ同値類．\\
+Dedekind 切断 & \(L_{0.999\ldots}=L_1\) & 有限近似列が生成する有理下集合が \(\{q\in\Q:q<1\}\) と一致する．\\
+超実数 & \(1-10^{-H}\ne1\) & \(H\in\ulim\N\setminus\N\) なら \(10^{-H}\) が正の無限小として残る．\\
+標準部 & \(\st(1-10^{-H})=1\) & 無限小差を標準部写像で潰した後の等号．\\
+\bottomrule
+\end{longtable}
+
+\section{構文：有限文字列，\(\omega\)-語，桁列は別物である}
+
+\subsection{有限文字列としての \(\ulcorner0.999\ldots\urcorner\)}
+
+\begin{definition}[アルファベットと有限文字列]
+有限または可算アルファベット \(A\) に対し，\(A^{<\omega}\) を有限文字列全体の集合とする．記号 \(\ldots\) をアルファベットの一文字として追加した場合，
+\[
+  \ulcorner0.999\ldots\urcorner\in A^{<\omega}
+\]
+は有限文字列である．この段階では，\(\ldots\) は「無限に続く」という意味を持たない単なる記号である．
+\end{definition}
+
+\begin{remark}
+有限文字列としての \(\ulcorner0.999\ldots\urcorner\) と \(\ulcorner1.000\ldots\urcorner\) は構文的に異なる．すなわち
+\[
+  \ulcorner0.999\ldots\urcorner\not\Syn\ulcorner1.000\ldots\urcorner .
+\]
+この否定は実数値評価後の等号と矛盾しない．
+\end{remark}
+
+\subsection{\(\omega\)-語としての \(9^\omega\)}
+
+\begin{definition}[\(\omega\)-語]
+アルファベット \(A\) 上の \(\omega\)-語とは関数
+\[
+  w:\Ns\to A
+\]
+である．たとえば
+\[
+  9^\omega:=\seq{9_n}{n\in\DN},\qquad 9_n=9
+\]
+は \(\{0,\ldots,9\}\) 上の \(\omega\)-語である．
+\end{definition}
+
+\begin{warning}[\(0,9,9,9,\ldots\) と桁列 \((0;9^\omega)\) の区別]
+\(\seq{a_n}{n\in\DN}\) としての記号列
+\[
+  \seq{a_n}{n\in\DN}=(0,9,9,9,\ldots)
+\]
+は，単に記号の \(\omega\)-列である．一方，十進桁列
+\[
+  (0;9^\omega)
+\]
+は，整数部 \(0\) と小数部 \(9^\omega\) の対であり，空間
+\[
+  \Dec=\Z\times\{0,\ldots,9\}^{\Ns}
+\]
+の元である．この二つは同じ対象ではない．特に，前者には「小数点」や「整数部」の構造がまだ含まれていない．
+\end{warning}
+
+\subsection{通常の一階項ではないという事実}
+
+\begin{definition}[通常の一階項]
+\(\Lang\) を有限アリティの関数記号を持つ一階言語とする．\(\Lang\)-項全体 \(\Term(\Lang)\) は，変数，定数記号，有限アリティ関数記号への有限回の適用によって生成される最小集合である．従って各項は有限構文木を持つ．
+\end{definition}
+
+\begin{proposition}[無限小数は \(\Lang_{\mathrm{ring}}\)-項ではない]
+環の言語
+\[
+  \Lang_{\mathrm{ring}}=\{0,1,+,-,\cdot\}
+\]
+の通常の一階項として，右無限桁列を直接含む
+\[
+  \ulcorner0.999\ldots\urcorner
+\]
+は存在しない．
+\end{proposition}
+
+\begin{proof}
+\(\Lang_{\mathrm{ring}}\)-項は有限構文木である．右無限に \(9\) が並ぶ情報は，有限構文木の中には直接含められない．もし \(\ulcorner0.999\ldots\urcorner\) を項として扱うなら，それは新しい定数記号として追加されたか，記号 \(\ldots\) を持つ有限文字列として扱われているか，または外部表示空間の元をメタ言語で参照しているかのいずれかである．
+\end{proof}
+
+\begin{definition}[\(0.999\ldots\) を対象化する方法]
+\(0.999\ldots\) を数学的対象として扱う代表的な方法は次である．
+\begin{enumerate}
+\item \textbf{定数追加型}：\(c_{0.999\ldots}\) を新しい定数記号として \(\Lang\) に追加する．値は公理または解釈により決める．
+\item \textbf{桁列ソート型}：\(\mathrm{DigSeq}\) というソートを追加し，\(9^\omega\in\mathrm{DigSeq}\) と評価写像 \(\nu:\mathrm{DigSeq}\to\R\) を導入する．
+\item \textbf{数列ソート型}：値ソート \(K\) と列ソート \(K^{\DN}\) を持つ二ソート言語で，\(\seq{s_n}{n\in\DN}\) と極限関係 \(\Lim_K^{\DN}\) を導入する．
+\item \textbf{無限項型}：可算アリティの形式演算子 \(\sum_{n\in\DN}\) または \(\lim_{\substack{n\to\infty\\ n\in\DN}}\) を構文に直接追加する．この場合，無限項の well-formedness と意味論を別途定義する必要がある．
+\item \textbf{メタ略記型}：対象言語には入れず，メタ言語で
+\[
+  0.999\ldots := \lim_{\substack{n\to\infty\\ n\in\DN}}^{M}\seq{1-10^{-n}}{n\in\DN}
+\]
+と約束する．
+\end{enumerate}
+\end{definition}
+
+\section{極限記号：構文記号と意味論的極限を分ける}
+
+\subsection{有向集合とネット}
+
+\begin{definition}[有向集合]
+集合 \(D\) 上の反射的かつ推移的な関係 \(\le_D\) が有向であるとは，任意の \(d_0,d_1\in D\) に対し，ある \(e\in D\) が存在して
+\[
+  d_0\le_D e,
+  \qquad
+  d_1\le_D e
+\]
+を満たすことをいう．このとき \((D,\le_D)\) を有向集合という．
+\end{definition}
+
+\begin{definition}[ネット]
+位相空間 \(X\) と有向集合 \((D,\le_D)\) に対し，\(X\)-値ネットとは写像
+\[
+  x:D\to X
+\]
+である．本稿ではこのネットを
+\[
+  \seq{x_d}{d\in D}
+\]
+と書く．標準列は \(D=\DN=(\Ns,\le)\) の特殊例である．
+\end{definition}
+
+\begin{definition}[極限関係]
+\(X\) を位相空間，\(\seq{x_d}{d\in D}\) を \(X\)-値ネット，\(a\in X\) とする．\(\seq{x_d}{d\in D}\) が \(a\) に収束するとは，任意の \(a\) の近傍 \(U\) に対し，ある \(d_0\in D\) が存在して
+\[
+  d\ge_D d_0\quad\Longrightarrow\quad x_d\in U
+\]
+が成り立つことをいう．これを
+\[
+  \Lim_X^D(\seq{x_d}{d\in D},a)
+\]
+と書く．収束先集合を
+\[
+  \LimSet_X^D(\seq{x_d}{d\in D})
+  :=\set{a\in X:\Lim_X^D(\seq{x_d}{d\in D},a)}
+\]
+で定義する．
+\end{definition}
+
+\begin{proposition}[Hausdorff 性と関数記号としての \(\lim\)]
+\(X\) が Hausdorff なら，任意の \(D\)-ネット \(\seq{x_d}{d\in D}\) について
+\[
+  \Lim_X^D(\seq{x_d}{d\in D},a)\land
+  \Lim_X^D(\seq{x_d}{d\in D},b)
+  \quad\Longrightarrow\quad
+  a=b.
+\]
+したがって，この場合に限り，収束するネットに対して
+\[
+  \lim_{d\in D}^{X}\seq{x_d}{d\in D}=a
+\]
+という部分関数的記法を安全に使える．
+\end{proposition}
+
+\begin{proof}
+\(a\ne b\) とする．Hausdorff 性により，互いに交わらない近傍 \(U\ni a\)，\(V\ni b\) が存在する．両方へ収束すると仮定すれば，ある \(d_U,d_V\in D\) 以降でそれぞれ \(x_d\in U\)，\(x_d\in V\) となる．有向性により \(d_U,d_V\le_D e\) となる \(e\in D\) が存在し，\(x_e\in U\cap V\) となって矛盾する．
+\end{proof}
+
+\begin{warning}[非 Hausdorff 空間では \(\lim\) は値ではない]
+密着位相 \(\{\varnothing,X\}\) では任意のネット \(\seq{x_d}{d\in D}\) が任意の点 \(a\in X\) に収束する．従って
+\[
+  \LimSet_X^D(\seq{x_d}{d\in D})=X
+\]
+であり，\(\lim_{d\in D}^{X}\seq{x_d}{d\in D}\) は一意な値を持たない．したがって非 Hausdorff 空間では，\(\lim\) を関数記号として導入する前に，一意性条件を確認しなければならない．
+\end{warning}
+
+\subsection{二ソート極限言語}
+
+\begin{definition}[二ソート極限言語]
+値ソート \(K\) と列ソート \(K^{\DN}\) を持つ二ソート言語
+\[
+  \Lang_{\mathrm{lim}}^{2}(K,\DN)
+\]
+を考える．この言語は，少なくとも次を持つ．
+\begin{enumerate}
+\item 値ソート \(K\) 上の環記号 \(0,1,+,-,\cdot\)．
+\item 列ソート \(K^{\DN}\)．
+\item 評価関数記号 \(\operatorname{ev}_n:K^{\DN}\to K\) または二変数評価 \(\operatorname{ev}:K^{\DN}\times\DN\to K\)．
+\item 定数列埋め込み \(\Const:K\to K^{\DN}\)．
+\item 極限関係記号 \(\Lim_K^{\DN}(X,a)\subseteq K^{\DN}\times K\)．
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[関係方式と演算子方式]
+\(\Lim_K^{\DN}(X,a)\) を関係記号として採用すれば，非 Hausdorff 空間でも形式化できる．これに対し，\(\lim_{\substack{n\to\infty\\ n\in\DN}}:K^{\DN}\rightharpoonup K\) を部分関数記号として採用するには，対象とする列クラス \(C\subseteq K^{\DN}\) について
+\[
+  \forall X\in C\,\exists!a\in K\,\Lim_K^{\DN}(X,a)
+\]
+が必要である．
+\end{remark}
+
+\subsection{構文記号 \(\mathsf{lim}\) と意味論的極限}
+
+\begin{definition}[構文的極限記号]
+対象言語に \(\mathsf{lim}_{\DN}\) という記号を追加し，構文規則
+\[
+  X\in K^{\DN}\quad\Longrightarrow\quad
+  \mathsf{lim}_{\DN}(X)\in K
+\]
+を許したとする．このとき \(\mathsf{lim}_{\DN}(X)\) はまず項であり，まだ極限値を意味しない．モデル \(M\) が与えられて初めて，\(\mathsf{lim}_{\DN}\) は部分関数，選択関数，関係から定義された演算などに解釈される．
+\end{definition}
+
+\begin{warning}[記号空間内の \(\mathsf{lim}\) と解析的 \(\lim\)]
+有限文字列
+\[
+  \ulcorner\mathsf{lim}_{n\to\infty}(1-10^{-n})\urcorner
+\]
+は記号列である．一方，
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{\R}\seq{1-10^{-n}}{n\in\DN}=1
+\]
+は通常実数位相における意味論的命題である．両者を混同してはならない．前者は \(\mathsf{Syn}\) の元，後者は \(\R\) を解釈先に持つ構造での主張である．
+\end{warning}
+
+\subsection{Cauchy 実数で混同しやすい四つの構文}
+
+\begin{definition}[Cauchy 実数の記法]
+有理 Cauchy 列全体を \(C_\Q\) とし，
+\[
+  \seq{x_n}{n\in\DN}\sim_C\seq{y_n}{n\in\DN}
+  \quad:\Longleftrightarrow\quad
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{\Q}\seq{x_n-y_n}{n\in\DN}=0
+\]
+とする．Cauchy 実数を
+\[
+  \RealC:=C_\Q/\sim_C
+\]
+と書き，同値類を \([\seq{x_n}{n\in\DN}]_C\) と書く．
+\end{definition}
+
+\begin{longtable}{L{55mm}L{82mm}}
+\caption{似ているが異なる四つの式}\label{tab:four-limits}\\
+\toprule
+式 & 意味 \\
+\midrule
+\endfirsthead
+\toprule
+式 & 意味 \\
+\midrule
+\endhead
+\(\displaystyle \lim_{\substack{m\to\infty\\ m\in\DN}}^{\RealC}\seq{[\seq{x_{m,n}}{n\in\DN}]_C}{m\in\DN}\) & \(m\)-番目の項が Cauchy 実数 \([\seq{x_{m,n}}{n\in\DN}]_C\) であるような \(\RealC\)-値列の実数上の極限．外側の極限は \(\RealC\) の位相で取る．\\
+\(\displaystyle \lim_{\substack{n\to\infty\\ n\in\DN}}^{\RealC}\seq{[\seq{\bar x_{n,m}}{m\in\DN}]_C}{n\in\DN}\), \(\bar x_{n,m}=x_n\) & 有理数列 \(\seq{x_n}{n\in\DN}\) の各項 \(x_n\) を定数 Cauchy 列 \(\seq{\bar x_{n,m}}{m\in\DN}\) として \(\RealC\) に埋め込み，その \(\RealC\)-値列の極限を取る式．\\
+\(\displaystyle [\seq{\ell_m}{m\in\DN}]_C,\quad \ell_m=\lim_{\substack{n\to\infty\\ n\in\DN}}^{\Q}\seq{x_n}{n\in\DN}\) & 有理数列 \(\seq{x_n}{n\in\DN}\) が \(\Q\) 内で極限 \(\ell\) を持つ場合に，その極限値 \(\ell\) を定数 Cauchy 列 \(\seq{\ell_m}{m\in\DN}\) にしてから同値類を取る式．\\
+\(\displaystyle [\seq{x_n}{n\in\DN}]_C\) & 有理 Cauchy 列そのものの Cauchy 同値類．この式には外側の \(\lim\) 記号はない．\\
+\bottomrule
+\end{longtable}
+
+\begin{warning}
+特に，
+\[
+  [\seq{x_n}{n\in\DN}]_C
+\]
+と
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{\RealC}\seq{[\seq{\bar x_{n,m}}{m\in\DN}]_C}{n\in\DN}
+\]
+は，値が一致する場合があっても構文的には異なる．前者は「列を商で割った元」であり，後者は「商で得た実数の列の極限」である．
+\end{warning}
+
+\section{表示写像，核，同値関係，商}
+
+\begin{definition}[表示写像と核]
+集合 \(S\) を表示空間，集合 \(X\) を値空間とする．写像
+\[
+  \rho:S\to X
+\]
+を表示写像という．核同値関係を
+\[
+  s\sim_\rho t\quad:\Longleftrightarrow\quad \rho(s)=\rho(t)
+\]
+で定義する．
+\end{definition}
+
+\begin{proposition}[核商]
+表示写像 \(\rho:S\to X\) に対し，商写像 \(q:S\to S/{\sim_\rho}\) と単射
+\[
+  \bar\rho:S/{\sim_\rho}\to X,
+  \qquad
+  \bar\rho([s])=\rho(s)
+\]
+が存在し，\(\rho=\bar\rho\circ q\) を満たす．\(\rho\) が全射なら \(\bar\rho\) は全単射である．
+\end{proposition}
+
+\begin{proof}
+\(s\sim_\rho t\) なら \(\rho(s)=\rho(t)\) なので \(\bar\rho\) は well-defined である．単射性は核同値関係の定義から従う．全射性は \(\rho\) の全射性から従う．
+\end{proof}
+
+\begin{definition}[十進評価写像]
+右無限十進桁列空間を
+\[
+  \Dec:=\Z\times\{0,1,\ldots,9\}^{\Ns}
+\]
+とする．評価写像
+\[
+  \nu:\Dec\to\R
+\]
+を
+\[
+  \nu(k;\seq{a_n}{n\in\DN})
+  =k+\sum_{n=1}^{\infty}a_n10^{-n}
+\]
+で定義する．ここで総和は通常実数での
+\[
+  \lim_{\substack{N\to\infty\\ N\in\DN}}^{\R}\seq{\sum_{n=1}^{N}a_n10^{-n}}{N\in\DN}
+\]
+である．
+\end{definition}
+
+\begin{proposition}[評価後の等号]
+\[
+  \nu(0;9^\omega)=\nu(1;0^\omega)=1.
+\]
+従って
+\[
+  (0;9^\omega)\sim_\nu(1;0^\omega)
+\]
+である．
+\end{proposition}
+
+\begin{proof}
+\[
+  \nu(0;9^\omega)=\sum_{n=1}^{\infty}9\cdot10^{-n}
+  =\lim_{\substack{N\to\infty\\ N\in\DN}}^{\R}\seq{\sum_{n=1}^{N}9\cdot10^{-n}}{N\in\DN}
+  =\lim_{\substack{N\to\infty\\ N\in\DN}}^{\R}\seq{1-10^{-N}}{N\in\DN}=1.
+\]
+また \(\nu(1;0^\omega)=1\) である．
+\end{proof}
+
+\section{実数構成 I：有限小数環と Cauchy 実数}
+
+\subsection{有限小数環}
+
+\begin{definition}[有限小数環]
+\[
+  D_{10}:=\Z[1/10]
+  =\set{\frac{m}{10^n}:m\in\Z,\ n\in\N}
+\]
+と定義する．これは \(\Q\) の部分環であるが，体ではない．
+\end{definition}
+
+\begin{proposition}[有限小数環での極限]
+通常距離の部分空間位相を持つ \(D_{10}\) で，
+\[
+  \Lim_{D_{10}}^{\DN}(\seq{s_n}{n\in\DN},1)
+\]
+が成り立つ．従って Hausdorff 性により
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{D_{10}}\seq{s_n}{n\in\DN}=1.
+\]
+\end{proposition}
+
+\begin{proof}
+任意の \(\eps>0\) に対し，Archimedean 性により \(10^{-N}<\eps\) となる \(N\in\Ns\) が存在する．\(n\ge N\) なら
+\[
+  \abs{s_n-1}=10^{-n}\le 10^{-N}<\eps.
+\]
+よって \(\Lim_{D_{10}}^{\DN}(\seq{s_n}{n\in\DN},1)\) である．
+\end{proof}
+
+\begin{remark}[\(0.333\ldots\) との違い]
+\(\seq{1/3}{n\in\DN}\) は \(D_{10}\)-値列ではない．また
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{\R}\seq{0.\underbrace{33\cdots3}_{n}}{n\in\DN}=1/3
+\]
+であるが，\(1/3\notin D_{10}\) である．よって \(D_{10}\) 内で \(0.999\ldots\) が値 \(1\) を持つことと，任意の無限小数が \(D_{10}\) 内で値を持つことは別問題である．
+\end{remark}
+
+\subsection{Cauchy 実数}
+
+\begin{definition}[有理 Cauchy 列]
+\(C_\Q\) を，有理数値 Cauchy 列
+\[
+  \seq{x_n}{n\in\DN},\qquad x_n\in\Q
+\]
+全体とする．同値関係 \(\sim_C\) を
+\[
+  \seq{x_n}{n\in\DN}\sim_C\seq{y_n}{n\in\DN}
+  \quad:\Longleftrightarrow\quad
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{\Q}\seq{x_n-y_n}{n\in\DN}=0
+\]
+で定める．Cauchy 実数を
+\[
+  \RealC=C_\Q/\sim_C
+\]
+と定義する．
+\end{definition}
+
+\begin{definition}[Cauchy 実数における \(0.999\ldots\)]
+\[
+  \mathbf s:=\seq{s_n}{n\in\DN},\qquad s_n=1-10^{-n},
+\]
+\[
+  \mathbf 1:=\seq{\mathbf1_n}{n\in\DN},\qquad \mathbf1_n=1
+\]
+とする．Cauchy 実数における表示を
+\[
+  I_C(0.999\ldots):=[\mathbf s]_C=[\seq{s_n}{n\in\DN}]_C,
+\]
+\[
+  I_C(1.000\ldots):=[\mathbf1]_C=[\seq{\mathbf1_n}{n\in\DN}]_C
+\]
+で定義する．
+\end{definition}
+
+\begin{theorem}[Cauchy 実数での等号]
+\[
+  [\seq{s_n}{n\in\DN}]_C=[\seq{\mathbf1_n}{n\in\DN}]_C.
+\]
+従って，Cauchy 実数解釈では
+\[
+  I_C(0.999\ldots)=I_C(1.000\ldots).
+\]
+\end{theorem}
+
+\begin{proof}
+同値類が等しいことを示すには
+\[
+  \seq{s_n-\mathbf1_n}{n\in\DN}\sim_C\seq{0_n}{n\in\DN}
+\]
+を示せばよい．ここで \(0_n=0\) である．実際，
+\[
+  s_n-\mathbf1_n=(1-10^{-n})-1=-10^{-n}.
+\]
+任意の有理 \(\eps>0\) に対し，\(10^{-N}<\eps\) となる \(N\in\Ns\) を取れば，\(n\ge N\) で
+\[
+  \abs{s_n-\mathbf1_n}=10^{-n}\le10^{-N}<\eps.
+\]
+従って
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{\Q}\seq{s_n-\mathbf1_n}{n\in\DN}=0
+\]
+であり，同値類は等しい．
+\end{proof}
+
+\begin{warning}[不正確な書き方]
+この定理を
+\[
+  [\lim_{\substack{n\to\infty\\ n\in\DN}}^{\Q}\seq{s_n}{n\in\DN}]=[1]
+\]
+と書くのは不正確である．正しい主張は
+\[
+  [\seq{s_n}{n\in\DN}]_C=[\seq{\mathbf1_n}{n\in\DN}]_C
+\]
+である．一方，\(\lim_{\substack{n\to\infty\\ n\in\DN}}^{\RealC}\seq{[\seq{\bar s_{n,m}}{m\in\DN}]_C}{n\in\DN}= [\seq{\mathbf1_m}{m\in\DN}]_C\) という別の正しい命題もある．ここで \(\bar s_{n,m}=s_n\) である．これは「有理有限近似を実数に埋め込んでから，実数列の極限を取る」主張であり，Cauchy 同値類そのものの定義とは構文的に異なる．
+\end{warning}
+
+\section{実数構成 II：Dedekind 切断と上限}
+
+\begin{definition}[Dedekind 切断]
+Dedekind 実数を，有理数集合 \(L\subseteq\Q\) で次を満たすものとして定義する．
+\begin{enumerate}
+\item \(L\ne\varnothing\) かつ \(L\ne\Q\)．
+\item \(q\in L\) かつ \(r<q\) なら \(r\in L\)．
+\item \(q\in L\) なら，ある \(r\in L\) が存在して \(q<r\)．
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[\(0.999\ldots\) が生成する切断]
+有限近似列 \(\seq{s_n}{n\in\DN}\) により
+\[
+  L_{0.999\ldots}:=
+  \set{q\in\Q:\exists n\in\Ns\ (q<s_n)}
+\]
+と定義する．また
+\[
+  L_1:=\set{q\in\Q:q<1}
+\]
+とする．
+\end{definition}
+
+\begin{theorem}[Dedekind 切断での等号]
+\[
+  L_{0.999\ldots}=L_1.
+\]
+\end{theorem}
+
+\begin{proof}
+まず \(q\in L_{0.999\ldots}\) とする．ある \(n\in\Ns\) が存在して \(q<s_n=1-10^{-n}<1\) である．よって \(q\in L_1\) である．
+
+逆に \(q\in L_1\) とする．すなわち \(q<1\) である．Archimedean 性により，ある \(n\in\Ns\) が存在して
+\[
+  10^{-n}<1-q
+\]
+となる．このとき
+\[
+  q<1-10^{-n}=s_n
+\]
+であるから \(q\in L_{0.999\ldots}\) である．従って両集合は等しい．
+\end{proof}
+
+\begin{definition}[上限解釈]
+順序集合 \(P\) において \(\seq{s_n}{n\in\DN}\) が上限を持つとき，
+\[
+  I_{\sup}(0.999\ldots):=\sup_{n\in\DN}s_n
+\]
+と定義する解釈を上限解釈という．
+\end{definition}
+
+\begin{proposition}[上限としての \(1\)]
+\(P\) が \(\R\)，\(\Q\cap[0,1]\)，または \(D_{10}\cap[0,1]\) に通常順序を入れたものなら
+\[
+  \sup_{n\in\DN}s_n=1.
+\]
+\end{proposition}
+
+\begin{proof}
+任意の \(n\in\Ns\) について \(s_n=1-10^{-n}<1\) なので \(1\) は上界である．一方，\(a<1\) とすると，\(10^{-n}<1-a\) となる \(n\in\Ns\) が存在し，\(a<1-10^{-n}=s_n\) となる．従って \(a\) は上界ではない．よって最小上界は \(1\) である．
+\end{proof}
+
+\section{一般判定定理：位相環と順序体}
+
+\begin{definition}[位相環]
+環 \(A\) と位相 \(\tau\) の組 \((A,\tau)\) が位相環であるとは，加法，乗法，加法逆元
+\[
+  +:A\times A\to A,
+  \qquad
+  \cdot:A\times A\to A,
+  \qquad
+  -:A\to A
+\]
+が連続であることをいう．
+\end{definition}
+
+\begin{theorem}[位相環判定]
+\((A,\tau)\) を単位元 \(1_A\) を持つ位相環とし，\(10\cdot1_A\) が可逆であるとする．
+\[
+  u_n=(10\cdot1_A)^{-n}\qquad(n\in\Ns)
+\]
+により \(A\)-値列 \(\seq{u_n}{n\in\DN}\) を定める．もし
+\[
+  \Lim_A^{\DN}(\seq{u_n}{n\in\DN},0_A)
+\]
+ならば
+\[
+  \Lim_A^{\DN}(\seq{1_A-u_n}{n\in\DN},1_A)
+\]
+である．特に \(A\) が Hausdorff であれば
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{A}\seq{1_A-u_n}{n\in\DN}=1_A.
+\]
+\end{theorem}
+
+\begin{proof}
+写像 \(f:A\to A\)，\(f(x)=1_A-x\) は位相環の連続写像である．従ってネット収束は連続写像で保存され，\(u_n\to0_A\) なら \(1_A-u_n=f(u_n)\to f(0_A)=1_A\) である．
+\end{proof}
+
+\begin{definition}[Archimedean 順序体]
+順序体 \(F\) が Archimedean であるとは，任意の \(x\in F\) に対し，ある \(n\in\N\) が存在して
+\[
+  x<n\cdot1_F
+\]
+となることをいう．
+\end{definition}
+
+\begin{theorem}[Archimedean 順序体での収束]
+\(F\) を Archimedean 順序体とする．\(F\) に順序位相を入れると
+\[
+  \Lim_F^{\DN}(\seq{s_n}{n\in\DN},1)
+\]
+が成り立つ．従って Hausdorff 性により
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{F}\seq{s_n}{n\in\DN}=1.
+\]
+\end{theorem}
+
+\begin{proof}
+任意の \(\eps>0\) を取る．Archimedean 性により，ある \(N\in\Ns\) が存在して \(10^{-N}<\eps\) となる．\(n\ge N\) なら
+\[
+  \abs{s_n-1}=10^{-n}\le10^{-N}<\eps.
+\]
+従って \(\Lim_F^{\DN}(\seq{s_n}{n\in\DN},1)\) である．
+\end{proof}
+
+\begin{warning}[非 Archimedean 順序体では標準列が失敗しうる]
+\(F\) が正の無限小 \(\delta>0\) を持つ順序体であるとする．すなわち任意の標準 \(m\in\Ns\) について
+\[
+  0<\delta<\frac1m.
+\]
+このとき，標準列 \(\seq{10^{-n}}{n\in\DN}\) は順序位相で \(0\) に収束しない．実際，\((-\delta,\delta)\) は \(0\) の近傍であるが，任意の標準 \(n\in\Ns\) について \(\delta<10^{-n}\) なので \(10^{-n}\notin(-\delta,
+\delta)\) である．従って \(\seq{s_n}{n\in\DN}\) は \(1\) に収束しない．
+\end{warning}
+
+\section{値空間と桁列空間の位相}
+
+\subsection{値空間 \(\R\) の位相}
+
+\begin{longtable}{L{28mm}C{22mm}C{25mm}L{65mm}}
+\caption{\(\R\) 上の位相と \(\seq{s_n}{n\in\DN}\) の振る舞い}\label{tab:Rtop}\\
+\toprule
+位相 & 分離性 & 1への収束 & コメント\\
+\midrule
+\endfirsthead
+\toprule
+位相 & 分離性 & 1への収束 & コメント\\
+\midrule
+\endhead
+通常位相 & Hausdorff & 成立 & \(\lim_{\substack{n\to\infty\\ n\in\DN}}^{\R}\seq{s_n}{n\in\DN}=1\) と書いてよい．\\
+離散位相 & Hausdorff & 不成立 & 収束列は最終的に定数でなければならない．\\
+密着位相 & 非 Hausdorff & 成立 & すべての列がすべての点へ収束する．\(\lim\) は関数ではない．\\
+余有限位相 & \(T_1\)，非 Hausdorff & 成立 & 重複が有限の列は任意の点へ収束する．\\
+下限位相 \([a,b)\) & Hausdorff & 不成立 & \(1\) の近傍 \([1,b)\) に \(s_n<1\) は入らない．\\
+上限位相 \((a,b]\) & Hausdorff & 成立 & 任意の \((a,1]\) に最終的に入る．\\
+\bottomrule
+\end{longtable}
+
+\subsection{桁列空間の位相}
+
+\begin{definition}[接頭辞位相]
+\(\{0,\ldots,9\}^{\Ns}\) に離散空間 \(\{0,\ldots,9\}\) の積位相を入れる．有限 prefix を固定する cylinder 集合を基本開集合とするこの位相を接頭辞位相という．\(\Dec\) には \(\Z\) を離散とした積位相を入れる．
+\end{definition}
+
+\begin{proposition}[有限近似桁列の収束]
+\[
+  \tau_n:=(0;\underbrace{9,\ldots,9}_{n},0,0,\ldots)\qquad(n\in\Ns)
+\]
+により \(\Dec\)-値列 \(\seq{\tau_n}{n\in\DN}\) を定める．接頭辞位相では
+\[
+  \Lim_{\Dec}^{\DN}(\seq{\tau_n}{n\in\DN},(0;9^\omega))
+\]
+が成り立つが，
+\[
+  \Lim_{\Dec}^{\DN}(\seq{\tau_n}{n\in\DN},(1;0^\omega))
+\]
+は成り立たない．
+\end{proposition}
+
+\begin{proof}
+\((0;9^\omega)\) の任意の基本近傍は，ある有限長 \(k\) までの prefix が \((0;9,\ldots,9)\) であることを要求する．\(n\ge k\) なら \(\tau_n\) はその近傍に入る．一方，\((1;0^\omega)\) の基本近傍として整数部が \(1\) であることを要求するものを取れば，すべての \(\tau_n\) は整数部 \(0\) なので入らない．
+\end{proof}
+
+\begin{longtable}{L{34mm}L{40mm}C{18mm}L{59mm}}
+\caption{桁列空間での極限と等号}\label{tab:digit}\\
+\toprule
+空間・位相 & \(\seq{\tau_n}{n\in\DN}\) の収束先 & 同一視 & コメント\\
+\midrule
+\endfirsthead
+\toprule
+空間・位相 & \(\seq{\tau_n}{n\in\DN}\) の収束先 & 同一視 & コメント\\
+\midrule
+\endhead
+生の桁列集合 & 位相なし & いいえ & 集合の元として異なる．\\
+接頭辞位相 & \((0;9^\omega)\) & いいえ & \((1;0^\omega)\) へは収束しない．\\
+評価擬距離位相 & 評価値で \(1\) & 商では はい & \(d_\nu(x,y)=|\nu(x)-\nu(y)|\) の距離 \(0\) の点を潰す．\\
+評価商位相 & 商点 \([(0;9^\omega)]\) & はい & \([(0;9^\omega)]=[(1;0^\omega)]\)．\\
+密着位相 & すべての点 & いいえ & 非 Hausdorff なので多重極限を持つが，等号は変わらない．\\
+\bottomrule
+\end{longtable}
+
+\section{基数表示と \texorpdfstring{\(\beta\)}{beta}-展開}
+
+\subsection{整数基数 \texorpdfstring{\(b\)}{b}}
+
+\begin{definition}[基数 \(b\) の桁列]
+整数 \(b\ge2\) に対し，基数 \(b\) の小数部桁列空間を
+\[
+  \Sigma_b:=\{0,1,\ldots,b-1\}^{\Ns}
+\]
+とする．評価写像
+\[
+  \nu_b:\Sigma_b\to[0,1]
+\]
+を
+\[
+  \nu_b(\seq{a_n}{n\in\DN})
+  :=\sum_{n=1}^{\infty}a_nb^{-n}
+  =\lim_{\substack{N\to\infty\\ N\in\DN}}^{\R}\seq{\sum_{n=1}^{N}a_nb^{-n}}{N\in\DN}
+\]
+で定義する．
+\end{definition}
+
+\begin{proposition}[基数 \(b\) 版]
+\[
+  \nu_b(\seq{b-1}{n\in\DN})=1.
+\]
+すなわち通常実数値として
+\[
+  0.(b-1)(b-1)(b-1)\ldots_b=1
+\]
+である．
+\end{proposition}
+
+\begin{proof}
+部分和列を
+\[
+  \seq{S_N^{(b)}}{N\in\DN},
+  \qquad
+  S_N^{(b)}=\sum_{n=1}^{N}(b-1)b^{-n}=1-b^{-N}
+\]
+とおく．通常実数では
+\[
+  \lim_{\substack{N\to\infty\\ N\in\DN}}^{\R}\seq{b^{-N}}{N\in\DN}=0
+\]
+なので
+\[
+  \lim_{\substack{N\to\infty\\ N\in\DN}}^{\R}\seq{S_N^{(b)}}{N\in\DN}=1.
+\]
+\end{proof}
+
+\begin{remark}
+十進法の \(0.999\ldots=1\) は \(b=10\) の特殊例である．二進法では \(0.111\ldots_2=1\)，三進法では \(0.222\ldots_3=1\) となる．ここでも，生の桁列 \(\seq{b-1}{n\in\DN}\) と，評価写像 \(\nu_b\) による値を区別する必要がある．
+\end{remark}
+
+\subsection{非整数基数と記号力学}
+
+\begin{definition}[\(\beta\)-展開]
+\(\beta>1\) を実数とし，桁集合 \(A\subseteq\N\) を選ぶ．列
+\[
+  \seq{a_n}{n\in\DN}\in A^{\Ns}
+\]
+に対し
+\[
+  \nu_\beta(\seq{a_n}{n\in\DN})
+  :=\sum_{n=1}^{\infty}a_n\beta^{-n}
+\]
+を考える．これを \(\beta\)-展開という．
+\end{definition}
+
+\begin{remark}[非一意性の一般化]
+整数基数での
+\[
+  0.999\ldots=1.000\ldots
+\]
+は，記号力学的表示の非一意性の最も初等的な例である．非整数基数では，許される列の集合，shift 空間，辞書式順序，Parry expansion などが絡み，\(1\) の展開は一般により複雑になる．この場合も，問いは
+\[
+  \seq{a_n}{n\in\DN}=\seq{b_n}{n\in\DN}
+\]
+か，
+\[
+  \nu_\beta(\seq{a_n}{n\in\DN})=\nu_\beta(\seq{b_n}{n\in\DN})
+\]
+か，あるいは表示同値関係で同値か，に分解される．
+\end{remark}
+
+
+\subsection{univoque 集合と Komornik--Loreti 定数：一意性の相転移}
+
+整数基数で \(1=0.(b-1)(b-1)\ldots_b\) という二重表示が現れることは，非整数基数表示で一般に起きる非一意性の最も初等的な影である．ここでは，安全のため二進的な alphabet \(\{0,1\}\) に限って述べる．十進法 \(b=10\) はこの二進的族そのものではなく，より一般の alphabet \(\{0,1,\ldots,M\}\) に対する univoque 理論の整数点に対応する．
+
+\begin{definition}[二進的 \(q\)-展開と univoque 集合]
+\(q\in(1,2]\) とする．列 \(\seq{a_n}{n\in\DN}\in\{0,1\}^{\Ns}\) に対し
+\[
+  \pi_q(\seq{a_n}{n\in\DN})
+  :=\sum_{n=1}^{\infty}a_nq^{-n}
+  \in\left[0,\frac{1}{q-1}\right]
+\]
+を定める．点 \(x\) が一意な \(q\)-展開を持つとは，\(\pi_q(\seq{a_n}{n\in\DN})=x\) なる二進列 \(\seq{a_n}{n\in\DN}\) がただ一つであることをいう．そのような点全体を \(U_q\) と書く．
+\end{definition}
+
+\begin{theorem}[Glendinning--Sidorov 型の相転移]
+黄金比を \(\varphi=(1+\sqrt5)/2\) とする．Komornik--Loreti 定数 \(\KL\approx1.787231650\ldots\) は，Thue--Morse 列 \(t_0t_1t_2\ldots=011010011001\ldots\) に対し，添字を \(\DN=\N_{>0}\) に合わせて
+\[
+  1=\sum_{n=1}^{\infty}t_n \KL^{-n}
+\]
+を満たす最小の基数として特徴づけられる．すなわち，和に現れる桁列は \(t_1t_2t_3\ldots=11010011001\ldots\) である．この \(\KL\) を境に，二進的 univoque 集合 \(U_q\) には，概略として次の相転移がある．
+\begin{enumerate}
+\item \(q\in(1,\varphi)\) では一意表示は自明な端点に限られる．
+\item \(q\in(\varphi,\KL)\) では一意表示集合は可算的に記述される領域にある．
+\item \(q=\KL\) では \(1\) が初めて一意な \(q\)-展開を持つ．
+\item \(q>\KL\) では univoque 集合は非可算になり，さらに Hausdorff 次元を用いて細かく測られる．
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}[固定値 \(1\) と集合 \(U_q\) 全体を混同しない]
+\(\KL\) の基本的特徴は「\(1\) が一意な \(q\)-展開を持つ最小の基数」である．これは「\(q>\KL\) なら固定点 \(1\) の展開が必ず非一意になる」という意味ではない．また，\(U_q\) 全体の濃度・次元の相転移と，特定の fiber
+\[
+  \pi_q^{-1}(1)
+\]
+の挙動は分けて述べる必要がある．本稿で必要な要点は，桁列表示の非一意性が整数基数に特有の偶然ではなく，非整数基数の記号力学・フラクタル幾何の中で精密化される，という点である．十進法 \(0.999\ldots=1.000\ldots\) は，この一般現象の整数基数・多桁 alphabet 版の初等的な断面である．
+\end{remark}
+
+
+\section{関数空間・Banach 代数・確率変数への持ち上げ}
+
+\begin{proposition}[単位的ノルム代数]
+\(A\) を単位元 \(1_A\) を持つノルム代数とし，標準実数 \(10^{-n}\) がスカラーとして作用するとする．このとき
+\[
+  \seq{a_n}{n\in\DN},\qquad a_n=(1-10^{-n})1_A
+\]
+は
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{A}\seq{a_n}{n\in\DN}=1_A
+\]
+を満たす．
+\end{proposition}
+
+\begin{proof}
+\[
+  \|a_n-1_A\|=\|10^{-n}1_A\|=10^{-n}\|1_A\|
+\]
+であり，
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{\R}\seq{10^{-n}\|1_A\|}{n\in\DN}=0
+\]
+だからである．
+\end{proof}
+
+\begin{example}[行列代数]
+\(A=M_k(\R)\) または \(M_k(\C)\) とし，\(1_A=I_k\) とする．このとき
+\[
+  \seq{(1-10^{-n})I_k}{n\in\DN}
+\]
+は任意の標準的な行列ノルムで \(I_k\) に収束する．従って，\(0.999\ldots\) をスカラー倍の極限として解釈すれば，値は単位行列 \(I_k\) である．
+\end{example}
+
+\begin{proposition}[関数空間]
+\(X\) を集合または位相空間とする．定数関数列
+\[
+  \seq{f_n}{n\in\DN},
+  \qquad
+  f_n(x)=1-10^{-n}
+\]
+を考える．このとき点ごと収束として
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{\R}\seq{f_n(x)}{n\in\DN}=1
+  \qquad(x\in X)
+\]
+である．さらに \(C(X,\R)\) に一様ノルムが入る文脈では
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{C(X,\R)}\seq{f_n}{n\in\DN}=\mathbf 1_X
+\]
+である．
+\end{proposition}
+
+\begin{proof}
+各点 \(x\in X\) について
+\[
+  |f_n(x)-1|=10^{-n}
+\]
+である．一様ノルムでは
+\[
+  \|f_n-\mathbf1_X\|_\infty=10^{-n},
+\]
+従って \(\lim_{\substack{n\to\infty\\ n\in\DN}}^{\R}\seq{\|f_n-\mathbf1_X\|_\infty}{n\in\DN}=0\) である．
+\end{proof}
+
+\begin{example}[確率変数]
+確率空間 \((\Omega,\mathcal F,\mu)\) 上の定数確率変数列
+\[
+  \seq{X_n}{n\in\DN},
+  \qquad
+  X_n(\omega)=1-10^{-n}
+\]
+を考える．任意の \(1\le p<\infty\) について
+\[
+  \|X_n-1\|_{L^p}=10^{-n}\mu(\Omega)^{1/p}=10^{-n}
+\]
+なので
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{L^p}\seq{X_n}{n\in\DN}=1
+\]
+である．確率収束でも同じ結論が成り立つ．
+\end{example}
+
+\section{漸近商と germ at infinity}
+
+\begin{definition}[漸近同値]
+\(\R^{\DN}\) 上に同値関係 \(\sim_0\) を
+\[
+  \seq{x_n}{n\in\DN}\sim_0\seq{y_n}{n\in\DN}
+  \quad:\Longleftrightarrow\quad
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{\R}\seq{x_n-y_n}{n\in\DN}=0
+\]
+で定義する．
+\end{definition}
+
+\begin{proposition}[漸近商での等号]
+漸近商 \(\R^{\DN}/\sim_0\) では
+\[
+  [\seq{s_n}{n\in\DN}]_{\sim_0}
+  =[\seq{\mathbf1_n}{n\in\DN}]_{\sim_0}.
+\]
+\end{proposition}
+
+\begin{proof}
+\[
+  s_n-\mathbf1_n=-10^{-n}
+\]
+であり，
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{\R}\seq{-10^{-n}}{n\in\DN}=0
+\]
+だからである．
+\end{proof}
+
+\begin{example}[\(\ell^\infty/c_0\)]
+有界実数列全体の Banach 代数を \(\ell^\infty\)，零収束列全体を
+\[
+  c_0=\set{\seq{x_n}{n\in\DN}:\lim_{\substack{n\to\infty\\ n\in\DN}}^{\R}\seq{x_n}{n\in\DN}=0}
+\]
+とする．このとき
+\[
+  \seq{s_n}{n\in\DN}-\seq{\mathbf1_n}{n\in\DN}=\seq{-10^{-n}}{n\in\DN}\in c_0
+\]
+であるから，商 \(\ell^\infty/c_0\) では両者は同じ元である．これは Cauchy 実数とは異なる商である．Cauchy 実数では対象を Cauchy 列に制限するが，\(\ell^\infty/c_0\) はすべての有界列を扱う．
+\end{example}
+
+
+
+\section{差ネットによる統一：潰し判定と解析的／論理的イデアルの二分法}
+
+ここまでに現れた商構造，すなわち Cauchy 実数，漸近商，\(\ell^\infty/c_0\) は，いずれも「列環をある同値関係で割ったとき \(0.999\ldots\) と \(1\) が同一視されるか」という単一の問いの実例である．本節ではこの問いを一つの差ネットに集約する．
+
+\begin{definition}[差ネット]
+有限近似列 \(\seq{s_n}{n\in\DN}\)，\(s_n=1-10^{-n}\)，と定数列 \(\seq{\mathbf1_n}{n\in\DN}\) の差を
+\[
+  \delta:=\seq{\delta_n}{n\in\DN},
+  \qquad
+  \delta_n:=s_n-\mathbf1_n=-10^{-n}
+\]
+とおき，これを差ネットと呼ぶ．
+\end{definition}
+
+\begin{theorem}[潰し判定]
+可換環 \(R\) 上の列環 \(R^{\DN}\)，またはその部分環 \(A\subseteq R^{\DN}\) で \(\seq{s_n}{n\in\DN}\) と \(\seq{\mathbf1_n}{n\in\DN}\) を含むものを考える．値構造がイデアル \(J\) による商
+\[
+  \pi:R^{\DN}\twoheadrightarrow R^{\DN}/J
+\]
+として得られるとする．このとき
+\[
+  \pi(\seq{s_n}{n\in\DN})=\pi(\seq{\mathbf1_n}{n\in\DN})
+  \quad\Longleftrightarrow\quad
+  \delta\in J.
+\]
+\end{theorem}
+
+\begin{proof}
+イデアル商では \(\pi(x)=\pi(y)\Longleftrightarrow x-y\in J\) である．ここで \(\seq{s_n}{n\in\DN}-\seq{\mathbf1_n}{n\in\DN}=\delta\) である．
+\end{proof}
+
+\begin{definition}[二種のイデアル]
+\begin{enumerate}
+\item 減衰イデアル，すなわち解析側のイデアル：大きさの消滅で定義されるもの．代表例は
+\[
+  c_0=\set{x\in\R^{\DN}:\lim_{\substack{n\to\infty\\ n\in\DN}}^{\R}\seq{x_n}{n\in\DN}=0}.
+\]
+\item 台イデアル，すなわち論理側のイデアル：\(\N\) 上のフィルター \(\mathcal F\) に対し，零集合
+\[
+  Z(x):=\set{n\in\Ns:x_n=0}
+\]
+を用いて
+\[
+  J_{\mathcal F}:=\set{x\in\R^{\DN}:Z(x)\in\mathcal F}
+\]
+で定まるもの．\(\mathcal F\) が超フィルターのとき，\(\R^{\DN}/J_{\mathcal F}\) は超冪である．
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[解析的イデアルと論理的イデアルの二分法]
+差ネット \(\delta\) は各 \(n\) で非零であり，\(Z(\delta)=\emptyset\) である．したがって次が成り立つ．
+\begin{enumerate}
+\item 解析側では潰れる：\(\delta\in c_0\) である．ゆえに \(c_0\subseteq J\) を満たす任意の減衰商 \(\R^{\DN}/J\) で \(0.999\ldots=1\) となる．Cauchy 実数や \(\ell^\infty/c_0\) はこの側に属する．
+\item 論理側では潰れない：任意の真フィルター \(\mathcal F\) に対して \(\delta\notin J_{\mathcal F}\) である．したがって，いかなる真フィルターによる簡約冪・超冪でも，\(\seq{s_n}{n\in\DN}\) と \(\seq{\mathbf1_n}{n\in\DN}\) は商で同一視されない．
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\(\delta_n=-10^{-n}\ne0\) より \(Z(\delta)=\emptyset\) である．一方 \(10^{-n}\to0\) なので \(\delta\in c_0\) である．また
+\[
+  \delta\in J_{\mathcal F}
+  \quad\Longleftrightarrow\quad
+  Z(\delta)=\emptyset\in\mathcal F.
+\]
+真フィルターでは \(\emptyset\notin\mathcal F\) であるから，\(\delta\notin J_{\mathcal F}\) である．
+\end{proof}
+
+\begin{corollary}[超フィルター不変な剛性]
+非主超フィルター \(\mathcal U\) による超冪 \(\ulim\R=\R^{\DN}/J_{\mathcal U}\) において，\(\seq{s_n}{n\in\DN}\) の定める元は
+\[
+  1-\eps,
+  \qquad
+  \eps:=[\seq{10^{-n}}{n\in\DN}]_{\mathcal U}>0
+\]
+であり，常に \(1\) ではない．この結論は \(\mathcal U\) の選び方に依存しない．
+\end{corollary}
+
+標語としては，解析は差の小ささを見て潰し，論理は差の台を見て潰さない．\(0.999\ldots=1\) はこの二つの視覚の境界に立っている．
+
+\subsection{形式冪級数}
+
+\begin{definition}[形式冪級数解釈]
+形式変数 \(X\) を用いて
+\[
+  I_{\mathrm{fps}}(0.999\ldots):=9X+9X^2+9X^3+\cdots\in\Q[[X]]
+\]
+と解釈する．右辺は形式冪級数であり，実数の級数ではない．
+\end{definition}
+
+\begin{proposition}
+\[
+  9X+9X^2+9X^3+\cdots\ne1
+  \qquad\text{in }\Q[[X]].
+\]
+\end{proposition}
+
+\begin{proof}
+左辺の定数項は \(0\)，右辺の定数項は \(1\) である．
+\end{proof}
+
+\begin{remark}
+形式的には
+\[
+  9X+9X^2+9X^3+\cdots=\frac{9X}{1-X}
+\]
+である．しかしこれは \(1\) ではない．評価写像 \(\ev_{1/10}\) を導入して初めて
+\[
+  \ev_{1/10}\left(\frac{9X}{1-X}\right)=1
+\]
+となる．つまり，形式冪級数環内部の等号と，評価後の実数等号は別である．
+\end{remark}
+
+\subsection{Hahn 体と無限小保持}
+
+Hahn 体 \(\R((t^\Gamma))\) や Laurent 級数体 \(\R((t))\) では，\(t\) を正の無限小として扱える．このとき
+\[
+  1-t\ne1
+\]
+である．一般に，無限小 \(\delta>0\) を保持する構造では
+\[
+  1-\delta\ne1
+\]
+であり，等号を得るには無限小イデアルによる剰余化，標準部写像，Archimedean quotient などが必要である．
+
+\subsection{\(p\)-進数}
+
+\begin{proposition}[右無限十進小数は \(p\)-進的に収束しない]
+通常の \(p\)-進体 \(\Q_p\) で，右無限小数に対応する級数
+\[
+  \sum_{n=1}^{\infty}9\cdot10^{-n}
+\]
+は収束しない．
+\end{proposition}
+
+\begin{proof}
+級数が \(\Q_p\) で収束するには，一般項 \(9\cdot10^{-n}\) が \(0\) に収束する必要がある．\(p\ne2,5\) のとき \(|10^{-n}|_p=1\) なので一般項は \(0\) に近づかない．\(p=2\) または \(p=5\) のとき \(|10^{-n}|_p\) はむしろ無限大へ発散する．従って収束しない．
+\end{proof}
+
+\subsection{Ostrowski 的統一：右無限と左無限は相補的素点での顔}
+
+右無限の \(0.999\ldots=1\) と，左無限の \(10\)-進整数等式 \(\cdots999=-1\) は，無関係な偶然ではなく，同じ等比級数を \(\Q\) の異なる完備化で読んだ二つの顔である．基数 \(b\ge2\) に対し
+\[
+  \Sigma_{\to}:=\sum_{n\ge1}(b-1)b^{-n},
+  \qquad
+  \Sigma_{\leftarrow}:=\sum_{n\ge0}(b-1)b^n
+\]
+を考える．
+
+\begin{proposition}[相補的素点での評価]
+整数 \(b\ge2\) について次が成り立つ．
+\begin{enumerate}
+\item \(\Sigma_{\to}\) は \(|b|_v>1\) なる素点 \(v\) で収束し，等比和 \(1\) を与える．整数 \(b\) ではこれは実素点 \(v=\infty\) に限る．
+\item \(\Sigma_{\leftarrow}\) は \(|b|_v<1\)，すなわち \(p\mid b\) なる \(p\)-進素点で収束し，等比和 \(-1\) を与える．
+\item \(p\nmid b\) なる \(p\)-進素点では \(|b|_p=1\) なので一般項は \(0\) に近づかず，両級数とも収束しない．
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\(\Sigma_{\to}\) の一般項の \(v\)-ノルムは定数倍を除いて \(|b|_v^{-n}\) であり，これが \(0\) に向かうのは \(|b|_v>1\) のときである．\(\Sigma_{\leftarrow}\) の一般項の \(v\)-ノルムは定数倍を除いて \(|b|_v^n\) であり，これが \(0\) に向かうのは \(|b|_v<1\) のときである．和の値は収束する完備体での等比級数公式から従う．
+\end{proof}
+
+\begin{remark}
+\(b=10\) では，\(\Sigma_{\to}\) は実素点で \(1\) を与え，\(\Sigma_{\leftarrow}\) は \(2\)-進・\(5\)-進側で \(-1\) を与える．したがって「\(0.999\ldots=1\)」か「\(\cdots999=-1\)」かは，解釈先の値体・位相・添字方向を含むパッケージの選択に依存する．
+\end{remark}
+
+
+\section{超実数と非標準解析：添字，位相，モナドを分ける}
+
+\subsection{超実数の基本語彙}
+
+\begin{definition}[超実数]
+\(\ulim\R\) を \(\R\) の非標準拡大とする．典型例は非主超フィルター \(\mathcal U\) による超冪
+\[
+  \ulim\R=\R^{\N}/\mathcal U
+\]
+である．標準実数 \(r\in\R\) は定数列の同値類により \(\ulim\R\) に埋め込む．
+\end{definition}
+
+\begin{definition}[有限・無限小・無限大]
+\[
+  \Fin(\ulim\R):=\set{x\in\ulim\R:\exists n\in\Ns\ (|x|<n)},
+\]
+\[
+  \Inf(\ulim\R):=\set{x\in\ulim\R:\forall n\in\Ns\ (|x|<1/n)}.
+\]
+\(x-y\in\Inf(\ulim\R)\) のとき \(x\approx y\) と書く．\(H\in\ulim\N\) が無限大であるとは，任意の標準 \(n\in\N\) について \(H>n\) となることである．
+\end{definition}
+
+\begin{definition}[標準部]
+有限超実数 \(x\in\Fin(\ulim\R)\) に対し，\(x\approx r\) となる唯一の \(r\in\R\) が存在するとき，それを標準部と呼び
+\[
+  \st(x)=r
+\]
+と書く．十分飽和な通常の超実数モデルでは，各有限超実数に標準部が存在する．
+\end{definition}
+
+\begin{definition}[超有限小数]
+\(H\in\ulim\N\setminus\N\) を無限大超自然数とする．\(H\) 桁の超有限小数を
+\[
+  0.\underbrace{99\cdots9}_{H\text{ 桁}}
+  :=1-10^{-H}\in\ulim\R
+\]
+で定義する．
+\end{definition}
+
+\begin{proposition}[超有限小数は \(1\) ではない]
+\(H\in\ulim\N\setminus\N\) なら
+\[
+  1-10^{-H}\ne1,
+\]
+しかし
+\[
+  1-10^{-H}\approx1,
+  \qquad
+  \st(1-10^{-H})=1.
+\]
+\end{proposition}
+
+\begin{proof}
+\(10^{-H}>0\) であるから \(1-10^{-H}<1\) であり，等しくない．また \(H\) は無限大なので，任意の標準 \(m\in\Ns\) に対し \(10^{-H}<1/m\) である．従って \(10^{-H}\) は正の無限小であり，\(1-10^{-H}\approx1\) である．標準部は \(1\) である．
+\end{proof}
+
+\subsection{標準有向集合 \(\DN\)-列と超自然数有向集合 \(\DStarN\)-ネット}
+
+\begin{definition}[二つの添字付け]
+標準有向集合 \(\DN=(\Ns,\le)\) 上の列を
+\[
+  \mathbf s^{\DN}:=\seq{s^{\DN}_n}{n\in\DN},
+  \qquad
+  s^{\DN}_n=1-10^{-n}\in\ulim\R
+\]
+とする．一方，超自然数有向集合 \(\DStarN=(\ulim\Ns,\le)\) 上のネットを
+\[
+  \mathbf s^{\DStarN}:=\seq{s^{\DStarN}_H}{H\in\DStarN},
+  \qquad
+  s^{\DStarN}_H=1-10^{-H}\in\ulim\R
+\]
+とする．
+\end{definition}
+
+\begin{warning}
+\(\mathbf s^{\DN}\) と \(\mathbf s^{\DStarN}\) は同じ対象ではない．前者は標準自然数だけで走る外部列であり，後者は超自然数全体で走る内部的なネットである．この違いにより，順序位相や Q-位相での収束挙動が変わる．
+\end{warning}
+
+\subsection{モナドと近標準点}
+
+\begin{definition}[Robinson モナド]
+\((X,\tau)\) を標準位相空間とする．標準点 \(x\in X\) の Robinson モナドを
+\[
+  \mu_\tau(x):=\bigcap\set{\ulim U:U\in\tau,\ x\in U}\subseteq\ulim X
+\]
+で定義する．\(y\in\mu_\tau(x)\) のとき，\(y\) は \(x\) に無限に近いという．
+\end{definition}
+
+\begin{definition}[近標準点と標準部]
+\[
+  \near(\ulim X):=\bigcup_{x\in X}\mu_\tau(x)
+\]
+を近標準点全体と呼ぶ．\(X\) が Hausdorff なら，\(y\in\near(\ulim X)\) に対して \(y\in\mu_\tau(x)\) となる \(x\in X\) は一意である．この \(x\) を \(\st(y)\) と書く．
+\end{definition}
+
+\begin{remark}[\(\R\) の場合]
+\(X=\R\) に通常位相を入れると
+\[
+  \mu(r)=\set{x\in\ulim\R:x\approx r}
+\]
+である．従って \(\near(\ulim\R)=\Fin(\ulim\R)\) であり，標準部写像は
+\[
+  \st:\Fin(\ulim\R)\to\R
+\]
+である．
+\end{remark}
+
+\subsection{S 型位相，Q-位相，順序位相}
+
+\begin{definition}[三つの S 型位相]
+\(\R\) に通常位相を入れる．\(\ulim\R\) または \(\Fin(\ulim\R)\) 上の S 型位相を，採用する基底によって次の三種に分ける．
+\begin{enumerate}
+\item 全標準開型：標準開集合全体の超準拡大で生成する位相
+\[
+  \taufullS:=\langle\ulim U:U\subseteq\R\text{ open}\rangle.
+\]
+これは文献で Luxemburg topology, standard topology, S-topology などと呼ばれることがある genuine な標準開型である．
+\item 区間・半直線生成型：標準端点の有界区間と半直線の超準拡大で生成する位相
+\[
+  \tauintS
+  :=\left\langle\ulim I:I\in\mathcal I_{\R}\right\rangle,
+\]
+ただし
+\[
+  \mathcal I_{\R}:=\{(a,b),(a,\infty),(-\infty,b),\R:a,b\in\R,\ a<b\}.
+\]
+半直線を含める理由は，無限大点を誤って全ネットの収束先にしないためである．有限点上の下側モナド現象は有界区間だけで既に生じるが，\(\ulim\R\) 全体の位相としては半直線を入れる方が厳密である．
+\item Robinson／標準部型：有限点上の標準部写像に関する初期位相
+\[
+  \taust:=\left\langle \st^{-1}(U):U\subseteq\R\text{ open}\right\rangle
+  \quad\text{on }\Fin(\ulim\R).
+\]
+本稿では \(\tauRobS\) をこの \(\taust\) と同一視する．曖昧な非標準点モナド \(\mu(x)\) を使わず，\(\st\) だけで定義する．
+\end{enumerate}
+\end{definition}
+
+\begin{warning}[\(\taufullS\) と \(\tauintS\) は別物]
+標準開集合は区間とは限らない．無限かつ余無限な \(B\subseteq\Ns\) を取り，\(s_n=1-10^{-n}\) のまわりに互いに素な小標準開区間 \(I_n\) を選ぶと
+\[
+  U_B:=\bigcup_{n\in B}I_n
+\]
+は標準開集合である．\(\ulim U_B\) は \(\taufullS\) の基本開集合だが，\(\tauintS\) の基本開集合ではない．この差が収束先集合を \(\{1\}\) と \(\mu^-(1)\) に分ける．
+\end{warning}
+
+\begin{definition}[Q-位相]
+標準距離空間 \((X,d)\) に対し，\(\ulim X\) 上の Q-位相を，内部開球
+\[
+  B_Q(x,r):=\set{y\in\ulim X:\ulim d(x,y)<r},
+  \qquad x\in\ulim X,\quad r\in\ulim\R_{>0},
+\]
+を基底として生成される位相とする．本稿ではこれを \(\tauQ\) と書く．
+\end{definition}
+
+\begin{definition}[順序位相]
+\(\ulim\R\) の順序 \(<\) による開区間
+\[
+  (a,b)_{\ulim\R}:=\set{x\in\ulim\R:a<x<b},
+  \qquad a<b,
+\]
+を基底として生成される位相を \(\tauord\) と書く．\(\ulim\R\) では \(\tauQ=\tauord\) である．
+\end{definition}
+
+\begin{proposition}[基本的な分離性]
+\(\ulim\R\) 上で \(\taufullS\) と \(\tauintS\) は一般に Hausdorff でない．一方，\(\tauQ=\tauord\) は Hausdorff である．
+\end{proposition}
+
+\begin{proof}
+\(\tauintS\) では，\(1\) と \(1+\eps\)（\(0\ne\eps\approx0\)）を標準端点の区間・半直線では分離できない．\(\taufullS\) でも，例えば \(1+\eps\) と \(1+2\eps\) は任意の標準開集合の超準拡大では分離できない．\(\tauQ\) では異なる \(x<y\) に対して \(r=(y-x)/3>0\) を取り，内部開球 \(B_Q(x,r)\) と \(B_Q(y,r)\) で分離できる．
+\end{proof}
+
+\subsection{S 型・Q 型位相での収束先集合}
+
+\begin{theorem}[全標準開型 \(\taufullS\) での収束先集合]
+\(\ulim\R\) に \(\taufullS\) を入れる．標準列 \(\mathbf s^{\DN}\) と \(\DStarN\)-ネット \(\mathbf s^{\DStarN}\) のいずれについても
+\[
+  \LimSet^{\DN}_{(\ulim\R,\taufullS)}(\mathbf s^{\DN})
+  =
+  \LimSet^{\DStarN}_{(\ulim\R,\taufullS)}(\mathbf s^{\DStarN})
+  =\{1\}.
+\]
+\end{theorem}
+
+\begin{proof}
+まず \(1\) は収束先である．標準開集合 \(U\ni1\) は，ある標準 \(\eps_0>0\) について \((1-\eps_0,1+\eps_0)\subseteq U\) を満たす．\(10^{-N}<\eps_0\) となる標準 \(N\) 以降で \(s_n\in U\) である．\(\DStarN\)-ネットの場合も移行により同じである．
+
+次に \(x\ne1\) を収束先から排除する．\(T=\{s_n:n\in\Ns\}\) とおく．\(x\) が \(1\) に無限に近くない有限点または無限大点なら，\(x\) を含み \(T\) を終局的に含まない標準開集合を取ればよい．\(x\approx1\) かつ \(x>1\) なら \(U=(1,2)\) が \(x\in\ulim U\) を満たすが，全ての \(s_n<1\) なので終局的に入らない．
+
+\(x\approx1\) かつ \(x<1\) の場合，もし \(x\in\ulim T\) なら \(x=s_H\) となる無限大 \(H\in\ulim\N\) が存在する．偶数全体または奇数全体のうち \(H\in\ulim B\) となる方を \(B\) とし，上の \(U_B\) を取る．すると \(x\in\ulim U_B\) だが，\(\Ns\setminus B\) は無限なので標準列は \(\ulim U_B\) に終局的に入らない．\(\DStarN\)-ネットでも，\(\ulim(\Ns\setminus B)\) が \(\ulim\N\) で共終なので終局性が壊れる．
+
+最後に \(x\approx1\), \(x<1\), \(x\notin\ulim T\) の場合，標準閉集合 \(\overline T=T\cup\{1\}\) の補集合 \(U=\R\setminus\overline T\) を取ると，\(x\in\ulim U\) だが \(U\cap T=\emptyset\) である．以上より収束先は \(1\) のみである．
+\end{proof}
+
+\begin{definition}[下側モナドと全モナド]
+標準点 \(1\in\R\subseteq\ulim\R\) に対し
+\[
+  \mu(1):=\set{x\in\Fin(\ulim\R):x\approx1},
+  \qquad
+  \mu^-(1):=\set{x\in\Fin(\ulim\R):x\approx1\ \text{and}\ x\le1}
+\]
+とおく．\(\mu(1)\) を \(1\) の全モナド，\(\mu^-(1)\) を \(1\) の下側モナドと呼ぶ．
+\end{definition}
+
+\begin{theorem}[区間・半直線生成型 \(\tauintS\) での収束先集合]
+\(\ulim\R\) に \(\tauintS\) を入れる．標準列・\(\DStarN\)-ネットのいずれについても
+\[
+  \LimSet^{\DN}_{(\ulim\R,\tauintS)}(\mathbf s^{\DN})
+  =
+  \LimSet^{\DStarN}_{(\ulim\R,\tauintS)}(\mathbf s^{\DStarN})
+  =\mu^-(1).
+\]
+\end{theorem}
+
+\begin{proof}
+\(x\in\mu^-(1)\) とする．\(x\) を含む基本近傍は，標準端点の有界区間または半直線の有限交叉として得られる標準凸近傍の超準拡大を含む．\(x\approx1\) かつ \(x\le1\) なので，その近傍は \(1\) の左からの十分近い点を含む．従って \(s_n=1-10^{-n}\) は最終的にそこに入る．\(\DStarN\)-ネットでも同様である．
+
+逆に，\(x\) が無限大なら標準半直線で排除できる．\(x\not\approx1\) なら標準端点の区間または半直線で \(1\) 近傍から分離できる．\(x\approx1\) かつ \(x>1\) なら基本近傍 \(\ulim(1,\infty)\) が \(x\) を含むが，全ての項は \(<1\) なので入らない．よって収束先集合は \(\mu^-(1)\) である．
+\end{proof}
+
+\begin{theorem}[Q-位相・順序位相での収束先集合]
+\(\ulim\R\) に \(\tauQ=\tauord\) を入れる．このとき
+\[
+  \LimSet^{\DN}_{(\ulim\R,\tauQ)}(\mathbf s^{\DN})=\emptyset,
+\]
+一方で
+\[
+  \LimSet^{\DStarN}_{(\ulim\R,\tauQ)}(\mathbf s^{\DStarN})=\{1\}.
+\]
+\end{theorem}
+
+\begin{proof}
+標準列が \(1\) に収束しないことは，正の無限小 \(\eta\) に対し，\(1\) の Q-近傍 \((1-\eta,1+\eta)\) にどの標準項 \(1-10^{-n}\) も入らないことから従う．他の点への収束は Hausdorff 性で排除される．一方，\(\DStarN\)-ネットについては，実数で真な文
+\[
+  \forall\eps>0\ \exists N\in\Ns\ \forall n\in\Ns\ [n\ge N\Rightarrow10^{-n}<\eps]
+\]
+を移行すれば，任意の \(\eps\in\ulim\R_{>0}\) に対して十分大きい \(H\) 以降 \(10^{-H}<\eps\) となる．従って \(1\) に Q-収束する．
+\end{proof}
+
+\subsection{標準部位相と標準部商}
+
+\begin{definition}[標準部位相]
+\(\Fin(\ulim\R)\) 上の標準部位相 \(\taust\) を，標準部写像
+\[
+  \st:\Fin(\ulim\R)\to\R
+\]
+に関する初期位相，すなわち \(\st^{-1}(U)\), \(U\subseteq\R\) open を基底として生成される位相として定義する．
+\end{definition}
+
+\begin{definition}[標準部商]
+\(\Fin(\ulim\R)\) 上に同値関係
+\[
+  x\equiv_{\inf}y\quad:\Longleftrightarrow\quad x-y\in\Inf(\ulim\R)
+\]
+を入れる．商 \(\Fin(\ulim\R)/\equiv_{\inf}\) を標準部商と呼ぶ．これは \(\st\) により \(\R\) と同型である．
+\end{definition}
+
+\begin{proposition}[標準部位相での収束先]
+\[
+  \LimSet^{\DN}_{(\Fin(\ulim\R),\taust)}(\mathbf s^{\DN})
+  =\set{x\in\Fin(\ulim\R):\st(x)=1},
+\]
+\[
+  \LimSet^{\DStarN}_{(\Fin(\ulim\R),\taust)}(\mathbf s^{\DStarN})
+  =\set{x\in\Fin(\ulim\R):\st(x)=1}.
+\]
+標準部商では，両者の収束先は一意に \([1]\) である．
+\end{proposition}
+
+\begin{proof}
+\(x\) の \(\taust\)-近傍は \(\st(x)\) の通常開近傍 \(U\) に対する \(\st^{-1}(U)\) を含む．\(\st(x)=1\) のとき \(\st(s_n)=1-10^{-n}\) は通常実数として \(1\) に収束する．\(\st(x)\ne1\) の場合は通常開集合で \(\st(x)\) と \(1\) を分離する．
+\end{proof}
+
+\subsection{QS-位相}
+
+\begin{definition}[凸部分環と無限小イデアル]
+\(F\subseteq\ulim\R\) を凸部分環とする．すなわち \(x,z\in F\) かつ \(x\le y\le z\) なら \(y\in F\) である．\(F\) の無限小イデアルを
+\[
+  i_F:=\set{x\in\ulim\R:\forall r\in F_{>0}\ (|x|<r)}
+\]
+で定義する．
+\end{definition}
+
+\begin{definition}[QS-モナドと QS-位相]
+標準距離空間 \((X,d)\) と \(p\in\ulim X\) に対し，\(F\)-モナドを
+\[
+  \mu_F(p):=\set{q\in\ulim X:\ulim d(p,q)\in i_F}
+\]
+で定義する．QS-位相 \(\tau^F_{QS}\) は，半径を \(F\) によって制限した開球または同値なモナド条件によって生成される非標準位相である．\(F=\Fin(\ulim\R)\) では Robinson／標準部型に対応し，\(F=\ulim\R\) では Q-位相に一致する．ただし，本稿の \(\taufullS\) と \(\tauintS\) は標準開集合・標準凸集合の超準拡大から作る別系統の位相であり，計量的 QS 階層と混同しない．
+\end{definition}
+
+\begin{longtable}{L{34mm}C{18mm}C{40mm}C{40mm}}
+\caption{\(\ulim\R\) 上の主要位相と有向点族 \(\seq{1-10^{-\lambda}}{\lambda\in D}\)}\label{tab:star-topologies}\\
+\toprule
+位相・構造 & Hausdorff & \(\mathbf s^{\DN}\) の収束先集合 & \(\mathbf s^{\DStarN}\) の収束先集合\\
+\midrule
+\endfirsthead
+\toprule
+位相・構造 & Hausdorff & \(\mathbf s^{\DN}\) の収束先集合 & \(\mathbf s^{\DStarN}\) の収束先集合\\
+\midrule
+\endhead
+\(\tauord=\tauQ\) & はい & \(\emptyset\) & \(\{1\}\)\\
+\(\taufullS\) & いいえ & \(\{1\}\) & \(\{1\}\)\\
+\(\tauintS\) & いいえ & \(\mu^-(1)\) & \(\mu^-(1)\)\\
+\(\tauRobS=\taust\) on \(\Fin(\ulim\R)\) & いいえ & \(\mu(1)\) & \(\mu(1)\)\\
+標準部商 \(\Fin(\ulim\R)/\approx\) & はい & \(\{[1]\}\) & \(\{[1]\}\)\\
+\(\tau^F_{QS}\) & \(F\) に依存 & \(F\) に依存 & \(F\) に依存\\
+\bottomrule
+\end{longtable}
+
+\subsection{添付図式との整合性：三つの S 型位相の分離}
+
+添付図式の Luxemburg 型 S-topology の欄に \(1\) と書かれていた主張は，\(\taufullS\) と読む限り正しい．一方，Robinson 型 S-topology の欄に「標準部 \(1\) の超実数全て」と書かれていた主張は，\(\tauRobS=\taust\) と読む限り正しい．前版 v8 が出した \(\mu^-(1)\) は，図式のどちらでもなく，中間に挟まる \(\tauintS\) の収束先である．
+
+細かさの関係は，有限点上で概念的に
+\[
+  \taust\subseteq\tauintS\subseteq\taufullS\subseteq\tauQ
+\]
+と整理できる．位相が細かくなるほど収束先集合は痩せる．実際，今回の点族では
+\[
+  \mu(1)\supseteq\mu^-(1)\supseteq\{1\}
+\]
+という形で現れる．ただし \(\taust\) は \(\Fin(\ulim\R)\) 上の位相として定義されるため，\(\ulim\R\) 全体の位相と無造作に同一視してはならない．
+\section{Type-2 表現と計算可能解析}
+
+この節では，\(0.999\ldots=1\) を Type-2 計算論の語彙で定式化する．ここで重要なのは，実数そのものを直接入力・出力するのではなく，Baire 空間上の名前を通して扱う点である．したがって，ここでも
+\[
+  \text{名前の等号} \quad\ne\quad \text{名前が表す値の等号}
+\]
+が基本原則になる．
+
+\begin{definition}[Baire 空間と表現]
+本稿では Baire 空間を
+\[
+  \Baire := \N^{\DN}
+  \defeq \{\seq{p_n}{n\in\DN}:p_n\in\N\}
+\]
+と書く．ここで添字有向集合は \(\DN=(\N_{>0},\le)\) である．位相は離散空間 \(\N\) の積位相である．集合または位相空間 \(X\) の Type-2 表現とは，部分写像
+\[
+  \delta:\subseteq \Baire\to X
+\]
+である．\(p\in\dom(\delta)\) を \(\delta(p)\) の名前という．
+\end{definition}
+
+\begin{definition}[計算可能写像と実現子]
+\((X,\delta_X)\)，\((Y,\delta_Y)\) を表現空間とする．写像 \(f:X\to Y\) が \((\delta_X,\delta_Y)\)-計算可能であるとは，ある Type-2 計算可能作用素
+\[
+  F:\subseteq\Baire\to\Baire
+\]
+が存在し，任意の \(p\in\dom(\delta_X)\) について
+\[
+  p\in\dom(F),\qquad \delta_Y(F(p))=f(\delta_X(p))
+\]
+が成り立つことをいう．この \(F\) を \(f\) の実現子という．連続性だけを要求する場合は，\(F\) を Baire 空間の部分連続写像とする．
+\end{definition}
+
+\begin{definition}[高速 Cauchy 表現]
+有理数の標準的な符号化 \(\nu_{\Q}:\subseteq\N\to\Q\) を一つ固定する．高速 Cauchy 表現
+\[
+  \rho_C:\subseteq\Baire\to\R
+\]
+を次で定義する．\(p=\seq{p_k}{k\in\DN}\in\dom(\rho_C)\) であるとは，\(q_k:=\nu_{\Q}(p_k)\) が定義され，ある \(x\in\R\) について
+\[
+  \forall k\in\N_{>0}\quad |q_k-x|\le 2^{-k}
+\]
+を満たすことである．このとき \(\rho_C(p)=x\) と定める．同値に，\(p\) は精度 \(2^{-k}\) で \(x\) を近似する有理数列
+\[
+  \seq{q_k}{k\in\DN}
+\]
+を符号化している．
+\end{definition}
+
+\begin{proposition}[高速 Cauchy 名としての \(0.999\ldots\)]
+\[
+  q_k:=1-10^{-k}\qquad(k\in\N_{>0})
+\]
+とし，\(p^{(9)}=\seq{p^{(9)}_k}{k\in\DN}\) を \(\nu_{\Q}(p^{(9)}_k)=q_k\) となる Baire 名とする．また，\(p^{(1)}=\seq{p^{(1)}_k}{k\in\DN}\) を \(\nu_{\Q}(p^{(1)}_k)=1\) となる定数名とする．このとき
+\[
+  \rho_C(p^{(9)})=\rho_C(p^{(1)})=1.
+\]
+より具体的には，\(\seq{q_k}{k\in\DN}\) と定数列 \(\seq{\mathbf1_k}{k\in\DN}\) は同じ Cauchy 実数を表す．
+\end{proposition}
+
+\begin{proof}
+任意の \(k\in\N_{>0}\) について
+\[
+  |q_k-1|=10^{-k}<2^{-k}
+\]
+である．従って \(p^{(9)}\) は高速 Cauchy 名として実数 \(1\) を表す．定数名 \(p^{(1)}\) も明らかに \(1\) を表す．
+\end{proof}
+
+\begin{definition}[十進表現]
+\([0,1]\) 上の十進名前空間を
+\[
+  \mathsf{Dec}_{[0,1]}
+  :=\bigl(\{0\}\times\{0,\ldots,9\}^{\DN}\bigr)\cup\{(1;0^\omega)\}
+\]
+とする．十進表現
+\[
+  \rho_{10}:\mathsf{Dec}_{[0,1]}\to[0,1]
+\]
+を
+\[
+  \rho_{10}(k;\seq{a_n}{n\in\DN})
+  := k+\sum_{n=1}^{\infty}a_n10^{-n}
+  =k+\lim_{\substack{N\to\infty\\N\in\DN}}^{\R}
+      \seq{\sum_{n=1}^{N}a_n10^{-n}}{N\in\DN}
+\]
+で定義する．
+\end{definition}
+
+この定義では
+\[
+  \rho_{10}(0;9^\omega)=\rho_{10}(1;0^\omega)=1
+\]
+である．したがって \((0;9^\omega)\) と \((1;0^\omega)\) は名前としては異なるが，\(\rho_{10}\) の核同値関係では同値である．
+
+\begin{warning}[正規十進名は一様計算と相性が悪い]
+十進展開から重複を消すために，例えば「末尾が全て \(9\) になる展開を禁止する」という正規化を行い，各実数に唯一の十進名を割り当てるとする．この正規十進表現では，Cauchy 名から十進名への一様変換は一般に計算可能でない．理由は，ある桁が繰り上がるかどうかを有限精度近似から決定できない場合があるからである．
+
+典型的には \(x\mapsto 3x\) を考える．入力 \(1/3\) の正規十進名は \(0.333\ldots\) であり，出力 \(1\) の正規十進名は \(1.000\ldots\) である．しかし \(1/3\) より僅かに小さい実数は，入力名の任意に長い初期部分を \(0.333\ldots\) と共有しうる一方，出力は \(<1\) であり整数部は \(0\) でなければならない．従って，出力の最初の桁を有限時間で安定に決定する連続実現子は存在しない．これは「値として \(0.999\ldots=1\)」であることと，「十進名前を使った演算が計算可能である」ことが別問題であることを示す．
+\end{warning}
+
+\begin{remark}[冗長表現の役割]
+計算可能解析では，通常の十進展開よりも，高速 Cauchy 表現，区間表現，符号付き桁表現などの冗長性を持つ表現が好まれる．冗長性により，境界上の桁上がりをただちに決定しなくてもよくなるため，加法，乗法，合成などの演算を連続または計算可能な実現子で扱いやすくなる．この観点から見ると，\(0.999\ldots=1\) は「二つの名前が同じ値を持つ」という representation-theoretic な核同値関係の基本例である．
+\end{remark}
+
+\begin{proposition}[名前等号，値等号，計算可能等号]
+Type-2 表現の文脈では，次の三つは異なる概念である．
+\begin{enumerate}
+\item 名前の等号：\(p=q\) in \(\Baire\) または \(\mathsf{Dec}_{[0,1]}\)．
+\item 値の等号：\(\delta(p)=\delta(q)\) in \(X\)．
+\item 等号判定可能性：入力名 \((p,q)\) から \(\delta(p)=\delta(q)\) かどうかを計算で判定できること．
+\end{enumerate}
+一般に実数の等号判定は計算可能でないが，特定の二つの名前
+\[
+  p^{(9)},\qquad p^{(1)}
+\]
+については，上の明示的評価
+\[
+  |(1-10^{-k})-1|=10^{-k}<2^{-k}
+\]
+により，同じ実数を表すことが証明される．
+\end{proposition}
+
+
+
+\begin{remark}[終余代数と双模倣：振る舞い同値は値同値より細かい]
+整数部つき十進表示空間
+\[
+  \Dec=\Z\times\{0,1,\ldots,9\}^{\Ns}
+\]
+を考える．小数部ストリーム \(\{0,\ldots,9\}^{\Ns}\) は関手 \(FX=\{0,
+\ldots,9\}\times X\) の終余代数であり，余代数構造は「先頭桁と残り」への分解で与えられる．整数部を含む \(\Dec\) では，整数部を別成分として保持したうえで小数部にこの終余代数構造を入れる．
+
+評価写像
+\[
+  \nu:\Dec\to\R
+\]
+の核 \(\ker\nu\) は値同値を与えるが，これはストリームの双模倣同値より粗い．実際，\((0;9^\omega)\) と \((1;0^\omega)\) は整数部が異なるので表示としても，終余代数的振る舞いとしても同一ではない．しかし
+\[
+  \nu(0;9^\omega)=\nu(1;0^\omega)=1
+\]
+である．したがって
+\[
+  \text{表示・双模倣的同値}\ \subsetneq\ \ker\nu
+\]
+が成り立つ．これは「名前の等号 \(\ne\) 値の等号」を，余帰納・双模倣の語彙で言い直したものである．
+\end{remark}
+
+\section{topos 内部実数：具体例}
+
+\subsection{内部言語と実数対象の分岐}
+
+topos \(\mathcal E\) の内部論理では，古典集合論の外部メタ言語で当然同一視される構成が分離することがある．特に，Cauchy 実数，Dedekind 実数，lower real，upper real は一般には同じ対象ではない．したがって，内部で
+\[
+  0.999\ldots=1
+\]
+と書く場合，少なくとも次を指定しなければならない．
+\[
+  \mathcal E,
+  \qquad \mathbb N_{\mathcal E},
+  \qquad \mathbb Q_{\mathcal E},
+  \qquad \mathbb R_{\mathcal E}^{?},
+  \qquad \text{内部等号または商同値関係}.
+\]
+
+\begin{definition}[内部 Cauchy 実数]
+自然数対象 \(\mathbb N\) と有理数対象 \(\mathbb Q\) を持つ topos \(\mathcal E\) を考える．内部 Cauchy 実数は，内部有理数列
+\[
+  x: \mathbb N_{>0}\to\mathbb Q,
+  \qquad x=\seq{x_n}{n\in\DN}
+\]
+で，内部 Cauchy 条件
+\[
+  \forall k\in\mathbb N_{>0}\ \exists N\in\mathbb N_{>0}\
+  \forall m,n\in\mathbb N_{>0}\,[m,n\ge N\Rightarrow |x_m-x_n|<2^{-k}]
+\]
+を満たすものを，内部同値関係
+\[
+  x\sim_C y
+  :\Longleftrightarrow
+  \forall k\in\mathbb N_{>0}\ \exists N\in\mathbb N_{>0}\
+  \forall n\in\mathbb N_{>0}\,[n\ge N\Rightarrow |x_n-y_n|<2^{-k}]
+\]
+で割った対象として定義する．この商を \((\RealCau)_{\mathcal E}\) と書く．構成的文脈では，明示的 modulus を持つ regular Cauchy 列で定義する変種もよく用いられる．
+\end{definition}
+
+\begin{definition}[内部 Dedekind 実数]
+内部 Dedekind 実数は，内部述語
+\[
+  L,U\subseteq\mathbb Q
+\]
+の組 \((L,U)\) であり，内部論理で次を満たすものとして定義する．
+\begin{enumerate}
+\item inhabitedness：\(\exists q\in\mathbb Q\, L(q)\) かつ \(\exists r\in\mathbb Q\, U(r)\)．
+\item lower/upper：\(q<r\land L(r)\Rightarrow L(q)\)，および \(q<r\land U(q)\Rightarrow U(r)\)．
+\item roundedness：\(L(q)\Leftrightarrow \exists r\in\mathbb Q\,(q<r\land L(r))\)，および \(U(r)\Leftrightarrow \exists q\in\mathbb Q\,(U(q)\land q<r)\)．
+\item disjointness：\(L(q)\land U(r)\Rightarrow q<r\)．
+\item locatedness：\(q<r\Rightarrow L(q)\lor U(r)\)．
+\end{enumerate}
+この対象を \((\RealDed)_{\mathcal E}\) と書く．locatedness は直観主義的文脈で本質的であり，単なる下切断だけでは Dedekind 実数ではなく lower real になる．
+\end{definition}
+
+\begin{definition}[lower real と upper real]
+lower real は，内部有理数上の inhabited，lower，rounded な下集合 \(L\subseteq\mathbb Q\) として定義される．upper real は双対的に upper，rounded な上集合として定義される．lower real では上からの情報を要求しないため，上限
+\[
+  \sup_{n\in\DN}s_n
+\]
+のような片側近似と相性がよい．一方，Dedekind 実数では locatedness により，左右両側からの近似情報が要求される．
+\end{definition}
+
+\begin{theorem}[内部 Cauchy 実数での \(0.999\ldots=1\)]
+任意の elementary topos \(\mathcal E\) の内部有理数において，通常の自然数算術と有理数算術が解釈されているとする．内部列
+\[
+  s:=\seq{s_n}{n\in\DN},\qquad s_n=1-10^{-n},
+\]
+および内部定数列
+\[
+  \mathbf1:=\seq{\mathbf1_n}{n\in\DN},\qquad \mathbf1_n=1
+\]
+を考える．このとき内部 Cauchy 実数で
+\[
+  [\seq{s_n}{n\in\DN}]_C=[\seq{\mathbf1_n}{n\in\DN}]_C
+\]
+が成り立つ．さらに，この等号は明示的 modulus
+\[
+  M(k)=k
+\]
+により証明される．
+\end{theorem}
+
+\begin{proof}
+内部論理で任意の \(k\in\mathbb N_{>0}\) を取る．\(N=k\) とおく．\(n\ge N\) なら
+\[
+  |s_n-\mathbf1_n|=10^{-n}\le 10^{-k}<2^{-k}.
+\]
+したがって
+\[
+  \forall k\in\mathbb N_{>0}\ \exists N\in\mathbb N_{>0}\
+  \forall n\in\mathbb N_{>0}\,[n\ge N\Rightarrow |s_n-\mathbf1_n|<2^{-k}]
+\]
+であり，定義により \(s\sim_C\mathbf1\) である．
+\end{proof}
+
+\begin{theorem}[内部 Dedekind 実数での \(L_{0.999\ldots}=L_1\)]
+内部有理数 \(\mathbb Q\) が Archimedean 性
+\[
+  \forall r\in\mathbb Q_{>0}\ \exists n\in\mathbb N_{>0}\,(10^{-n}<r)
+\]
+を満たすとする．内部下切断
+\[
+  L_{0.999\ldots}(q)
+  :\Longleftrightarrow
+  \exists n\in\mathbb N_{>0}\,(q<1-10^{-n})
+\]
+と
+\[
+  L_1(q):\Longleftrightarrow q<1
+\]
+は等しい．すなわち内部論理で
+\[
+  L_{0.999\ldots}=L_1
+\]
+が成り立つ．上切断を \(U_1(q):\Longleftrightarrow 1<q\) と取れば，Dedekind 実数としても \(0.999\ldots\) は \(1\) と同じ切断を定める．
+\end{theorem}
+
+\begin{proof}
+内部論理で任意の \(q\in\mathbb Q\) を取る．まず \(q\in L_{0.999\ldots}\) とする．このときある \(n\in\mathbb N_{>0}\) が存在して
+\[
+  q<1-10^{-n}<1
+\]
+であるから \(q\in L_1\) である．
+
+逆に \(q\in L_1\)，すなわち \(q<1\) とする．\(r=1-q\in\mathbb Q_{>0}\) とおく．内部 Archimedean 性により，ある \(n\in\mathbb N_{>0}\) が存在して \(10^{-n}<r\) である．したがって
+\[
+  q<1-10^{-n}
+\]
+であり，\(q\in L_{0.999\ldots}\) である．よって二つの下切断は等しい．
+\end{proof}
+
+\begin{remark}[lower real としての読み]
+lower real では，\(0.999\ldots\) は増加有向族 \(\seq{s_n}{n\in\DN}\) の下側情報として
+\[
+  \{q\in\mathbb Q:\exists n\in\mathbb N_{>0}\ (q<s_n)\}
+\]
+を定める．上の定理は，この lower real が lower real としての \(1\) と一致することを示している．Dedekind 実数の場合は，さらに上切断と locatedness を確認することで，両側実数として \(1\) を得る．
+\end{remark}
+
+\subsection{具体的モデル}
+
+\begin{example}[集合の topos \(\mathbf{Set}\)]
+\(\mathbf{Set}\) では内部論理は通常の古典集合論の論理と一致する．Cauchy 実数と Dedekind 実数は標準的な仮定の下で同型な完備 Archimedean 順序体を与える．この場合，
+\[
+  [\seq{s_n}{n\in\DN}]_C=[\seq{\mathbf1_n}{n\in\DN}]_C,
+  \qquad L_{0.999\ldots}=L_1
+\]
+は本稿前半の通常の実数論そのものである．
+\end{example}
+
+\begin{example}[sheaf topos \(\Sh(X)\)]
+位相空間 \(X\) 上の sheaf topos \(\Sh(X)\) では，Dedekind real object は外部的には
+\[
+  U\longmapsto C(U,\R)
+\]
+すなわち開集合 \(U\subseteq X\) 上の連続実数値関数の sheaf として記述される．有理数対象は局所定数有理値関数の sheaf であり，内部 Cauchy 名は局所的な有理近似データとして現れる．Cauchy real object から Dedekind real object への自然な写像があり，空間 \(X\) や採用する Cauchy 完備化の形式によって，両者を同一視できる範囲が変わる．
+
+本稿の列 \(\seq{s_n}{n\in\DN}\) は全て定数有理関数
+\[
+  U\to\Q,\qquad u\mapsto 1-10^{-n}
+\]
+として与えられるため，任意の \(U\) 上で同じ明示的 modulus \(M(k)=k\) を持つ．従って，\(\Sh(X)\) 内部でも Cauchy 実数として \(1\) と等しく，Dedekind 実数としても定数連続関数 \(1_U\) と同じ切断を定める．
+\end{example}
+
+\begin{example}[presheaf topos \(\mathbf{Set}^{\mathcal C^{op}}\)]
+presheaf topos では，内部命題は Kripke-Joyal 意味論により，各ステージ \(C\in\mathcal C\) と制限写像に沿って評価される．内部自然数・有理数・Cauchy 名もステージごとのデータとして解釈される．しかし \(s_n=1-10^{-n}\) と \(\mathbf1_n=1\) は全ステージで定数的に定まるため，任意のステージで同じ modulus \(M(k)=k\) が働く．従って，Cauchy 実数での等号はステージごとに安定であり，制限写像とも可換である．
+\end{example}
+
+\begin{example}[effective topos \(\Eff\)]
+Hyland の effective topos では，内部存在証明には計算的内容が要求される．Cauchy 実数としての等号
+\[
+  [\seq{s_n}{n\in\DN}]_C=[\seq{\mathbf1_n}{n\in\DN}]_C
+\]
+は，関数
+\[
+  k\longmapsto k
+\]
+を modulus とする実現子により与えられる．従って effective topos 内部でも安定に成立する．ただし，実数全体についての排中律，任意の実数の十進展開の一様選択，Cauchy 実数と Dedekind 実数の無条件な同一視などは，一般には古典集合論と同じ形では成立しない．
+\end{example}
+
+\begin{example}[realizability topos]
+Kleene realizability や modified realizability に由来する topos でも同様である．命題
+\[
+  \forall k\ \exists N\ \forall n\ge N\ |(1-10^{-n})-1|<2^{-k}
+\]
+は，\(N=k\) を返す実現子によって実現される．したがって，\(0.999\ldots=1\) の Cauchy 証明は非常に強い構成的内容を持つ．一方，任意の Dedekind 実数から Cauchy 名を選ぶような原理は，選択原理や可算選択に依存しうる．
+\end{example}
+
+\begin{example}[parameterized realizability topos]
+parameterized realizability topos では，Dedekind 実数対象の外部的な濃度や被覆性が通常の \(\mathbf{Set}\) と大きく異なるモデルが構成されることがある．たとえば Dedekind reals が外部的に可算に見えるモデルが知られている．しかし，ここでの等号は実数全体の濃度ではなく，特定の明示的 Cauchy 名
+\[
+  \seq{1-10^{-n}}{n\in\DN}
+\]
+と定数名
+\[
+  \seq{1}{n\in\DN}
+\]
+の同値性である．この局所的主張は，modulus \(M(k)=k\) により実現されるため，そのようなモデルでも壊れにくい．
+\end{example}
+
+\begin{example}[smooth topos と合成微分幾何]
+smooth topos では，Kock-Lawvere 公理に現れる冪零無限小対象
+\[
+  D=\{d\in\mathbb R:d^2=0\}
+\]
+を持つことがある．これは Robinson 型の順序体的な正無限小とは異なる．加法群としての実数対象で考える限り，\(1-d=1\) なら \(d=0\) である．したがって，非零の一般化元 \(d\) に対しては \(1-d\) は \(1\) と同じ一般化元ではない．一方，標準自然数添字の列 \(\seq{1-10^{-n}}{n\in\DN}\) は依然として明示的 Cauchy modulus を持つため，Cauchy 実数としての \(0.999\ldots=1\) は成立する．
+
+従って，「無限小が存在する」ことだけから \(0.999\ldots=1\) の成否は決まらない．問題は，\(0.999\ldots\) を標準自然数添字の極限・Cauchy 名として読むのか，ある無限小 \(d\) を保持する元 \(1-d\) として読むのか，あるいは商・標準部で無限小を潰すのかである．
+\end{example}
+
+
+\section{総合判定表}
+
+\begin{longtable}{L{30mm}L{48mm}C{25mm}L{50mm}}
+\caption{構造ごとの判定}\label{tab:summary}\\
+\toprule
+構造 & \(0.999\ldots\) の解釈 & \(=1\) & 補足\\
+\midrule
+\endfirsthead
+\toprule
+構造 & \(0.999\ldots\) の解釈 & \(=1\) & 補足\\
+\midrule
+\endhead
+有限文字列 & \(\ulcorner0.999\ldots\urcorner\) & いいえ & \(\ulcorner1.000\ldots\urcorner\) と構文的に異なる．\\
+\(\omega\)-語 & \(9^\omega=\seq{9_n}{n\in\DN}\) & 該当なし & まだ整数部・小数点・評価がない．\\
+生の桁列空間 & \((0;9^\omega)\in\Dec\) & いいえ & \((1;0^\omega)\) とは異なる元．\\
+評価写像 & \(\nu(0;9^\omega)\) & はい & 実数値評価後に等しい．\\
+評価商 & \((0;9^\omega)/\sim_\nu\) & はい & 核同値関係で割る．\\
+Cauchy 実数 & \([\seq{s_n}{n\in\DN}]_C\) & はい & \([\seq{s_n}{n\in\DN}]_C=[\seq{\mathbf1_n}{n\in\DN}]_C\)．\\
+Dedekind 実数 & \(L_{0.999\ldots}\) & はい & \(L_{0.999\ldots}=L_1\)．\\
+上限解釈 & \(\sup_{n\in\DN}s_n\) & はい & 完備順序または該当する順序構造で成立．\\
+形式冪級数 & \(9X+9X^2+\cdots\) & いいえ & 定数項が異なる．\\
+\(p\)-進体 & 右無限級数 & いいえ & 一般項が \(0\) に近づかない．\\
+Hahn/Levi-Civita & \(1-\delta\) 型 & いいえ & 無限小 \(\delta\) を保持するなら等しくない．\\
+超実数標準値 & 実数で等号を作ってから埋め込む & はい & 移入された標準実数の等号．\\
+超実数超有限小数 & \(1-10^{-H}\), \(H\in\ulim\N\setminus\N\) & いいえ & 正の無限小差が残る．\\
+\(\taufullS\) & \(\mathbf s^{\DN}\) または \(\mathbf s^{\DStarN}\) の極限 & 収束先 \(\{1\}\) & genuine Luxemburg 型として読む場合．\\
+\(\tauintS\) & 区間・半直線生成型での極限 & 収束先 \(\mu^-(1)\) & 下側モナドが現れる第三の位相．\\
+\(\taust\) & 標準部だけを見る位相 & 収束先 \(\mu(1)\) & 有限点上の Robinson／標準部型．\\
+標準部商 & \(\st(1-10^{-H})\) & はい & 無限小差を潰す．\\
+差ネット商（解析側） & \(\delta\in c_0\) & はい & 差の大きさを見て潰す．\\
+差ネット商（論理側） & \(\delta\notin J_{\mathcal F}\) & いいえ & 任意の真フィルターで非等号．\\
+左無限 \(10\)-進 & \(\sum_{n\ge0}9\cdot10^n\) & 該当別問 & \(\cdots999=-1\)．右無限とは素点と添字方向が違う．\\
+\(\beta\)-展開 & 非整数基数表示 & 場合による & univoque 理論で非一意性が精密化される．\\
+Type-2 表現 & 名前と値を分ける & \begin{tabular}{@{}c@{}}値：はい\\名前：いいえ\end{tabular} & 名前としては異なり，値としては同じ．\\
+桁ストリーム終余代数 & \((0;9^\omega)\) vs \((1;0^\omega)\) & \begin{tabular}{@{}c@{}}表示：いいえ\\値：はい\end{tabular} & 双模倣的同値より値同値が粗い．\\
+topos 内部実数 & 内部 Cauchy/Dedekind/lower 名 & はい & modulus 付き Cauchy 証明と切断等号で成立．\\
+\bottomrule
+\end{longtable}
+
+\section{病的な周縁：同値関係の細かさ・構成的鋭化・最も単純な上界}
+
+本節は，潰し判定の境界を病的例で照らす．いずれも「無限小の差をどう扱うか」という主旋律の変奏である．
+
+\subsection{構成的鋭化：\(0.999\ldots=1\) は二重否定ではなく正の等号}
+
+直観主義・構成主義では，\(\neg(x\ne y)\) と \(x=y\) は一般に同じ強さではない．しかし，有限近似列で定義される \(0.999\ldots\) は明示的 modulus を持つため，Cauchy 実数としての等号は二重否定的な影ではなく正の構成的等号である．
+
+\begin{proposition}[明示 modulus による等号]
+\(s=\seq{1-10^{-n}}{n\in\DN}\) と \(\mathbf1=\seq{1}{n\in\DN}\) に対し，Cauchy 実数の同値関係で
+\[
+  s\sim_C \mathbf1
+\]
+が成り立つ．証拠は \(M(k)=k\) で与えられる．
+\end{proposition}
+
+\begin{proof}
+任意の \(k\in\Ns\) に対し，\(n\ge k\) なら
+\[
+  |(1-10^{-n})-1|=10^{-n}\le10^{-k}<2^{-k}.
+\]
+従って Cauchy 同値の定義を満たす．排中律や二重否定除去は不要である．
+\end{proof}
+
+\subsection{イデアル由来でない同値関係という病的下限}
+
+潰し判定はイデアル \(J\) による線型核を前提にしている．しかし，\(0.999\ldots\) と \(1\) を同一視する関係が常にイデアル由来であるとは限らない．ここでは「合同」という語を避け，単なる同値関係として例を挙げる．
+
+\begin{example}[漸近比による同値関係]
+零でない列に対し，最終的に同符号で
+\[
+  \frac{x_n}{y_n}\longrightarrow1
+\]
+となるとき \(x\approx_* y\) と書く．この関係では
+\[
+  \seq{s_n}{n\in\DN}\approx_*\seq{1}{n\in\DN}
+\]
+である．しかし加法とは両立しない．実際，\(s\approx_*1\) かつ \((-1)\approx_*(-1)\) であっても，\(s-1=\delta\) は \(0\) と \(\approx_*\) で同値ではない．したがって \(\approx_*\) は環合同ではなく，イデアル商としては表せない．
+\end{example}
+
+\begin{remark}
+減衰イデアル \(c_0\) は差の大きさを見ていた．台イデアル \(J_{\mathcal F}\) は差の台を見ていた．これに対し \(\approx_*\) は差ではなく比を見る第三の視覚であり，イデアルによる潰し判定の外側にある．
+\end{remark}
+
+\subsection{超現実数と Hackenbush：最も単純な上界としての \(1\)}
+
+Conway の超現実数では，\(\{1-2^{-n}:n\in\N\}\) の「最も単純な」上界が問題になる．
+
+\begin{remark}[誕生日と単純性による \(1\)]
+超現実数の切断 \(\{L\mid R\}\) の構成で
+\[
+  L=\set{0,\frac12,\frac34,\frac78,\ldots}=\set{1-2^{-n}:n\in\N},
+  \qquad
+  R=\emptyset
+\]
+を取ると，得られる数は \(L\) の全ての元より大きい最も単純な数として \(1\) である．これは級数和ではなく，単純性順序における極小上界として \(1\) を選ぶ操作である．
+\end{remark}
+
+\begin{warning}[超現実体では無限小は残る]
+超現実数は順序体であり正の無限小 \(\eps\) を含む．したがって \(1-\eps\ne1\) である．上の切断が \(1\) を与えるのは，特定の生成データから単純性で選んだ場合に限る．何を構成データに取るかが値を決めるという，パッケージ依存性のもう一つの実例である．
+\end{warning}
+
+\section{結論}
+
+本稿の結論は，単に「\(0.999\ldots=1\) は正しい」というものではない．正確には，次のように言うべきである．
+
+\begin{quote}
+\(0.999\ldots=1\) は，生の記号列の等号ではない．それは，指定された言語，記号空間，表示写像，モデル，商，同値関係，位相，または標準部写像のもとで成立する意味論的等号である．
+\end{quote}
+
+通常の実数では，次の同値な読みが自然に成立する．
+\[
+  \nu(0;9^\omega)=1,
+\]
+\[
+  \lim_{\substack{n\to\infty\\ n\in\DN}}^{\R}\seq{s_n}{n\in\DN}=1,
+\]
+\[
+  [\seq{s_n}{n\in\DN}]_C=[\seq{\mathbf1_n}{n\in\DN}]_C,
+\]
+\[
+  L_{0.999\ldots}=L_1,
+\]
+\[
+  \sup_{n\in\DN}s_n=1.
+\]
+しかし，これらは同じ文字列で書けるとしても同じ構文ではない．一方，生の桁列空間，形式冪級数環，\(p\)-進的な右無限小数解釈，無限小差を保持する非 Archimedean 構造では，\(0.999\ldots\) は一般には \(1\) と等しくない．超実数では特に，標準実数値としての \(0.999\ldots\) と，超有限 \(H\) 桁小数 \(1-10^{-H}\) を区別する必要がある．前者は \(1\) であり，後者は \(1\) に無限小だけ近いが \(1\) ではない．
+
+従って，最終的な検査項目は次である．
+\begin{enumerate}
+\item 対象言語 \(\Lang\) は何か．環の言語か，順序体の言語か，多ソート列言語か，集合論言語か．
+\item \(0.999\ldots\) は項か，定数記号か，外部表示か，桁列ソートの元か，メタ言語の略記か．
+\item 列は必ず添字有向集合つきで \(\seq{x_d}{d\in D}\) と書いているか．定数列も \(\seq{c_d}{d\in D}\) と書いているか．
+\item 極限は \(\lim_{\substack{n\to\infty\\ n\in\DN}}\) または \(\lim_{\lambda\in\Lambda}\) と添字を明記しているか．非 Hausdorff なら \(\Lim_X^D\) 関係として書いているか．
+\item 等号は生の等号か，評価後の等号か，商での等号か，標準部後の等号か．
+\item 位相は通常位相，接頭辞位相，三種の S 型位相（\(\taufullS\), \(\tauintS\), \(\taust\)），Q-位相，標準部商のどれか．
+\item 超実数では，標準有向集合 \(\DN\)-列 \(\mathbf s^{\DN}\) と超自然数有向集合 \(\DStarN\)-ネット \(\mathbf s^{\DStarN}\) を区別しているか．
+\item topos 内部では，Cauchy 実数，Dedekind 実数，lower real，upper real のどれを使っているか．
+\end{enumerate}
+
+
+\begin{thebibliography}{99}
+\bibitem{Enderton} H. B. Enderton, \textit{A Mathematical Introduction to Logic}, 2nd ed., Academic Press, 2001.
+\bibitem{Hodges} W. Hodges, \textit{A Shorter Model Theory}, Cambridge University Press, 1997.
+\bibitem{Marker} D. Marker, \textit{Model Theory: An Introduction}, Springer, 2002.
+\bibitem{Kelley} J. L. Kelley, \textit{General Topology}, Van Nostrand, 1955.
+\bibitem{Munkres} J. R. Munkres, \textit{Topology}, 2nd ed., Prentice Hall, 2000.
+\bibitem{Rudin} W. Rudin, \textit{Principles of Mathematical Analysis}, 3rd ed., McGraw-Hill, 1976.
+\bibitem{Robinson} A. Robinson, \textit{Non-standard Analysis}, North-Holland, 1966.
+\bibitem{Goldblatt} R. Goldblatt, \textit{Lectures on the Hyperreals: An Introduction to Nonstandard Analysis}, Springer, 1998.
+\bibitem{Keisler} H. J. Keisler, \textit{Foundations of Infinitesimal Calculus}, Prindle, Weber \& Schmidt, 1976.
+\bibitem{StroyanLuxemburg} K. D. Stroyan and W. A. J. Luxemburg, \textit{Introduction to the Theory of Infinitesimals}, Academic Press, 1976.
+\bibitem{SalbanyTodorov} S. Salbany and T. Todorov, \textit{Nonstandard Analysis in Topology: Nonstandard and Standard Compactifications}, arXiv:math/0601724, 2006.
+\bibitem{Khalfallah} A. Khalfallah, \textit{New Non-standard Topologies}, 2013. \url{https://kgrc.univie.ac.at/fileadmin/user_upload/p_kgrc/Valuation_Theory/nonstandard_topologies_rev.pdf}
+\bibitem{Parry} W. Parry, On the \(\beta\)-expansions of real numbers, \textit{Acta Mathematica Academiae Scientiarum Hungaricae} 11, 1960, 401--416.
+\bibitem{KomornikLoreti} V. Komornik and P. Loreti, Unique developments in non-integer bases, \textit{American Mathematical Monthly} 105(7), 1998, 636--639.
+\bibitem{GlendinningSidorov} P. Glendinning and N. Sidorov, Unique representations of real numbers in non-integer bases, \textit{Mathematical Research Letters} 8(4), 2001, 535--543.
+\bibitem{AlloucheCosnard} J.-P. Allouche and M. Cosnard, The Komornik--Loreti constant is transcendental, \textit{American Mathematical Monthly} 107(5), 2000, 448--449.
+\bibitem{deVriesKomornikLoreti} M. de Vries, V. Komornik and P. Loreti, Topological properties of univoque sets in real base expansions, arXiv:2109.01460, 2021.
+\bibitem{Weihrauch} K. Weihrauch, \textit{Computable Analysis: An Introduction}, Springer, 2000.
+\bibitem{Brattka} V. Brattka, P. Hertling and K. Weihrauch, A tutorial on computable analysis, in \textit{New Computational Paradigms}, Springer, 2008.
+\bibitem{BishopBridges} E. Bishop and D. Bridges, \textit{Constructive Analysis}, Springer, 1985.
+\bibitem{Johnstone} P. T. Johnstone, \textit{Topos Theory}, Academic Press, 1977.
+\bibitem{JohnstoneElephant} P. T. Johnstone, \textit{Sketches of an Elephant: A Topos Theory Compendium}, Oxford University Press, 2002.
+\bibitem{MacLaneMoerdijk} S. Mac Lane and I. Moerdijk, \textit{Sheaves in Geometry and Logic}, Springer, 1992.
+\bibitem{Stout} L. N. Stout, Topological properties of the real numbers object in a topos, \textit{Cahiers de Topologie et Géométrie Différentielle Catégoriques} 17(3), 1976, 295--326.
+\bibitem{Hyland} J. M. E. Hyland, The effective topos, in \textit{The L. E. J. Brouwer Centenary Symposium}, North-Holland, 1982.
+\bibitem{BauerHanson} A. Bauer and J. E. Hanson, The Countable Reals, arXiv:2404.01256, 2024.
+\bibitem{Richman} F. Richman, Is \(0.999\ldots=1\)?, \textit{Mathematics Magazine} 72(5), 1999, 396--400.
+\bibitem{Wiki999} Wikipedia contributors, ``0.999...'', \textit{Wikipedia, The Free Encyclopedia}. \url{https://en.wikipedia.org/wiki/0.999...}
+\bibitem{WikiDecimal} Wikipedia contributors, ``Decimal representation'', \textit{Wikipedia, The Free Encyclopedia}. \url{https://en.wikipedia.org/wiki/Decimal_representation}
+\bibitem{WikiNSA} Wikipedia contributors, ``Nonstandard analysis'', \textit{Wikipedia, The Free Encyclopedia}. \url{https://en.wikipedia.org/wiki/Nonstandard_analysis}
+\bibitem{nLabReal} nLab contributors, ``real numbers object''. \url{https://ncatlab.org/nlab/show/real+numbers+object}
+\bibitem{Keyne} きいねく, 「大学数学と高校数学は一体何が違うのか？ 数学科で学ぶ純粋数学の謎（Part 1）」, note, 2019. \url{https://note.com/keyneqq/n/ndc8357f6290c}
+\end{thebibliography}
+
+
+\end{document}
