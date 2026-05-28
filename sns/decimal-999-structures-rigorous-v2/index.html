@@ -174,6 +174,18 @@
             padding: clamp(18px, 4vw, 28px);
         }
 
+        .annotation-panel {
+            background: #ffffff;
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--blue);
+            margin-top: 28px;
+            padding: clamp(18px, 4vw, 28px);
+        }
+
+        .annotation-panel p:last-child {
+            margin-bottom: 0;
+        }
+
         .field-grid {
             display: grid;
             gap: 14px;
@@ -300,6 +312,28 @@
                 <a class="button secondary" href="decimal-999-structures-survey-v8-rigorous-type2-topos.pdf">v8 PDFを開く</a>
                 <a class="button secondary" href="#corrections">修正を提出</a>
             </div>
+        </section>
+
+        <section class="annotation-panel" aria-labelledby="annotation-title">
+            <p class="meta">Annotation</p>
+            <h2 id="annotation-title">この資料について</h2>
+            <p>
+                筆者は数学・数理論理学・圏論の専門家ではなく、これらを学んでいる一学生です。
+                本資料は査読済みの専門論文ではなく、趣味で作成した読み物として公開しています。
+            </p>
+            <p>
+                数学的な細部の完全性よりも、「0.999...=1」というよく知られた題材が、
+                証明論的な記号操作と意味論的な解釈の両面から見ると、思いのほか一筋縄ではいかない、
+                という雰囲気が伝わることを主な目的にしています。
+            </p>
+            <p>
+                数学的な誤り、表記上の不備、参考文献や構成に関する修正案がありましたら、
+                このページ下部のTeX提出プラットフォームから、修正済みTeXファイルまたは修正案をお送りいただけると助かります。
+            </p>
+            <p>
+                資料作成にあたっては、ChatGPT 5.5 Thinking / Claude Opus 4.7 を補助的に利用しました。
+                最終的な公開内容の責任は筆者にあります。
+            </p>
         </section>
 
         <section class="section correction-panel" id="corrections">
