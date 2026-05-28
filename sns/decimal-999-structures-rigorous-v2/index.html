@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>「0.999... = 1」を解釈する数学的構造</title>
-    <meta name="description" content="0.999...=1 を、言語・記号空間・解釈・商構造・位相・非標準解析の観点から整理した精密サーベイPDF。Draft version 10。">
+    <title>「0.999... = 1」を解釈する数学的構造：解釈パッケージとtopos内部論理</title>
+    <meta name="description" content="0.999...=1 を、言語・記号空間・表示写像・商構造・位相・非標準解析・Type-2表現・topos内部論理から読み直す精密サーベイ。Draft version 11：解釈パッケージ具体例・topos内部論理精密化版。">
     <link rel="canonical" href="https://jikokennobun.github.io/sns/decimal-999-structures-rigorous-v2/">
-    <meta property="og:title" content="「0.999... = 1」を解釈する数学的構造">
-    <meta property="og:description" content="0.999...=1 を、言語・記号空間・解釈・商構造・位相・非標準解析の観点から整理した精密サーベイPDF。Draft version 10。">
+    <meta property="og:title" content="「0.999... = 1」を解釈する数学的構造：解釈パッケージとtopos内部論理">
+    <meta property="og:description" content="0.999...=1 を、言語・記号空間・表示写像・商構造・位相・非標準解析・Type-2表現・topos内部論理から読み直す精密サーベイ。Draft version 11。">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://jikokennobun.github.io/sns/decimal-999-structures-rigorous-v2/">
     <meta property="og:image" content="https://jikokennobun.github.io/assets/images/village.jpg">
@@ -311,23 +311,25 @@
 <body>
     <main>
         <section class="hero">
-            <p class="meta">Draft version 10 / PDF + TeX</p>
+            <p class="meta">Draft version 11 / PDF + TeX</p>
             <h1>「0.999... = 1」を解釈する数学的構造</h1>
             <p>
-                0.999...=1 を、単なる計算ではなく、言語・記号空間・解釈をどう指定するかという問題として整理したPDFです。
+                0.999...=1 を、単なる計算ではなく、対象言語・記号空間・表示写像・モデル・商構造・極限関係をどう指定するかという問題として整理したPDFです。
             </p>
             <p>
-                S-位相三分割、極限記法、商構造、Type-2 表現、topos 内部実数、記号力学、非標準解析的な構造などを比較しています。
+                v11では、解釈パッケージの具体例、S型位相の三分割、Robinson/標準部位相、Type-2表現、topos内部実数とKripke-Joyal意味論を中心に精密化しています。
             </p>
             <p class="notice">
                 注：本資料は現在ドラフト版です。内容・表記・構成は今後変更されます。
             </p>
             <p class="meta">
-                2026年5月28日版。
+                2026年5月28日版。Draft version 11：解釈パッケージ具体例・topos内部論理精密化版。
             </p>
             <div class="actions">
-                <a class="button" href="decimal-999-structures-survey-v10-corrected.pdf">v10 PDFを開く</a>
-                <a class="button secondary" href="decimal-999-structures-survey-v10-corrected.tex" download>v10 TeXをダウンロード</a>
+                <a class="button" href="decimal-999-structures-survey-v11-topos-refined.pdf">v11 PDFを開く</a>
+                <a class="button secondary" href="decimal-999-structures-survey-v11-topos-refined.tex" download>v11 TeXをダウンロード</a>
+                <a class="button secondary" href="decimal-999-structures-survey-v10-corrected.pdf">v10 PDFを開く</a>
+                <a class="button secondary" href="decimal-999-structures-survey-v10-corrected.tex" download>v10 TeX</a>
                 <a class="button secondary" href="decimal-999-structures-survey-v9.pdf">v9 PDFを開く</a>
                 <a class="button secondary" href="decimal-999-structures-survey-v8-rigorous-type2-topos.pdf">v8 PDFを開く</a>
                 <a class="button secondary" href="#corrections">修正を提出</a>
@@ -398,7 +400,7 @@
                     </label>
                 </div>
 
-                <input type="hidden" id="subjectField" name="_subject" value="[decimal-999] TeX修正提案">
+                <input type="hidden" id="subjectField" name="_subject" value="[decimal-999 v11] TeX修正提案">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="source_url" value="https://jikokennobun.github.io/sns/decimal-999-structures-rigorous-v2/">
                 <input type="hidden" id="submissionIdField" name="submission_id">
@@ -419,8 +421,8 @@
 
     <script>
         const FORM_ENDPOINT = "https://formsubmit.co/ajax/shibuya.i.9f75@m.isct.ac.jp";
-        const OFFICIAL_TEX_URL = "decimal-999-structures-survey-v10-corrected.tex";
-        const DEFAULT_SUBJECT = "[decimal-999] TeX修正提案";
+        const OFFICIAL_TEX_URL = "decimal-999-structures-survey-v11-topos-refined.tex";
+        const DEFAULT_SUBJECT = "[decimal-999 v11] TeX修正提案";
         const LAST_SUBMISSION_KEY = "decimal999LastSubmission";
         const refs = {
             form: document.querySelector("#correctionForm"),
