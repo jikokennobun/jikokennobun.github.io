@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渋谷伊織 | 数理論理学・研究活動</title>
+    <meta name="description" content="渋谷伊織の研究活動用個人ホームページ。東京科学大学・鹿島研究室。数理論理学，抽象代数論理，形式言語の論理構造についての研究と発表記録。">
+    <meta property="og:title" content="渋谷伊織 | 数理論理学・研究活動">
+    <meta property="og:description" content="研究上の関心，発表記録，Leibniz 階層と形式言語に関するノート。">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://jikokennobun.github.io/assets/images/village.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <style>
+        :root {
+            --ink: #16212f;
+            --muted: #53616e;
+            --paper: #f7fbfc;
+            --line: #c5d6dc;
+            --blue: #164d7a;
+            --teal: #1f7a69;
+            --red: #b84d43;
+            --yellow: #e6bd47;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.92)),
+                #e8f3f6;
+            color: var(--ink);
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        a {
+            color: var(--blue);
+            text-decoration: underline;
+            text-underline-offset: 0.18em;
+        }
+
+        a:hover {
+            color: var(--red);
+        }
+
+        .wrap {
+            margin: 0 auto;
+            max-width: 1060px;
+            padding: 28px 22px 56px;
+        }
+
+        header {
+            border-bottom: 1px solid var(--line);
+            display: grid;
+            gap: 28px;
+            grid-template-columns: minmax(0, 1fr) 220px;
+            min-height: 360px;
+            padding: 24px 0 34px;
+        }
+
+        .title-block {
+            align-self: center;
+        }
+
+        .kicker {
+            color: var(--teal);
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 0;
+            margin: 0 0 10px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            color: var(--blue);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 4.6rem;
+            letter-spacing: 0;
+            line-height: 1;
+            margin: 0;
+        }
+
+        .name-en {
+            color: var(--muted);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.25rem;
+            margin: 16px 0 8px;
+        }
+
+        .site-name { color: var(--muted); font-size: 0.92rem; }
+        .prose { font-family: "Yu Mincho", "Hiragino Mincho ProN", Meiryo, serif; line-height: 1.9; }
+        h3 { color: var(--blue); font-size: 1.05rem; margin: 24px 0 8px; }
+        .hierarchy { margin: 22px 0; padding-left: 24px; }
+        .hierarchy li { margin-bottom: 18px; }
+        .hierarchy strong { display: block; }
+        .reference, .status { color: var(--muted); font-size: 0.9rem; }
+        .talk { border-left: 3px solid var(--teal); padding-left: 18px; }
+        .talk h3 { margin-top: 0; }
+        a:focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; }
+        .contact-address { overflow-wrap: anywhere; }
+
+        .visual {
+            align-self: center;
+            background: #ffffff;
+            border: 1px solid var(--line);
+            display: grid;
+            gap: 12px;
+            padding: 12px;
+        }
+
+        .visual img {
+            display: block;
+            height: auto;
+            width: 100%;
+        }
+
+        nav {
+            align-items: center;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 18px;
+            padding: 18px 0;
+        }
+
+        nav a {
+            font-weight: 800;
+        }
+
+        section {
+            border-bottom: 1px solid var(--line);
+            padding: 34px 0;
+        }
+
+        h2 {
+            color: var(--blue);
+            font-size: 1.35rem;
+            letter-spacing: 0;
+            margin: 0 0 14px;
+        }
+
+        p {
+            margin: 0 0 12px;
+        }
+
+        .links {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            margin: 18px 0 0;
+        }
+
+        .links a {
+            background: #ffffff;
+            border: 1px solid var(--line);
+            color: var(--ink);
+            display: flex;
+            flex-direction: column;
+            min-height: 96px;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .links a:hover {
+            border-color: var(--red);
+            color: var(--blue);
+        }
+
+        .link-title {
+            font-weight: 900;
+        }
+
+        .link-desc {
+            color: var(--muted);
+            font-size: 0.92rem;
+            margin-top: 6px;
+        }
+
+        footer {
+            color: var(--muted);
+            font-size: 0.92rem;
+            padding-top: 28px;
+        }
+
+        @media (max-width: 760px) {
+            .wrap {
+                padding: 18px 16px 44px;
+            }
+
+            header {
+                grid-template-columns: 1fr;
+                min-height: 0;
+                padding-top: 8px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .visual {
+                max-width: 260px;
+            }
+
+            .links {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <div class="title-block">
+                <p class="kicker">Mathematical Logic / Research</p>
+                <h1>渋谷伊織</h1>
+                <p class="name-en">Iori Shibuya</p>
+                <p class="site-name">内包的な人ノ邨 — Intensional Hito-no-Mura</p>
+            </div>
+            <div class="visual" aria-label="site visual">
+                <img src="../assets/images/village.jpg" alt="Intensional Hito-no-Mura">
+            </div>
+        </header>
+
+        <nav aria-label="研究活動ページのナビゲーション">
+            <a href="#about">About</a>
+            <a href="#research">Research</a>
+            <a href="#talks">Talks</a>
+            <a href="#contents">Contents</a>
+            <a href="#note">Notes</a>
+            <a href="#works">Works</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <section id="about">
+            <h2>About / 自己紹介</h2>
+            <p class="prose">
+                渋谷伊織です．東京科学大学 情報理工学院 数理・計算科学系の学部4年で，鹿島研究室に所属しています．
+                数理論理学，特に不完全性現象の代数的・圏論的側面に関心を持っています．
+            </p>
+            <p class="prose">このページには，研究上の関心，発表記録，および勉強の過程で書いたノートを置いています．</p>
+        </section>
+
+        <section id="research">
+            <h2>Research / 研究上の関心</h2>
+            <div class="prose">
+                <p>論理の構造を，代数・順序・圏の言葉で捉えることに興味があります．特に，証明可能性や自己言及を扱う体系について，どの仮定が不完全性現象をもたらすのか，という問題を考えています．</p>
+                <p>また，抽象代数論理の視点から，形式言語に現れる論理構造と Leibniz 作用素の関係に関心を持っています．論理と代数の対応を，個々の体系の具体的な姿とともに理解したいと思っています．</p>
+            </div>
+        </section>
+
+        <section id="talks">
+            <h2>Talks / 発表実績</h2>
+            <article class="talk">
+                <h3>形式言語に潜む論理構造: Leibniz 作用素の観点から</h3>
+                <p>渋谷伊織（東京科学大学）<br>
+                    <time datetime="2026-10-07">2026年10月7日</time> · 第43回 記号論理と情報科学研究集会（SLACS 2026）<br>
+                    歌舞伎座タワー・ドワンゴセミナールーム</p>
+                <p><a href="https://sites.google.com/view/slacs-2026/">研究集会・公式プログラム</a></p>
+                <p><a href="slides/SLACS2026.pdf">使用スライド（PDF・59ページ）</a></p>
+            </article>
+        </section>
+
+        <section id="contents">
+            <h2>Contents / 論理についてのノート</h2>
+            <h3>Leibniz 階層の各階層に属する論理</h3>
+            <p class="prose">論理とその代数的意味論との結びつきを，Leibniz 階層に沿って整理します．ここで取り上げる四つのクラスは包含関係にあり，互いに排他的な分類ではありません．</p>
+            <ol class="hierarchy prose">
+                <li><strong>Strongly algebraizable logic</strong>代数化可能であり，同値な代数的意味論が variety をなす論理．古典命題論理と直観主義命題論理が代表例です．</li>
+                <li><strong>Algebraizable logic</strong>論理的帰結と代数的な等式帰結との間に，相互に逆となる忠実な翻訳を持つ論理．上の二つの論理もこのクラスに属します．</li>
+                <li><strong>Equivalential logic</strong>モデルの Leibniz 合同を，同値性を表す論理式の集合によって定義できる論理．代数化可能な論理はこの性質を持ちます．</li>
+                <li><strong>Protoalgebraic logic</strong>各代数上の論理フィルターに対して，Leibniz 作用素が単調である論理．上の三つのクラスはいずれもここに含まれます．</li>
+            </ol>
+            <p class="reference">参考：J. M. Font, R. Jansana, D. Pigozzi, <a href="https://www.uni-log.org/SurveyAAL.pdf"><cite>A Survey of Abstract Algebraic Logic</cite></a>, §3.3–3.4．</p>
+            <h3>形式言語の論理</h3>
+            <p class="prose">形式言語に対して，どのような論理構造を考えることができるか．SLACS 2026 では，この問いを Leibniz 作用素の観点から取り上げました．発表資料を入口として，定義と具体例を整理していきます．</p>
+        </section>
+
+        <section id="note">
+            <h2>Notes / 研究・学習ノート</h2>
+            <div class="links">
+                <a href="../stable-domain.html">
+                    <span class="link-title">Stable Domain Theory</span>
+                    <span class="link-desc">安定領域論を論理の側から読むための作業ノート。</span>
+                </a>
+                <a href="../countable-rosser.html">
+                    <span class="link-title">Countable Rosser</span>
+                    <span class="link-desc">Rosser 型文と APS モデル構成についてのノート。</span>
+                </a>
+            </div>
+        </section>
+
+        <section id="works">
+            <h2>Works / 公開研究資料</h2>
+            <p class="prose">抽象的証明可能体系と第二不完全性現象に関する資料です．</p>
+            <div class="links">
+                <a href="../APS-ZOO/index.html">
+                    <span class="link-title">APS-ZOO</span>
+                    <span class="link-desc">Abstract Provability Systems のPDF入口。</span>
+                </a>
+                <a class="g2-zoo-link" href="../G2-ZOO/index.html">
+                    <span class="link-title">G2-ZOO</span>
+                    <span class="link-desc">G2 原理と無矛盾性言明の関係図・PDF入口。</span>
+                </a>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact / 連絡先</h2>
+            <p class="contact-address">E-mail: <a href="mailto:shibuya.i.9f75@m.isct.ac.jp">shibuya.i.9f75@m.isct.ac.jp</a></p>
+            <div class="links">
+                <a href="https://twitter.com/jikokennobun">
+                    <span class="link-title">X / Twitter</span>
+                    <span class="link-desc">@jikokennobun</span>
+                </a>
+                <a href="https://scrapbox.io/jikokennobunn">
+                    <span class="link-title">Scrapbox</span>
+                    <span class="link-desc">読書・勉強のメモ。</span>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            渋谷伊織 / Iori Shibuya · Last updated: <time datetime="2026-10-08">2026-10-08</time>
+        </footer>
+    </div>
+</body>
+</html>
